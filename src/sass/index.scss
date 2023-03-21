@@ -1,2 +1,4 @@
-@import './common';
-@import './example';
+@import './utilities/main';
+@import '~node_modules/modern-normalize/modern-normalize.css';
+@import './base/main';
+@import './partials/main';

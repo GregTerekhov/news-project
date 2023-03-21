@@ -1,0 +1,22 @@
+// Точки перелому
+$breakpoints: (
+  'small': (
+    min-width: 320px,
+  ),
+  'pre-medium': (
+    max-width: 767px,
+  ),
+  'medium': (
+    min-width: 768px,
+  ),
+  'pre-large': (
+    max-width: 1279px,
+  ),
+  'large': (
+    min-width: 1280px,
+  ),
+) !default;
+
+// Шрифти
+$text-primary: 'Manrope', sans-serif;
+$text-secondary: 'Poppins', sans-serif;
