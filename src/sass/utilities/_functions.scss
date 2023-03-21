@@ -1,0 +1,4 @@
+// Функция виведення кольору
+@function getColor($key) {
+    @return map-get($colors, $key);
+  }

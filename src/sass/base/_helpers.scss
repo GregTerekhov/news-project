@@ -1,5 +1,7 @@
 body {
     font-family: $text-primary;
+    color: getColor('primary');
+    background-color: getColor('background-primary');
 }
 
 .visually-hidden {
