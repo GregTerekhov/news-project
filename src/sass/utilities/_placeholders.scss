@@ -1,4 +1,10 @@
+%resetGap {
+  margin: 0;
+  padding: 0;
+}
+
 %list {
+  @extend %resetGap;
     list-style: none;
   }
   
