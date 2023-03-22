@@ -5,6 +5,12 @@
 }
 
 .logo {
+  @extend %link;
+  font-family: $text-primary;
+  font-weight: 700;
+  font-size: 42px;
+  line-height: 57/42;
+  color: getColor('primary');
 }
 
 .menu-open {
@@ -23,6 +29,12 @@
   }
 
   &__link {
+    @extend %link;
+    font-family: $text-primary;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 25/18;
+    color: getColor('primary');
   }
 }
 
@@ -34,10 +46,18 @@
 
 .search-form {
   &__field {
+    position: relative;
+    width: 173px;
+    height: 31px;
+    padding: 5px 48px;
+    border: 1px solid getColor('primary');
+    border-radius: 20px;
+    outline: none;
   }
 
   &__button {
-    left: 0;
+    position: absolute;
+
     border: none;
   }
 
@@ -52,6 +72,13 @@
   }
 
   &__text {
+    @extend %list;
+    font-family: $text-secondary;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 24px;
+    color: #4b48db;
   }
 
   &__switch {
@@ -84,7 +111,9 @@
   @extend %list;
   &__item {
   }
-
+  &__link {
+    @extend %link;
+  }
   &__icon {
     fill: getColor('accent');
     stroke: getColor('primary-reversed');
