@@ -1,31 +1,24 @@
 <!DOCTYPE html>
 <html lang="ru">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>News</title>
-    <link rel="stylesheet" href="./sass/index.scss" />
-  </head>
-  <body>
-    <header>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>News</title>
+  <link rel="stylesheet" href="./sass/index.scss" />
+</head>
+
+<body>
+  <div class="wrapper">
+    <header class="header">
       <div class="container">
         <nav>
           <!-- Logo -->
           <a href="./index.html" class="logo">News</a>
           <!-- Button for opening a mobile menu -->
-          <button
-            class="menu-open"
-            type="button"
-            aria-expanded="false"
-            aria-controls="mobile-menu"
-          >
-            <svg
-              class="btn-open__icon"
-              width="24"
-              height="24"
-              aria-label="Switcher mobile menu"
-            >
-              <use href="#"></use>
+          <button class="menu-open" type="button" aria-expanded="false" aria-controls="mobile-menu">
+            <svg class="btn-open__icon" width="24" height="24" aria-label="Switcher mobile menu">
+              <use href="./images/sprite.svg#menu"></use>
             </svg>
           </button>
           <!-- Menu -->
@@ -43,28 +36,26 @@
           <!-- Search-form -->
           <form class="searh-form" role="search">
             <label for="news-search" class="visually-hidden"></label>
-            <input
-              type="search"
-              class="search-form__field"
-              id="news-search"
-              autocomplete="off"
-              placeholder="Search |"
-            />
+            <input type="search" class="search-form__field" id="news-search" autocomplete="off"
+              placeholder="Search |" />
             <button class="search-form__button">
-              <svg class="search-form__icon">
-                <use href="#"></use>
+              <svg class="search-form__icon" width="20" height="20">
+                <use href="./images/sprite.svg#search"></use>
               </svg>
             </button>
           </form>
           <!-- Toggle mode -->
           <div class="toggle-mode">
-            <svg class="toggle-mode__icon" width="21" height="21">
-              <use href="#"></use>
+            <svg class="toggle-mode__icon sun" width="21" height="21">
+              <use href="./images/sprite.svg#sun"></use>
             </svg>
             <p class="toggle-mode__text">Light</p>
-            <button type="button"></button>
-            <svg class="toggle-mode__icon" width="21" height="21">
-              <use href="#"></use>
+            <label class="toggle-mode__switch">
+              <input type="checkbox" class="toggle-mode__checkbox" />
+              <span class="toggle-mode__slider round"></span>
+            </label>
+            <svg class="toggle-mode__icon moon" width="21" height="21">
+              <use href="./images/sprite.svg#moon"></use>
             </svg>
             <p class="toggle-mode__text">Dark</p>
           </div>
@@ -72,37 +63,32 @@
           <div class="mobile-container">
             <!-- Button for closing a mobile menu -->
             <button class="menu-close" type="button">
-              <svg
-                class="btn-open__icon"
-                width="24"
-                height="24"
-                aria-label="Switcher mobile menu"
-              >
-                <use href="#"></use>
+              <svg class="btn-open__icon" width="24" height="24" aria-label="Switcher mobile menu">
+                <use href="./images/sprite.svg#cross"></use>
               </svg>
             </button>
             <!-- Mobile menu -->
             <ul class="mobile-menu">
               <li class="mobile-menu__item">
                 <a href="./index.html">
-                  <svg class="mobile-menu__icon" width="32" height="32">
-                    <use href="#"></use>
+                  <svg class="mobile-menu__icon mobile-menu__icon--current" width="32" height="32">
+                    <use href="./images/sprite.svg#home"></use>
                   </svg>
                   Home
                 </a>
               </li>
               <li class="mobile-menu__item">
                 <a href="./favourite.html">
-                  <svg class="mobile-menu__icon" width="32" height="32">
-                    <use href="#"></use>
+                  <svg class="mobile-menu__icon mobile-menu__icon--current" width="32" height="32">
+                    <use href="./images/sprite.svg#favourite"></use>
                   </svg>
                   Favorite
                 </a>
               </li>
               <li class="mobile-menu__item">
                 <a href="./read.html">
-                  <svg class="mobile-menu__icon" width="32" height="32">
-                    <use href="#"></use>
+                  <svg class="mobile-menu__icon mobile-menu__icon--current" width="32" height="32">
+                    <use href="./images/sprite.svg#read"></use>
                   </svg>
                   Read
                 </a>
@@ -122,6 +108,9 @@
         <div class="pagination"></div>
       </div>
     </main>
-    <script type="module" src="./index.js"></script>
-  </body>
+  </div>
+
+  <script type="module" src="./index.js"></script>
+</body>
+
 </html>

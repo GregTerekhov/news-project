@@ -1,0 +1,95 @@
+.header {
+}
+
+.container {
+}
+
+.logo {
+}
+
+.menu-open {
+  border: none;
+}
+
+.btn-open {
+  &__icon {
+    stroke: getColor('primary');
+  }
+}
+
+.menu {
+  @extend %list;
+  &__item {
+  }
+
+  &__link {
+  }
+}
+
+.searh-form {
+}
+
+.visually-hidden {
+}
+
+.search-form {
+  &__field {
+  }
+
+  &__button {
+    left: 0;
+    border: none;
+  }
+
+  &__icon {
+  }
+}
+
+.toggle-mode {
+  &__icon {
+    fill: #4b48db;
+    stroke: #4b48db;
+  }
+
+  &__text {
+  }
+
+  &__switch {
+    fill: #5f6775;
+    stroke: #5f6775;
+
+    .switch input {
+      display: none;
+    }
+  }
+
+  &__checkbox {
+  }
+
+  &__slider {
+  }
+}
+
+.round {
+}
+
+.mobile-container {
+}
+
+.menu-close {
+  border: none;
+}
+
+.mobile-menu {
+  @extend %list;
+  &__item {
+  }
+
+  &__icon {
+    fill: getColor('accent');
+    stroke: getColor('primary-reversed');
+  }
+
+  &__icon--current {
+  }
+}
