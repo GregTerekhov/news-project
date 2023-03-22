@@ -6,7 +6,7 @@ const API_KEY = 'uGHJWsajhmnJg2AMcnCD9YXkamMpVOHo';
 export const fetchPopularArticles = async () => {
         try {
 
-          const response = axios.get(`${BASE_URL}/mostpopular/v2/viewed/1.json?`, 
+          const response = await axios.get(`${BASE_URL}/mostpopular/v2/viewed/1.json?`, 
           { params: {
                 'api-key': API_KEY,
             }
@@ -18,7 +18,7 @@ export const fetchPopularArticles = async () => {
 
 export const fetchQueryArticles = async (PAGE_VALUE, searchTerm) => {
         try {
-          const response = axios.get(`${BASE_URL}/search/v2/articlesearch.json`,
+          const response = await axios.get(`${BASE_URL}/search/v2/articlesearch.json`,
           { params: {
                 'api-key': API_KEY,
                 'page': PAGE_VALUE,
@@ -33,7 +33,7 @@ export const fetchQueryArticles = async (PAGE_VALUE, searchTerm) => {
 export const fetchCategoryArticles = async (PAGE_VALUE, sectionName) => {
         try {
 
-          const response = axios.get(`${BASE_URL}/news/v3/content/all/${sectionName}.json`, 
+          const response = await axios.get(`${BASE_URL}/news/v3/content/all/${sectionName}.json`, 
           { params: {
                 'api-key': API_KEY,
                 'limit': 40,
