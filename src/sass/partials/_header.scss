@@ -2,35 +2,35 @@
 }
 
 .container {
+  display: flex;
 }
-
+.nav {
+  display: flex;
+  align-items: center;
+}
 .logo {
   @extend %link;
-  font-family: $text-primary;
+  margin-right: auto;
   font-weight: 700;
   font-size: 42px;
   line-height: 57/42;
   color: getColor('primary');
 }
 
-.menu-open {
-  border: none;
-}
-
-.btn-open {
-  &__icon {
-    stroke: getColor('primary');
-  }
-}
-
 .menu {
+  display: flex;
   @extend %list;
+  // gap: 44px;
+  // gap: 69px;
+
+  display: none;
+
   &__item {
   }
 
   &__link {
     @extend %link;
-    font-family: $text-primary;
+    // font-family: $text-primary;
     font-weight: 700;
     font-size: 18px;
     line-height: 25/18;
@@ -38,30 +38,29 @@
   }
 }
 
-.searh-form {
-}
-
 .visually-hidden {
 }
-
 .search-form {
   &__field {
-    position: relative;
+    // position: relative;
+    display: flex;
+    flex-direction: column;
     width: 173px;
     height: 31px;
     padding: 5px 48px;
     border: 1px solid getColor('primary');
     border-radius: 20px;
     outline: none;
+
+    display: none;
   }
-
-  &__button {
-    position: absolute;
-
+  &__btn {
+    background-color: inherit;
     border: none;
   }
-
   &__icon {
+    // position: absolute;
+    // transform: translateY(-50%);
   }
 }
 
@@ -95,6 +94,8 @@
 
   &__slider {
   }
+
+  display: none;
 }
 
 .round {
@@ -103,22 +104,57 @@
 .mobile-container {
 }
 
+.menu-open {
+  margin-left: 14px;
+  border: none;
+  background-color: inherit;
+}
+
+.btn-open {
+  &__icon {
+    stroke: getColor('primary');
+  }
+}
+
 .menu-close {
   border: none;
+  background-color: inherit;
+
+  display: none;
 }
 
 .mobile-menu {
   @extend %list;
   &__item {
   }
-  &__link {
-    @extend %link;
+  &__item:hover,
+  &__item:focus {
+    color: getColor('background-primary');
+    background-color: getColor('accent');
   }
   &__icon {
+    margin-right: 13px;
     fill: getColor('accent');
     stroke: getColor('primary-reversed');
   }
 
   &__icon--current {
+  }
+
+  display: none;
+}
+
+.mobile-menu__link {
+  @extend %link;
+  display: flex;
+  align-items: center;
+
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 22/16;
+
+  &__link:hover,
+  &__link:focus {
+    color: getColor('background-primary');
   }
 }
