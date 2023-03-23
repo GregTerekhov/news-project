@@ -1,5 +1,2 @@
-@import
-'./variables',
-'./functions',
-'./placeholders',
-'./mixins';
+@import './variables', './functions', './placeholders', './mixins',
+  '../partials/header', '../partials/mobile-menu';

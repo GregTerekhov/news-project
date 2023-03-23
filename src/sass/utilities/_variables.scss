@@ -17,6 +17,10 @@ $breakpoints: (
   ),
 ) !default;
 
+// @include respondTo('small') {
+
+// }
+
 // Шрифти
 $text-primary: 'Manrope', sans-serif;
 $text-secondary: 'Poppins', sans-serif;
@@ -30,4 +34,5 @@ $colors: (
   'primary-reversed': #ffffff,
   'accent': #4440f6,
   'grey': #a8a8a8,
-)
+);
+// getColor('background-primary')
