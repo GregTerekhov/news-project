@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const BASE_URL = 'https://api.nytimes.com/svc';
+export const IMAGE_URL = 'https://www.nytimes.com'; //Ссылка на сайт для получения изображений при поисковом запросе
 const API_KEY = 'uGHJWsajhmnJg2AMcnCD9YXkamMpVOHo';
 
 export const fetchPopularArticles = async () => {
