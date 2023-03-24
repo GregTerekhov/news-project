@@ -1,44 +1,44 @@
 body {
-    font-family: $text-primary;
-    color: getColor('primary');
-    background-color: getColor('background-primary');
+  font-family: $text-primary;
+  color: getColor('primary');
+  background-color: getColor('background-primary');
 }
 
 .visually-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    border: 0;
-    padding: 0;
-    
-    white-space: nowrap;
-    clip-path: inset(100%);
-    clip: rect(0 0 0 0);
-    overflow: hidden;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 16px;
+  padding-right: 16px;
+
+  @include respondTo('small') {
+    width: 320px;
   }
 
-  img {
-    display: block;
-    max-width: 100%;
-    height: auto;
+  @include respondTo('medium') {
+    width: 768px;
   }
 
-  .container {
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 16px;
-    padding-right: 16px;
-  
-    @include respondTo('small') {
-      width: 320px;
-    }
-  
-    @include respondTo('medium') {
-      width: 768px;
-    }
-  
-    @include respondTo('large') {
-      width: 1280px;
-    }
+  @include respondTo('large') {
+    width: 1280px;
   }
+}

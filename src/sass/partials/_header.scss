@@ -252,13 +252,13 @@ body.darkMode {
   }
 }
 
-.menu-open {
+.is-open {
   border: none;
   background-color: transparent;
   margin-left: 14px;
 }
 
-.menu-open {
+.is-open {
   .btn-open__icon {
     stroke: getColor('primary');
     transform: translateY(1px);
