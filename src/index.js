@@ -1,3 +1,5 @@
+import './js/fetch weather';
+import './js/pagination.js';
 import {
   fetchPopularArticles,
   fetchQueryArticles,
