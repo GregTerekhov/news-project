@@ -1,3 +1,4 @@
+import './js/fetch weather';
 import {
   fetchPopularArticles,
   fetchQueryArticles,
