@@ -40,7 +40,7 @@ let today = new Date(),
   ];
 
 
-// при закрытии календаря изменяем разметку
+// зміна розмітки при закритті
 const closeModalAndResetCalendar = () => {
   calendarForm.querySelector('[data-modal]').classList.add('hidden');
   calendarForm.querySelector('.calendar-input').classList.remove('isActive');
@@ -56,12 +56,12 @@ function calendarEl(e) {
   calendarBtn.classList.toggle('switchedColor');
 };
 
-// обработчик события по клику на инпут
+// обробник події по кліку на інпут
 calendar.openModalBtn.addEventListener('click', function() {
   calendarEl();
 });
 
-// обработчик события по клику вне календаря
+// обробник події по кліку поза календарем
 document.addEventListener('click', hideModals);
 
 function hideModals(e) {
@@ -71,12 +71,12 @@ function hideModals(e) {
   }
 }
 
-// ---------  ФУНКЦИЯ ДЛЯ РЕНДЕРИНГА КАЛЕНДАРЯ  ---------
+// ---------  Рендеринг календаря  ---------
 
 const render = () => {
 
-  // получаем первый день месяца, последний день месяца, последний день предыдущего месяца
-  const firstDayofMonth = new Date(currentYear, currentMonth, 1).getDay() - 1, // меняю тут для отображения понедельника, просто убираю - 1
+  // отримаємо перший день місяця, останній день місяця, останній день попереднього місяця
+  const firstDayofMonth = new Date(currentYear, currentMonth, 1).getDay() - 1, // для відображення понеділка
     lastDateofMonth = new Date(currentYear, currentMonth, 0).getDate(),
     lastDayofMonth = new Date(
       currentYear,
@@ -87,12 +87,12 @@ const render = () => {
 
   let liTag = '';
 
-  // добавляем элементы для дней предыдущего месяца
+  // елементи для днів попереднього місяця
   for (let j = firstDayofMonth ; j > 0; j--) {
     liTag += `<li class="inactive">${lastDateofLastMonth - j + 1}</li>`;
   }
 
-  // добавляем элементы для дней текущего месяца
+  // додаємо елементи для днів поточного місяця
   for (let i = 1; i <= lastDateofMonth; i++) {
     const currentDateObj = new Date(currentYear, currentMonth, i);
     const isToday =
@@ -105,31 +105,31 @@ const render = () => {
     }">${i}</li>`;
   }
 
-  // добавляем элементы для дней следующего месяца
-  for (let i = lastDayofMonth; i < 7; i++) { // меняю тут для отображения понедельника на i < 6
+  // додаємо елементи для днів наступного місяця
+  for (let i = lastDayofMonth; i < 7; i++) { 
     liTag += `<li class="inactive">${i - lastDayofMonth + 1}</li>`;
   }
 
-  // выводим текущую дату и элементы календаря в HTML
+  // виводимо поточну дату та елементи календаря в HTML
   currentDate.innerText = `${months[currentMonth]} ${currentYear}`;
   daysTag.innerHTML = liTag;
 
-  // обработчик события по клику на день
+  // обробник події по кліку на день
   const dayChange = document.querySelector('.days');
   dayChange.addEventListener('click', e => {
 
-    // проверяем, является ли элемент неактивным
+    // перевіряємо чи є елемент неактивним
     if (e.target.classList.contains('inactive')) {
       return;
     }
 
-    // удаляем класс "active" у всех дней и добавляем его только выбранному дню
+    // видаляємо клас active і всіх днів і додаємо його тільки вибраному
     [...e.currentTarget.children].forEach(item => {
       item.classList.remove('active');
     });
     e.target.classList.add('active');
 
-    // получаем выбранную дату и выводим ее в инпут
+    // отримуємо вибрану дату і виводимо її в input
     let selectedDay = e.target.textContent;
     if (selectedDay.length > 10) {
       return;
@@ -141,14 +141,14 @@ const render = () => {
       '0'
     )}/${selectedMonth.padStart(2, '0')}/${currentYear}`;
 
-    // отправляем выбранную дату на сервер
+    // відправляємо вибрану дату на сервер
     handleSelectedBeginDate();
   });
 };
 
 
-// --------  ФУНКЦИЯ ДЛЯ ОТПРАВКИ ДАТЫ НА API  --------
-let errorDisplayed = false; // чтобы один раз выводилась ошибка на экран
+// --------  ФУНКЦІЯ ДЛЯ ВІДПРАВКИ ДАТИ НА API  --------
+let errorDisplayed = false; // для виводу помилки на екран
 const handleSelectedBeginDate = async () => {
   const selectedDay = document.querySelector('.days .active').textContent,
     selectedMonth = (currentMonth + 1).toString(),
@@ -177,7 +177,7 @@ const handleSelectedBeginDate = async () => {
 };
 
 
-// отправляем на сервер сегодняшнюю дату при загрузке страницы
+// відправляємо на сервер сьогоднішню дату при завантаження сторінки
 setDateApi(
   `${today.getFullYear()}-${(today.getMonth() + 1)
     .toString()
@@ -185,11 +185,11 @@ setDateApi(
 );
 
 
-// --------  ПЕРЕКЛЮЧАТЕЛИ ГОДОВ  --------
+// --------  ПЕРЕМИКАЧ РОКІВ  --------
 const prevYearBtn = document.getElementById('prev-years');
 const nextYearBtn = document.getElementById('next-years');
 
-// обработчик события по клику на кнопку "предыдущий год"
+// обробник події по кліку на кнопку "попередній рік"
 prevYearBtn.addEventListener('click', () => {
   const prevYear = currentYear - 1;
   if (prevYear < today.getFullYear()) {
@@ -199,7 +199,7 @@ prevYearBtn.addEventListener('click', () => {
   }
 });
 
-// обработчик события по клику на кнопку "следующий год"
+// обробник події по кліку на кнопку"наступний рік"
 nextYearBtn.addEventListener('click', () => {
   const nextYear = currentYear + 1;
   if (nextYear <= new Date().getFullYear()) {
@@ -212,7 +212,7 @@ nextYearBtn.addEventListener('click', () => {
 });
 
 
-// --------  ПЕРЕКЛЮЧАТЕЛИ МЕСЯЦЕВ  --------
+// --------  ПЕРЕМИКАЧ МІСЯЦІВ  --------
 switchesMonth.forEach(switchMonth => {
   switchMonth.addEventListener('click', () => {
     const nextMonth =
@@ -222,7 +222,7 @@ switchesMonth.forEach(switchMonth => {
       const nextYear = nextMonth < 0 ? currentYear - 1 : currentYear + 1;
       if (nextYear > new Date().getFullYear()) {
         Notiflix.Notify.failure(`Next month is beyond the current month`);
-        return; // переключение запрещено
+        return; // перемикання заборонено
       }
       currentYear = nextYear;
       currentMonth = nextMonth < 0 ? 11 : 0;
@@ -231,7 +231,7 @@ switchesMonth.forEach(switchMonth => {
       nextMonth > new Date().getMonth()
     ) {
       Notiflix.Notify.failure(`Next month is beyond the current month`);
-      return; // переключение запрещено
+      return; // перемикання заборонено
     } else {
       currentMonth = nextMonth;
     }
