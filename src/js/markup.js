@@ -7,7 +7,7 @@ export function createPopularMarkup(unit) {
   try {
     let templateUnit = unit.data.results
       .map(value => {
-        let image = '/src/images/card_placeholder.png';
+        let image = '../images/card_placeholder.png';
         if (value.media.length !== 0) {
           image = value.media[0]['media-metadata'][2].url;
         }

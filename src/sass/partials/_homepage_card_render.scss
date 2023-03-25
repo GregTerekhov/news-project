@@ -1,13 +1,10 @@
 .articles {
+  @extend %link;
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
   gap: 32px;
-  list-style: none;
-  margin: 0 auto;
   margin-top: 119px;
-  padding: 0px;
-  background-color: #f4f4f4;
 }
 
 .markup-unit {
@@ -16,19 +13,16 @@
 }
 
 .markup-unit__read {
-  background: url(/src/images/already-read-transparent.png);
+  background: url(../images/already-read-transparent.png);
 }
 
 .markup-unit__section {
   position: absolute;
-  font-family: 'Manrope';
-  font-style: normal;
   font-weight: 500;
   font-size: 12px;
-  line-height: 16px;
-  color: #f4f4f4;
   padding: 8px 4px;
-  background: rgba(68, 64, 247, 0.7);
+  background: transparentize(getColor('accent'), 0.3);
+  color: getColor('background-primary');
   border-radius: 0px 4px 4px 0px;
   width: fit-content;
   top: 40px;
@@ -36,11 +30,8 @@
 }
 
 .markup-unit__already-read {
-  font-family: 'Manrope';
-  font-style: normal;
   font-weight: 700;
   font-size: 14px;
-  line-height: 19px;
   color: #00dd73;
   position: absolute;
   margin: 0;
@@ -58,7 +49,7 @@
   object-fit: cover;
   width: auto;
   height: 395px;
-  background-image: url(/src/images/background_image.png);
+  background-image: url(../images/background_image.png);
   border-radius: 10px;
   // margin-right: auto;
   // margin-left: auto;
@@ -87,23 +78,17 @@
 // }
 
 .markup-unit__favorite-text {
-  font-family: 'Manrope';
-  font-style: normal;
   font-weight: 500;
   font-size: 12px;
   line-height: 16px;
-  color: #111321;
+  color: getColor('primary');
   margin: 0 auto;
 }
 
 .markup-unit__card-header {
-  font-family: 'Manrope';
-  font-style: normal;
   font-weight: 700;
   font-size: 32px;
-  line-height: 44px;
   letter-spacing: -0.01em;
-  color: #111321;
   padding-top: 20px;
   margin: 0px;
   height: 132px;
@@ -112,12 +97,8 @@
 }
 
 .markup-unit__card-text {
-  font-family: 'Manrope';
-  font-style: normal;
   font-weight: 400;
   font-size: 16px;
-  line-height: 22px;
-  color: #111321;
   padding-top: 20px;
   margin: 0px;
   height: 66px;
@@ -126,12 +107,8 @@
 }
 
 .markup-unit__card-date {
-  font-family: 'Manrope';
-  font-style: normal;
-  font-weight: 400;
   font-size: 16px;
-  line-height: 22px;
-  color: #a8a8a8;
+  color: getColor('grey');
   margin: 0;
   margin-right: 205px;
   display: inline-block;
@@ -139,18 +116,14 @@
 }
 
 .markup-unit__read-more {
-  font-family: 'Manrope';
-  font-style: normal;
-  font-weight: 400;
+  @extend %link;
   font-size: 16px;
-  line-height: 22px;
-  color: #4440f7;
-  text-decoration: none;
+  color: getColor('accent');
   margin: 0;
 }
 
 .weather-placeholder {
   width: 394.66px;
   height: 711px;
-  background-color: #111321;
+  background-color: getColor('primary');
 }
