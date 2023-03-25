@@ -25,10 +25,12 @@ export function createPopularMarkup(unit) {
     <path style="stroke: var(--color1, #4440f7)" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.2857" d="M10.666 2.286c-4.207 0-7.619 3.377-7.619 7.543 0 3.363 1.333 11.345 14.458 19.413 0.235 0.143 0.505 0.219 0.78 0.219s0.545-0.076 0.78-0.219c13.125-8.069 14.458-16.050 14.458-19.413 0-4.166-3.412-7.543-7.619-7.543s-7.619 4.571-7.619 4.571-3.412-4.571-7.619-4.571z"></path>
     </svg>
     </button>
-    <h1 class="markup-unit__card-header" name="card_header">${value.title}</h1>
-    <h2 class="markup-unit__card-text" name="card_text">${value.abstract}</h2>
+    <h2 class="markup-unit__card-header" name="card_header">${value.title}</h2>
+    <p class="markup-unit__card-text" name="card_text">${value.abstract}</p>
+    <div class="markup-unit__card-info">
     <p class="markup-unit__card-date">${value.published_date}</p>
     <a class="markup-unit__read-more" href="${value.url} name="read_more">Read more</a>
+    </div>
     </li>`;
       })
       .join('');
@@ -57,10 +59,12 @@ export function createQueryMarkup(unit) {
       <use href="..scr/images/icons.svg#icon-favorite-heart"></use>
       </svg>
       </button>
-      <h1 class="markup-unit__card-header">${value.headline.main}</h1>
-      <h2 class="markup-unit__card-text">${value.abstract}</h2>
+      <h2 class="markup-unit__card-header">${value.headline.main}</h2>
+      <p class="markup-unit__card-text">${value.abstract}</p>
+      <div class="markup-unit__card-info">
       <p>${value.pub_date}</p>
       <a  href="${value.web_url}">Read more</a>
+      </div>
       </li>`;
       })
       .join('');
@@ -85,8 +89,8 @@ class MakeCards {
   backCard(target) {
     `TARGET.map(value => {return <p class="markup-unit__section">${tag}</p>
   <img class="markup-unit__card-image" src="${image}" alt="placeholder" />
-  <h1 class="markup-unit__card-header">${header}</h1>
-  <h2 class="markup-unit__card-text">${description}</h2>
+  <h2 class="markup-unit__card-header">${header}</h2>
+  <p class="markup-unit__card-text">${description}</p>
   <p>${date}</p>
   <a  href="${url}">Read more</a>})
   .join("")
