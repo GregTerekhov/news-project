@@ -1,12 +1,11 @@
 .articles {
-  position: relative;
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
   gap: 32px;
   list-style: none;
   margin: 0 auto;
-  margin-top: 60px;
+  margin-top: 119px;
   padding: 0px;
   background-color: #f4f4f4;
 }
@@ -16,12 +15,8 @@
   width: calc((100% - (32px * 2)) / 3);
 }
 
-.markup-unit::before {
-  content: '';
-  position: absolute;
-  z-index: 50;
-  // background: url(/src/images/already-read-transparent.png);
-  background-color: #4440f7;
+.markup-unit__read {
+  background: url(/src/images/already-read-transparent.png);
 }
 
 .markup-unit__section {
@@ -111,6 +106,9 @@
   color: #111321;
   padding-top: 20px;
   margin: 0px;
+  height: 132px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .markup-unit__card-text {
@@ -122,6 +120,9 @@
   color: #111321;
   padding-top: 20px;
   margin: 0px;
+  height: 66px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .markup-unit__card-date {
@@ -152,34 +153,4 @@
   width: 394.66px;
   height: 711px;
   background-color: #111321;
-}
-
-.no-found {
-  margin-top: 60px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.no-found__text {
-  margin: 0;
-  margin-left: auto;
-  margin-right: auto;
-  font-family: 'Manrope';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 40px;
-  line-height: 55px;
-  text-align: center;
-  letter-spacing: -0.01em;
-  color: #111321;
-  width: 550px;
-}
-
-.no-found__image {
-  margin-left: auto;
-  margin-right: auto;
-  width: 605px;
-  height: 480px;
-  background-image: url(/src/images/background_image.png);
-  background-repeat: no-repeat;
 }
