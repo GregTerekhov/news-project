@@ -1,4 +1,5 @@
 import './js/fetch weather';
+import './js/categories/init';
 import './js/pagination.js';
 import {
   fetchPopularArticles,
