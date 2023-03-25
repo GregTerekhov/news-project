@@ -1,9 +1,9 @@
 import Notiflix from 'notiflix';
 
-let dateApi = '';
-export function setDateApi(value) {
-  dateApi = value;
-}
+// let dateApi = '';
+// export function setDateApi(value) {
+//   dateApi = value;
+// }
 
 const calendarForm = document.querySelector('calendar-form');
  const daysTag = document.querySelector('.days');
