@@ -1,29 +1,3 @@
-// const iconMenu = document.querySelector('.menu__icon');
-// const menuBody = document.querySelector('.menu__body');
-
-// if (iconMenu) {
-//   iconMenu.addEventListener('click', function () {
-//     document.body.classList.toggle('_lock');
-//     iconMenu.classList.toggle('_active');
-//     menuBody.classList.toggle('_active');
-//   });
-// }
-
-// function onMenuClick(e) {
-//   e.preventDefault();
-
-//   if (iconMenu.classList.contains('_active')) {
-//     document.body.classList.remove('_lock');
-//     iconMenu.classList.remove('_active');
-//     menuBody.classList.remove('_active');
-//   }
-// }
-
-// ////////////////////////////////
-// const bodyScrollLock = require('body-scroll-lock');
-// const disableBodyScroll = bodyScrollLock.disableBodyScroll;
-// const enableBodyScroll = bodyScrollLock.enableBodyScroll;
-
 (() => {
   const mobileMenuRef = document.querySelector('.js-menu-container');
   const openMenuBtn = document.querySelector('.js-open-menu');
@@ -55,42 +29,3 @@
     openMenuBtn.setAttribute('aria-expanded', false);
   });
 })();
-
-///////////////////////////////////////////
-
-// import {
-//   mobileMenuRef,
-//   openMenuBtnRef,
-//   closeMenuBtnRef,
-//   themeContainerRef,
-//   seachBtnRef,
-// } from './refs';
-
-// const toggleMenu = () => {
-//   const isMenuOpen =
-//     openMenuBtnRef.getAttribute('aria-expanded') === 'true' || false;
-//   openMenuBtnRef.setAttribute('aria-expanded', !isMenuOpen);
-//   mobileMenuRef.classList.toggle('open-menu');
-//   if (themeContainerRef.classList.contains('mobile')) {
-//     themeContainerRef.classList.remove('mobile');
-//   } else if (!themeContainerRef.classList.contains('mobile')) {
-//     themeContainerRef.classList.add('mobile');
-//   }
-
-//   const scrollLockMethod = !isMenuOpen
-//     ? 'disableBodyScroll'
-//     : 'enableBodyScroll';
-// };
-
-// openMenuBtnRef.addEventListener('click', toggleMenu);
-// closeMenuBtnRef.addEventListener('click', toggleMenu);
-
-// window.matchMedia('medium').addEventListener('change', e => {
-//   if (!e.matches) return;
-//   mobileMenuRef.classList.remove('open-menu');
-//   openMenuBtnRef.setAttribute('aria-expanded', false);
-// });
-
-// if (window.innerWidth < 768) {
-//   seachBtnRef.setAttribute('type', 'button');
-// }
