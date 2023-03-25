@@ -57,6 +57,7 @@
               </svg>
             </button>
           </form>
+         
           <!-- Toggle mode -->
           <div class="toggle-mode">
             <svg class="toggle-mode__icon" width="21" height="21">
@@ -114,6 +115,15 @@
       </div>
     </header>
     <main>
+      <div class="container">
+        <h1 class="visually-hidden">News portal</h1>
+        <ul class="categories"></ul>
+        <div class="calendar">
+          <include src="./partials/calendar.html"></include>
+        </div>
+        <div class="weather"></div>
+        <div class="articles"></div>
+        <div class="pagination"></div>
       <div class="container container-restrittion js-body-container">
         <h1 class="visually-hidden" name="header">News portal</h1>
         <ul class="categories" name="categories"></ul>
