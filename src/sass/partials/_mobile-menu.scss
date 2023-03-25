@@ -3,7 +3,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   background-color: getColor('background-primary');
   z-index: 5;
   transform: translateY(-100%);
@@ -20,25 +20,21 @@
 }
 
 .mobile-menu__container {
-  padding-left: 16px;
-  padding-right: 16px;
-  margin: 0 auto;
-
-  @include respondTo('small') {
-    width: 320px;
-  }
+  display: block;
 }
 
 .mobile-menu__wrapper {
   display: flex;
+  // // justify-content: space-between;
   align-items: center;
-  justify-content: space-between;
   margin-bottom: 68px;
 }
 
 .menu-close {
+  margin-left: auto;
   border: none;
   background-color: transparent;
+
   svg {
     stroke: getColor('primary');
     fill: getColor('primary');

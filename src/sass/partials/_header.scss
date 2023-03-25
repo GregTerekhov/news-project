@@ -8,12 +8,16 @@ body.darkMode {
   }
 }
 
+.body._lock {
+  overflow: hidden;
+}
+
 .header {
   min-height: 81px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
-.container {
+.header__box {
   display: flex;
   align-items: center;
 
