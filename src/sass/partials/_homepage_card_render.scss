@@ -14,15 +14,16 @@
 .markup-unit {
   position: relative;
   width: calc((100% - (32px * 2)) / 3);
+  padding-bottom: 8px;
 }
 
-.markup-unit::before {
-  content: '';
-  position: absolute;
-  z-index: 50;
-  // background: url(/src/images/already-read-transparent.png);
-  background-color: #4440f7;
-}
+// .markup-unit::before {
+//   content: '';
+//   position: absolute;
+//   width: 395px;
+//   height: 675px;
+//   background-color: rgba(244, 244, 244, 0.4);
+// }
 
 .markup-unit__section {
   position: absolute;
@@ -63,10 +64,7 @@
   object-fit: cover;
   width: auto;
   height: 395px;
-  background-image: url(/src/images/background_image.png);
   border-radius: 10px;
-  // margin-right: auto;
-  // margin-left: auto;
 }
 
 .markup-unit__add-favorite {
@@ -111,6 +109,7 @@
   color: #111321;
   padding-top: 20px;
   margin: 0px;
+  height: 135px;
 }
 
 .markup-unit__card-text {
@@ -122,6 +121,7 @@
   color: #111321;
   padding-top: 20px;
   margin: 0px;
+  height: 100px;
 }
 
 .markup-unit__card-date {
@@ -150,7 +150,7 @@
 
 .weather-placeholder {
   width: 394.66px;
-  height: 711px;
+  height: 675px;
   background-color: #111321;
 }
 

@@ -5,11 +5,14 @@ import {
 } from './fetchArticles';
 import { createPopularMarkup, createQueryMarkup, getNoFound } from './markup';
 import { PagePagination } from './pagination';
+import { TemplateCards } from './markup';
 
 export const formEl = document.querySelector('.search-form');
 const bodyContainerEl = document.querySelector('.js-body-container');
 export const bodyArticles = bodyContainerEl.children.articles;
+
 const pageValue = new PagePagination();
+const templateCards = new TemplateCards();
 
 getPopularArticles(); //Запрос популярных новостей
 
@@ -20,7 +23,8 @@ export function onInputSubmit(e) {
   resetMarkup();
   pageValue.pageReset(); //Сброс значения текущей страницы до 1
   if (!searchArticle) {
-    getPopularArticles();
+    templateCards.buildTemplate();
+    // getPopularArticles();
     return;
   }
   getQueryArticles(pageValue.page, searchArticle); //Не забыть поменять "1" на переменную номера страницы
@@ -30,8 +34,13 @@ export function onInputSubmit(e) {
 async function getPopularArticles() {
   try {
     const response = await fetchPopularArticles();
-    console.log(response);
+    templateCards.checkTheData(response);
+    // console.log(templateCards.buildTemplate());
     createPopularMarkup(response); //Рендер карточки популярного запроса
+    bodyArticles.firstChild.nextSibling.insertAdjacentHTML(
+      'afterend',
+      `<div class="weather-placeholder"></div>`
+    );
   } catch (error) {
     console.log(error);
   }
@@ -41,13 +50,13 @@ async function getPopularArticles() {
 async function getQueryArticles(page, searchArticle) {
   try {
     const response = await fetchQueryArticles(page, searchArticle);
+    templateCards.checkTheData(response);
+    // console.log(templateCards.buildTemplate());
     const target = response.data.response.docs;
-    console.log(response);
     if (target.length === 0) {
       getNoFound(); //Рендер заглушки при ненайденом запросе
     }
     createQueryMarkup(response); //Рендер карточки поискового запроса\
-    console.log(target);
   } catch (error) {
     console.log(error);
   }
