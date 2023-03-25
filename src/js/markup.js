@@ -1,6 +1,14 @@
 import { bodyArticles } from './homepage-render';
 import { IMAGE_URL } from './fetchArticles';
 
+export function getNoFound() {
+  const noFound = `<div class="no-found">
+  <h1 class="no-found__text">We haven’t found news from this category</h1>
+  <div class="no-found__image"></div>
+  </div>`;
+  return bodyArticles.insertAdjacentHTML('beforeend', noFound);
+}
+
 //Оптимизация рендеринга карточек не завершена, и будет дорабатываться
 
 export function createPopularMarkup(unit) {
@@ -42,7 +50,11 @@ export function createQueryMarkup(unit) {
   try {
     let templateUnit = unit.data.response.docs
       .map(value => {
-        console.log(value);
+        let image = '/src/images/card_placeholder.png';
+        if (value.multimedia.length !== 0) {
+          image = value.multimedia[0].legacy.xlarge;
+        }
+        // console.log(value);
         return `<li class="markup-unit" name="card">
       <p class="markup-unit__section">${value.section_name}</p>
       <p class="markup-unit__already-read">Already read
@@ -50,7 +62,7 @@ export function createQueryMarkup(unit) {
       <path stroke="#00DD73" stroke-linejoin="miter" stroke-linecap="square" stroke-miterlimit="4" stroke-width="2.2857" d="M28.779 6.389c-0.288 0.009-0.546 0.131-0.732 0.323l-16.313 16.313-6.713-6.713c-0.195-0.209-0.473-0.339-0.78-0.339-0.589 0-1.067 0.478-1.067 1.067 0 0.308 0.13 0.585 0.339 0.78l0.001 0.001 7.467 7.467c0.193 0.193 0.459 0.312 0.754 0.312s0.561-0.119 0.754-0.312v0l17.067-17.067c0.199-0.194 0.323-0.465 0.323-0.765 0-0.589-0.478-1.067-1.067-1.067-0.011 0-0.022 0-0.033 0l0.002-0z"></path>
       </svg>
       </p>
-      <img class="markup-unit__card-image" src="${IMAGE_URL}/${value.multimedia[0].legacy.xlarge}" alt="placeholder" />
+      <img class="markup-unit__card-image" src="${IMAGE_URL}/${image}" alt="placeholder" />
       <button class="markup-unit__add-favorite" type="button" data-info>
       <p class="markup-unit__favorite-text">Add to favorite</p>
       <svg width="15" height="15">
@@ -58,7 +70,7 @@ export function createQueryMarkup(unit) {
       </svg>
       </button>
       <h1 class="markup-unit__card-header">${value.headline.main}</h1>
-      <h2 class="markup-unit__card-text">${value.abstract}</h2>
+      <h2 class="markup-unit__card-text js-card-description">${value.abstract}</h2>
       <p>${value.pub_date}</p>
       <a  href="${value.web_url}">Read more</a>
       </li>`;
@@ -72,24 +84,24 @@ export function createQueryMarkup(unit) {
 }
 
 //Предпологаемый класс для универсальной карточки. Дорабатывается
-class MakeCards {
-  constructor(target) {
-    tag: target.section_name;
-    image: target.multimedia[0].url;
-    header: target.headline.main;
-    description: target.abstract;
-    date: target.pub_date;
-    url: target.web_url;
-  }
+// class MakeCards {
+//   constructor(target) {
+//     tag: target.section_name;
+//     image: target.multimedia[0].url;
+//     header: target.headline.main;
+//     description: target.abstract;
+//     date: target.pub_date;
+//     url: target.web_url;
+//   }
 
-  backCard(target) {
-    `TARGET.map(value => {return <p class="markup-unit__section">${tag}</p>
-  <img class="markup-unit__card-image" src="${image}" alt="placeholder" />
-  <h1 class="markup-unit__card-header">${header}</h1>
-  <h2 class="markup-unit__card-text">${description}</h2>
-  <p>${date}</p>
-  <a  href="${url}">Read more</a>})
-  .join("")
-  return bodyArticles.insertAdjacentHTML('beforeend', templateUnit);`;
-  }
-}
+//   backCard(target) {
+//     `TARGET.map(value => {return <p class="markup-unit__section">${tag}</p>
+//   <img class="markup-unit__card-image" src="${image}" alt="placeholder" />
+//   <h1 class="markup-unit__card-header">${header}</h1>
+//   <h2 class="markup-unit__card-text">${description}</h2>
+//   <p>${date}</p>
+//   <a  href="${url}">Read more</a>})
+//   .join("")
+//   return bodyArticles.insertAdjacentHTML('beforeend', templateUnit);`;
+//   }
+// }
