@@ -41,7 +41,7 @@
             </li>
           </ul>
           <!-- Search-form -->
-          <form class="searh-form" role="search">
+          <form class="search-form" role="search">
             <label for="news-search" class="visually-hidden"></label>
             <input
               type="search"
@@ -49,8 +49,9 @@
               id="news-search"
               autocomplete="off"
               placeholder="Search |"
+              name="querySearch"
             />
-            <button class="search-form__button">
+            <button class="search-form__button" name="search_button">
               <svg class="search-form__icon">
                 <use href="#"></use>
               </svg>
@@ -123,6 +124,13 @@
         <div class="weather"></div>
         <div class="articles"></div>
         <div class="pagination"></div>
+      <div class="container container-restrittion js-body-container">
+        <h1 class="visually-hidden" name="header">News portal</h1>
+        <ul class="categories" name="categories"></ul>
+        <div class="calendar" name="calendar"></div>
+        <div class="weather" name="weather"></div>
+        <ul class="articles articles-background" name="articles"></ul>
+        <div class="pagination" name="pagination"></div>
       </div>
     </main>
     <script type="module" src="./index.js"></script>
