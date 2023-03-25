@@ -17,6 +17,7 @@
 }
 
 .markup-unit__section {
+  @extend %resetGap;
   position: absolute;
   font-weight: 500;
   font-size: 12px;
@@ -30,11 +31,11 @@
 }
 
 .markup-unit__already-read {
+  @extend %resetGap;
   font-weight: 700;
   font-size: 14px;
   color: #00dd73;
   position: absolute;
-  margin: 0;
   display: flex;
   align-items: center;
   top: 20px;
@@ -78,48 +79,54 @@
 // }
 
 .markup-unit__favorite-text {
+  @extend %resetGap;
   font-weight: 500;
   font-size: 12px;
-  line-height: 16px;
   color: getColor('primary');
   margin: 0 auto;
 }
 
 .markup-unit__card-header {
+  @extend %resetGap;
   font-weight: 700;
   font-size: 32px;
   letter-spacing: -0.01em;
-  padding-top: 20px;
-  margin: 0px;
+  margin-top: 20px;
   height: 132px;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .markup-unit__card-text {
+  @extend %resetGap;
   font-weight: 400;
   font-size: 16px;
-  padding-top: 20px;
-  margin: 0px;
+  margin-top: 20px;
   height: 66px;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
+.markup-unit__card-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .markup-unit__card-date {
+  @extend %resetGap;
   font-size: 16px;
   color: getColor('grey');
-  margin: 0;
-  margin-right: 205px;
+  margin-top: 20px;
   display: inline-block;
-  padding-top: 20px;
 }
 
 .markup-unit__read-more {
+  @extend %resetGap;
   @extend %link;
   font-size: 16px;
   color: getColor('accent');
-  margin: 0;
+  margin-top: 20px;
 }
 
 .weather-placeholder {
