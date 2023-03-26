@@ -32,7 +32,7 @@
         </nav>
         <!-- Search-form -->
         <div class="search-btn-container">
-          <form class="searh-form" id="form-field" role="search">
+          <form class="search-form" id="form-field" role="search">
             <button class="search-form__btn">
               <svg class="search-form__icon" width="20" height="20">
                 <use href="./images/sprite.svg#search"></use>
@@ -143,13 +143,17 @@
     </div>
     <!-- Main  -->
     <main>
-      <div class="container">
-        <h1 class="visually-hidden">News portal</h1>
-        <ul class="categories"></ul>
-        <div class="calendar"></div>
-        <div class="weather"></div>
-        <div class="articles"></div>
-        <div class="pagination"></div>
+      <div class="container container-restrittion js-body-container">
+        <h1 class="visually-hidden" name="header">News portal</h1>
+        <div class="choosing-line">
+          <ul class="categories" name="categories"></ul>
+          <div class="calendar" name="calendar">
+            <include src="./partials/calendar.html"></include>
+          </div>
+        </div>
+        <div class="weather" name="weather"></div>
+        <ul class="articles articles-background" name="articles"></ul>
+        <div class="pagination" name="pagination"></div>
       </div>
     </main>
 
