@@ -1,17 +1,17 @@
 import Notiflix from 'notiflix';
 
-// let dateApi = '';
-// export function setDateApi(value) {
-//   dateApi = value;
-// }
+let dateApi = '';
+export function setDateApi(value) {
+  dateApi = value;
+}
 
 const calendarForm = document.querySelector('calendar-form');
- const daysTag = document.querySelector('.days');
- const currentDate = document.querySelector('.current-date');
- const switchesMonth = document.querySelectorAll('.calendar-icons span');
- const selectedDate = document.getElementById('input-picker');
+const daysTag = document.querySelector('.days');
+const currentDate = document.querySelector('.current-date');
+const switchesMonth = document.querySelectorAll('.calendar-icons span');
+const selectedDate = document.getElementById('input-picker');
 
- const calendar = {
+const calendar = {
   openModalBtn: document.querySelector('[data-modal-open]'),
   closeModalBtn: document.querySelector('body'),
   modal: document.querySelector('[data-modal]'),
@@ -24,28 +24,31 @@ let today = new Date(),
   currentMonth = today.getMonth(),
   currentYear = today.getFullYear();
 
-   const months = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ];
-
+const months = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
 
 // зміна розмітки при закритті
 const closeModalAndResetCalendar = () => {
   calendarForm.querySelector('[data-modal]').classList.add('hidden');
   calendarForm.querySelector('.calendar-input').classList.remove('isActive');
-  calendarForm.querySelector('.calendar__button-down').classList.remove('switched');
-  calendarForm.querySelector('.form-container__icon-calendar').classList.remove('switchedColor');
+  calendarForm
+    .querySelector('.calendar__button-down')
+    .classList.remove('switched');
+  calendarForm
+    .querySelector('.form-container__icon-calendar')
+    .classList.remove('switchedColor');
 };
 
 function calendarEl(e) {
@@ -54,10 +57,10 @@ function calendarEl(e) {
   inputField.classList.toggle('isActive');
   toggleBtn.classList.toggle('switched');
   calendarBtn.classList.toggle('switchedColor');
-};
+}
 
 // обробник події по кліку на інпут
-calendar.openModalBtn.addEventListener('click', function() {
+calendar.openModalBtn.addEventListener('click', function () {
   calendarEl();
 });
 
@@ -74,7 +77,6 @@ function hideModals(e) {
 // ---------  Рендеринг календаря  ---------
 
 const render = () => {
-
   // отримаємо перший день місяця, останній день місяця, останній день попереднього місяця
   const firstDayofMonth = new Date(currentYear, currentMonth, 1).getDay() - 1, // для відображення понеділка
     lastDateofMonth = new Date(currentYear, currentMonth, 0).getDate(),
@@ -88,7 +90,7 @@ const render = () => {
   let liTag = '';
 
   // елементи для днів попереднього місяця
-  for (let j = firstDayofMonth ; j > 0; j--) {
+  for (let j = firstDayofMonth; j > 0; j--) {
     liTag += `<li class="inactive">${lastDateofLastMonth - j + 1}</li>`;
   }
 
@@ -106,7 +108,7 @@ const render = () => {
   }
 
   // додаємо елементи для днів наступного місяця
-  for (let i = lastDayofMonth; i < 7; i++) { 
+  for (let i = lastDayofMonth; i < 7; i++) {
     liTag += `<li class="inactive">${i - lastDayofMonth + 1}</li>`;
   }
 
@@ -117,7 +119,6 @@ const render = () => {
   // обробник події по кліку на день
   const dayChange = document.querySelector('.days');
   dayChange.addEventListener('click', e => {
-
     // перевіряємо чи є елемент неактивним
     if (e.target.classList.contains('inactive')) {
       return;
@@ -146,7 +147,6 @@ const render = () => {
   });
 };
 
-
 // --------  ФУНКЦІЯ ДЛЯ ВІДПРАВКИ ДАТИ НА API  --------
 let errorDisplayed = false; // для виводу помилки на екран
 const handleSelectedBeginDate = async () => {
@@ -167,7 +167,7 @@ const handleSelectedBeginDate = async () => {
       }
       throw new Error(err);
     } else {
-      setDateApi(`${selectedDateStr}`); 
+      setDateApi(`${selectedDateStr}`);
       closeModalAndResetCalendar();
       errorDisplayed = false;
     }
@@ -176,14 +176,12 @@ const handleSelectedBeginDate = async () => {
   }
 };
 
-
 // відправляємо на сервер сьогоднішню дату при завантаження сторінки
 setDateApi(
   `${today.getFullYear()}-${(today.getMonth() + 1)
     .toString()
     .padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')}`
 );
-
 
 // --------  ПЕРЕМИКАЧ РОКІВ  --------
 const prevYearBtn = document.getElementById('prev-years');
@@ -210,7 +208,6 @@ nextYearBtn.addEventListener('click', () => {
     Notiflix.Notify.failure(`Next year is beyond the current year`);
   }
 });
-
 
 // --------  ПЕРЕМИКАЧ МІСЯЦІВ  --------
 switchesMonth.forEach(switchMonth => {
