@@ -24,8 +24,8 @@
   window.matchMedia('(min-width: 768px)').addEventListener('change', e => {
     if (!e.matches) return;
     document.body.classList.remove('_lock');
-    mobileMenu.classList.remove('is-open');
-    mobileMenu.classList.remove('open-menu');
+    mobileMenuRef.classList.remove('is-open');
+    // mobileMenuRef.classList.remove('open-menu');
     openMenuBtn.setAttribute('aria-expanded', false);
   });
 })();
