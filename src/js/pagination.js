@@ -1,3 +1,5 @@
+import { fetchPopularArticles, createPopularMarkup } from './markup.js';
+import { getPopularArticles } from './homepage-render';
 const paginationRef = document.querySelector('.pagination');
 function createPagination() {
   paginationRef.innerHTML = ` <ul class="page-container">
