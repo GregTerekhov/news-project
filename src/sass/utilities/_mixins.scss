@@ -8,3 +8,15 @@
       @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. " + "Available breakpoints are: #{map-keys($breakpoints)}.";
     }
   }
+
+  //міксін дарк/лайт теми
+
+  @mixin darkmode {
+    background-color: getColor('background-reversed');
+    color: getColor('primary-reversed');
+};
+
+  @mixin lightmode {
+  color: getColor('primary');
+  background-color: getColor('background-primary');
+}

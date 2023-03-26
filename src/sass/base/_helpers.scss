@@ -42,3 +42,23 @@ body {
       width: 1280px;
     }
   }
+//для light/dark теми
+  
+  body {
+    font-family: $text-primary;
+    transition: background-color var(--switch-transition), color var(--switch-transition);
+    @include lightmode;
+  }
+
+  .footer {
+    @include darkmode;
+  }
+
+  body.darkmode {
+    font-family: $text-primary;
+    @include darkmode;
+  }
+
+  .footer.darkmode-footer {
+    @include lightmode;
+  }
