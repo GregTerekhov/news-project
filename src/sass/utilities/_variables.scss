@@ -17,6 +17,10 @@ $breakpoints: (
   ),
 ) !default;
 
+// @include respondTo('small') {
+
+// }
+
 // Шрифти
 $text-primary: 'Manrope', sans-serif;
 $text-secondary: 'Poppins', sans-serif;
