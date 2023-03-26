@@ -1,17 +1,10 @@
 const paginationRef = document.querySelector('.pagination');
 function createPagination() {
   paginationRef.innerHTML = ` <ul class="page-container">
-  <button class="prev-page" disabled>
-    <svg class="prev-icon">
-      <use href="/images/icons.svg#icon-arrow-left"></use>
-    </svg>
-    Prev
+  <button class="prev-page" disabled> <  Prev
   </button>
   <div class= "pagination-buttons" id="pagination"></div>
-  <button class="next-page"> Next
-    <svg class="next-icon">
-      <use href="./images/pagination/symbol-defs.svg#icon-arrow-left"></use>
-    </svg> 
+  <button class="next-page"> Next  >    
   </button>
 </ul>`;
 }
@@ -22,12 +15,24 @@ const btnPrevPg = document.querySelector('button.prev-page');
 const valuePage = {
   curPage: 1,
   numLinksTwoSide: 1,
-  totalPages: 20,
+  totalPages: 10,
 };
+pagination(valuePage);
 
-setTimeout(() => {
-  pagination();
-}, 0);
+function handleWindowSizeChange() {
+  if (window.innerWidth < 768) {
+    valuePage.numLinksTwoSide = 0;
+  } else {
+    valuePage.numLinksTwoSide = 1;
+  }
+  pagination(valuePage);
+}
+
+window.addEventListener('resize', handleWindowSizeChange);
+
+// setTimeout(() => {
+//   pagination();
+// }, 0);
 
 pg.addEventListener('click', e => {
   const ele = e.target;
