@@ -1,5 +1,6 @@
 import { fetchPopularArticles, createPopularMarkup } from './markup.js';
-import { getPopularArticles } from './homepage-render';
+import { getPopularArticles, resetMarkup } from './homepage-render';
+
 const paginationRef = document.querySelector('.pagination');
 function createPagination() {
   paginationRef.innerHTML = ` <ul class="page-container">
@@ -11,6 +12,7 @@ function createPagination() {
 </ul>`;
 }
 createPagination();
+
 const pg = document.getElementById('pagination');
 const btnNextPg = document.querySelector('button.next-page');
 const btnPrevPg = document.querySelector('button.prev-page');
@@ -21,6 +23,7 @@ const valuePage = {
   data: null,
   amountShowCards: 8,
 };
+
 setTimeout(async () => {
   const response = await fetchPopularArticles();
   valuePage.data = response.data.results;
@@ -38,8 +41,6 @@ setTimeout(async () => {
   }
   pagination();
 }, 0);
-
-// pagination(valuePage);
 
 function handleWindowSizeChange() {
   if (window.innerWidth < 768) {
