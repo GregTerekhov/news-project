@@ -1,11 +1,8 @@
-import {
-  fetchPopularArticles,
-  fetchQueryArticles,
-  fetchCategoryArticles,
-} from './fetchArticles';
-import { createPopularMarkup, createQueryMarkup, getNoFound } from './markup';
+import { fetchPopularArticles, fetchQueryArticles } from './fetchArticles';
+import { getNoFound } from './markup';
 import { PagePagination } from './pagination';
 import { TemplateCards } from './markup';
+import { WeatherBlock } from './fetch_weather';
 
 export const formEl = document.querySelector('.search-form');
 const bodyContainerEl = document.querySelector('.js-body-container');
@@ -13,6 +10,7 @@ export const bodyArticles = bodyContainerEl.children.articles;
 
 const pageValue = new PagePagination();
 const templateCards = new TemplateCards();
+const weatherViget = new WeatherBlock();
 
 getPopularArticles(); //Запрос популярных новостей
 
@@ -39,7 +37,7 @@ async function getPopularArticles() {
     const response = await fetchPopularArticles();
     templateCards.checkTheData(response);
     templateCards.buildTemplate(); //Рендер карточки
-    addWeatherBlock();
+    weatherViget.checkLocation(); //Вставка блока с погодой
   } catch (error) {
     console.log(error);
   }
@@ -55,7 +53,7 @@ async function getQueryArticles(page, searchArticle) {
       getNoFound(); //Рендер заглушки при ненайденом запросе
     }
     templateCards.buildTemplate(); //Рендер карточки
-    addWeatherBlock();
+    weatherViget.checkLocation(); //Вставка блока с погодой
   } catch (error) {
     console.log(error);
   }
@@ -64,15 +62,4 @@ async function getQueryArticles(page, searchArticle) {
 //Сброс результата предыдущего запроса
 function resetMarkup() {
   bodyArticles.innerHTML = '';
-}
-
-//Вставка блока с погодой
-function addWeatherBlock() {
-  if (!bodyArticles.firstChild || !bodyArticles.firstChild.nextSibling) {
-    return;
-  }
-  bodyArticles.firstChild.nextSibling.insertAdjacentHTML(
-    'afterend',
-    `<div class="weather-placeholder"></div>`
-  );
 }
