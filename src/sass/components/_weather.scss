@@ -20,7 +20,7 @@ $large: 1280px;
 }
 @media screen and (min-width: 1280px) {
   .weather {
-    width: 395px;
+    width: calc((100% - (32px * 2)) / 3);
     height: 675px;
     padding-top: 40px;
   }

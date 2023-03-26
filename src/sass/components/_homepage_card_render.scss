@@ -8,21 +8,44 @@
   gap: 32px;
   margin: 0 auto;
   margin-top: 60px;
-  background-color: #f4f4f4;
+  background-color: getColor('background-primary');
+
+  @include respondTo('medium') {
+    flex-direction: row;
+    gap: 30px;
+    margin-top: 48px;
+  }
+
+  @include respondTo('large') {
+    gap: 32px;
+    margin-top: 60px;
+  }
 }
 
 .markup-unit {
   position: relative;
-  width: calc((100% - (32px * 2)) / 3);
-  padding-bottom: 8px;
+  @include respondTo('medium') {
+    width: calc((100% - (30px * 1)) / 2);
+    height: 675px;
+  }
+  @include respondTo('large') {
+    width: calc((100% - (32px * 2)) / 3);
+    padding-bottom: 8px;
+  }
 }
 
 // .markup-unit::before {
 //   content: '';
 //   position: absolute;
-//   width: 395px;
+//   width: 290px;
 //   height: 675px;
 //   background-color: rgba(244, 244, 244, 0.4);
+//   @media screen and (min-width: 768px) {
+//     width: 353px;
+//   }
+//   @media screen and (min-width: 1280px) {
+//     width: 395px;
+//   }
 // }
 
 .markup-unit__section {
@@ -36,7 +59,7 @@
   border-radius: 0px 4px 4px 0px;
   width: fit-content;
   top: 40px;
-  z-index: 9;
+  z-index: 4;
 }
 
 .markup-unit__already-read {
@@ -47,8 +70,15 @@
   position: absolute;
   display: flex;
   align-items: center;
-  top: 20px;
-  left: 270px;
+  top: 14px;
+  left: 167px;
+  @include respondTo('medium') {
+    top: 20px;
+    left: 225px;
+  }
+  @include respondTo('large') {
+    left: 270px;
+  }
 }
 
 .markup-unit__icon-check {
@@ -65,8 +95,8 @@
 .markup-unit__add-favorite {
   position: absolute;
   top: 355px;
-  left: 257px;
-  z-index: 9;
+  left: 154px;
+  z-index: 4;
   display: flex;
   align-items: center;
   gap: 4px;
@@ -74,6 +104,13 @@
   border-radius: 15px;
   border-style: none;
   cursor: pointer;
+
+  @include respondTo('medium') {
+    left: 215px;
+  }
+  @include respondTo('large') {
+    left: 257px;
+  }
 }
 
 .markup-unit__favorite-icon {
@@ -95,44 +132,60 @@
 .markup-unit__card-header {
   @extend %resetGap;
   font-weight: 700;
-  font-size: 32px;
+  font-size: 24px;
   letter-spacing: -0.01em;
   margin-top: 20px;
   height: 135px;
   overflow: hidden;
   text-overflow: ellipsis;
+
+  @include respondTo('medium') {
+    font-size: 32px;
+  }
 }
 
 .markup-unit__card-text {
   @extend %resetGap;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 14px;
   margin-top: 20px;
   height: 100px;
   overflow: hidden;
   text-overflow: ellipsis;
+
+  @include respondTo('medium') {
+    font-size: 16px;
+  }
 }
 
 .markup-unit__card-info {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-top: 20px;
 }
 
 .markup-unit__card-date {
   @extend %resetGap;
-  font-size: 16px;
+  font-size: 14px;
   color: getColor('grey');
   margin-top: 20px;
-  display: inline-block;
+
+  @include respondTo('medium') {
+    font-size: 16px;
+  }
 }
 
 .markup-unit__read-more {
   @extend %resetGap;
   @extend %link;
-  font-size: 16px;
+  font-size: 14px;
   color: getColor('accent');
   margin-top: 20px;
+
+  @include respondTo('medium') {
+    font-size: 16px;
+  }
 }
 
 .weather-placeholder {
@@ -142,31 +195,49 @@
 }
 
 .no-found {
-  margin-top: 60px;
+  margin-top: 40px;
   margin-left: auto;
   margin-right: auto;
+  @include respondTo('medium') {
+    margin-top: 88px;
+  }
+  @include respondTo('large') {
+    margin-top: 60px;
+  }
 }
 
 .no-found__text {
-  margin: 0;
+  margin: 0 auto;
   margin-left: auto;
-  margin-right: auto;
-  font-family: 'Manrope';
-  font-style: normal;
   font-weight: 700;
-  font-size: 40px;
-  line-height: 55px;
+  font-size: 20px;
+  line-height: 2.75;
   text-align: center;
   letter-spacing: -0.01em;
-  color: #111321;
-  width: 550px;
+  color: getColor('primary');
+  @include respondTo('medium') {
+    font-size: 40px;
+    line-height: 1.366;
+    width: 550px;
+  }
 }
 
 .no-found__image {
-  margin-left: auto;
-  margin-right: auto;
-  width: 605px;
-  height: 480px;
-  background-image: url(/src/images/background_image.png);
+  margin: 40px auto 60px;
   background-repeat: no-repeat;
+  width: 250px;
+  height: 200px;
+  background-image: url(/src/images/m_background_image.png);
+  @include respondTo('medium') {
+    width: 560px;
+    height: 445px;
+    background-image: url(/src/images/tbl_background_image.png);
+    margin-bottom: 100px;
+  }
+  @include respondTo('large') {
+    width: 605px;
+    height: 480px;
+    background-image: url(/src/images/background_image.png);
+    margin-bottom: 226px;
+  }
 }
