@@ -1,13 +1,13 @@
 .articles {
   position: relative;
+  @extend %link;
+  @extend %list;
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
   gap: 32px;
-  list-style: none;
   margin: 0 auto;
   margin-top: 60px;
-  padding: 0px;
   background-color: #f4f4f4;
 }
 
@@ -26,15 +26,13 @@
 // }
 
 .markup-unit__section {
+  @extend %resetGap;
   position: absolute;
-  font-family: 'Manrope';
-  font-style: normal;
   font-weight: 500;
   font-size: 12px;
-  line-height: 16px;
-  color: #f4f4f4;
   padding: 8px 4px;
-  background: rgba(68, 64, 247, 0.7);
+  background: transparentize(getColor('accent'), 0.3);
+  color: getColor('background-primary');
   border-radius: 0px 4px 4px 0px;
   width: fit-content;
   top: 40px;
@@ -42,14 +40,11 @@
 }
 
 .markup-unit__already-read {
-  font-family: 'Manrope';
-  font-style: normal;
+  @extend %resetGap;
   font-weight: 700;
   font-size: 14px;
-  line-height: 19px;
   color: #00dd73;
   position: absolute;
-  margin: 0;
   display: flex;
   align-items: center;
   top: 20px;
@@ -90,68 +85,60 @@
 // }
 
 .markup-unit__favorite-text {
-  font-family: 'Manrope';
-  font-style: normal;
+  @extend %resetGap;
   font-weight: 500;
   font-size: 12px;
-  line-height: 16px;
-  color: #111321;
+  color: getColor('primary');
   margin: 0 auto;
 }
 
 .markup-unit__card-header {
-  font-family: 'Manrope';
-  font-style: normal;
+  @extend %resetGap;
   font-weight: 700;
   font-size: 32px;
-  line-height: 44px;
   letter-spacing: -0.01em;
-  color: #111321;
-  padding-top: 20px;
-  margin: 0px;
+  margin-top: 20px;
   height: 135px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .markup-unit__card-text {
-  font-family: 'Manrope';
-  font-style: normal;
+  @extend %resetGap;
   font-weight: 400;
   font-size: 16px;
-  line-height: 22px;
-  color: #111321;
-  padding-top: 20px;
-  margin: 0px;
+  margin-top: 20px;
   height: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.markup-unit__card-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .markup-unit__card-date {
-  font-family: 'Manrope';
-  font-style: normal;
-  font-weight: 400;
+  @extend %resetGap;
   font-size: 16px;
-  line-height: 22px;
-  color: #a8a8a8;
-  margin: 0;
-  margin-right: 205px;
+  color: getColor('grey');
+  margin-top: 20px;
   display: inline-block;
-  padding-top: 20px;
 }
 
 .markup-unit__read-more {
-  font-family: 'Manrope';
-  font-style: normal;
-  font-weight: 400;
+  @extend %resetGap;
+  @extend %link;
   font-size: 16px;
-  line-height: 22px;
-  color: #4440f7;
-  text-decoration: none;
-  margin: 0;
+  color: getColor('accent');
+  margin-top: 20px;
 }
 
 .weather-placeholder {
   width: 394.66px;
   height: 675px;
-  background-color: #111321;
+  background-color: getColor('primary');
 }
 
 .no-found {

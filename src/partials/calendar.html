@@ -1,0 +1,69 @@
+<div class="filter-elements">
+  <p class="calendar-text">Search date news</p>
+
+  <div class="calendar-form">
+    <div class="form-container" data-modal-open data-modal-close>
+      <svg class="form-container__icon-calendar" width="14" height="14">
+        <use href="./images/icons.svg#icon-Frame"></use>
+      </svg>
+      <input
+        readonly
+        id="input-picker"
+        class="calendar-input datepicker-here dark-theme-border"
+        placeholder="Виберіть дату..."
+      />
+      <svg class="calendar__button-down dark-theme-btn" width="14" height="14">
+        <use href="./images/icons.svg#icon-down"></use>
+      </svg>
+    </div>
+
+    <!-- Сalendar -->
+
+    <div class="calendar-wrapper hidden" data-modal>
+      <div class="calendar-wrapper__container">
+        <div class="calendar-switcher">
+          <div class="switches-years">
+            <span id="prev-years" class="icon-symbols__years">
+              <svg width="16" height="12" class="calendar__icon-right">
+                <use href="./images/icons.svg#icon-down"></use>
+              </svg>
+            </span>
+            <p class="current-date"></p>
+            <span id="next-years" class="icon-symbols__years">
+              <svg width="16" height="12" class="calendar__icon-left">
+                <use href="./images/icons.svg#icon-down"></use>
+              </svg>
+            </span>
+          </div>
+
+          <div class="calendar-icons">
+            <span id="prev" class="icon-symbols">
+              <svg width="16" height="17" class="calendar__icon-right">
+                <use href="./images/icons.svg#icon-down"></use>
+              </svg>
+            </span>
+            <span id="next" class="icon-symbols">
+              <svg width="16" height="17" class="calendar__icon-left">
+                <use href="./images/icons.svg#icon-down"></use>
+              </svg>
+            </span>
+          </div>
+        </div>
+        <div class="calendar">
+          <ul class="calendar-weeks__list">
+            <li class="calendar-weeks__item">Mo</li>
+            <li class="calendar-weeks__item">Tu</li>
+            <li class="calendar-weeks__item">We</li>
+            <li class="calendar-weeks__item">Th</li>
+            <li class="calendar-weeks__item">Fr</li>
+            <li class="calendar-weeks__item">Sa</li>
+            <li class="calendar-weeks__item">Su</li>
+          </ul>
+          <ul class="days">
+            <li class="calendar-days"></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

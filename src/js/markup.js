@@ -199,12 +199,16 @@ export function createQueryMarkup(unit) {
       <use href="..scr/images/icons.svg#icon-favorite-heart"></use>
       </svg>
       </button>
+      <h2 class="markup-unit__card-header">${value.headline.main}</h2>
+      <p class="markup-unit__card-text">${value.abstract}</p>
+      <div class="markup-unit__card-info">
       <h1 class="markup-unit__card-header">${value.headline.main}</h1>
       <h2 class="markup-unit__card-text js-card-description">${
         value.abstract
       }</h2>
       <p>${value.pub_date}</p>
       <a  href="${value.web_url}">Read more</a>
+      </div>
       </li>`;
       })
       .join('');
@@ -216,3 +220,24 @@ export function createQueryMarkup(unit) {
 }
 
 //Предпологаемый класс для универсальной карточки. Дорабатывается
+class MakeCards {
+  constructor(target) {
+    tag: target.section_name;
+    image: target.multimedia[0].url;
+    header: target.headline.main;
+    description: target.abstract;
+    date: target.pub_date;
+    url: target.web_url;
+  }
+
+  backCard(target) {
+    `TARGET.map(value => {return <p class="markup-unit__section">${tag}</p>
+  <img class="markup-unit__card-image" src="${image}" alt="placeholder" />
+  <h2 class="markup-unit__card-header">${header}</h2>
+  <p class="markup-unit__card-text">${description}</p>
+  <p>${date}</p>
+  <a  href="${url}">Read more</a>})
+  .join("")
+  return bodyArticles.insertAdjacentHTML('beforeend', templateUnit);`;
+  }
+}

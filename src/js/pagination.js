@@ -35,7 +35,6 @@ function createPagination() {
 </ul>`;
 }
 createPagination();
-
 const pg = document.getElementById('pagination');
 const btnNextPg = document.querySelector('button.next-page');
 const btnPrevPg = document.querySelector('button.prev-page');
