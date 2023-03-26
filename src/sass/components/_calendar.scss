@@ -11,19 +11,20 @@ ul {
 .filter-elements {
   display: flex;
   justify-content: space-between;
-
-  margin-bottom: 40px;}
+  align-items: center;
+}
   
 
 .calendar-text {
   display: none;
 
   @media screen and (min-width: 1280px) {
-    display: inline;
-    margin-left: 238px;
+    margin: 0;
+    padding: 0;
+    margin-right: 37px;
+    display: block;
     font-weight: 700;
     font-size: 18px;
-    line-height: 1.38;
     color: #111321;
   }
 }
