@@ -8,10 +8,9 @@ export function getNoFound() {
   </div>`;
   return bodyArticles.insertAdjacentHTML('beforeend', noFound);
 }
-
 class ImageConvertor {
   convertPopularImage(img) {
-    let imagePop = '/src/images/card_placeholder.jpg';
+    let imagePop = '../images/card_placeholder.jpg';
     if (img.length !== 0) {
       imagePop = img[0]['media-metadata'][2].url;
     }
@@ -137,7 +136,7 @@ export class TemplateCards {
     </li>`;
         })
         .join('');
-      return bodyArticles.insertAdjacentHTML('beforeend', templateUnit);
+      return bodyArticles.insertAdjacentHTML('beforeend', valueReceiver);
     } catch (error) {
       console.log(error);
     }

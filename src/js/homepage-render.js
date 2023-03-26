@@ -18,15 +18,19 @@ getPopularArticles(); //Запрос популярных новостей
 
 //Логика действий при взаимодействии с Input
 export function onInputSubmit(e) {
-  e.preventDefault();
-  const searchArticle = e.currentTarget.elements.querySearch.value; //Значение Input
-  resetMarkup();
-  pageValue.pageReset(); //Сброс значения текущей страницы до 1
-  if (!searchArticle) {
-    getPopularArticles();
-    return;
+  try {
+    e.preventDefault();
+    const searchArticle = e.currentTarget.elements.querySearch.value; //Значение Input
+    resetMarkup();
+    pageValue.pageReset(); //Сброс значения текущей страницы до 1
+    if (!searchArticle) {
+      getPopularArticles();
+      return;
+    }
+    getQueryArticles(pageValue.page, searchArticle); //Не забыть поменять "1" на переменную номера страницы
+  } catch (error) {
+    console.log(error);
   }
-  getQueryArticles(pageValue.page, searchArticle); //Не забыть поменять "1" на переменную номера страницы
 }
 
 //Популярный запрос
@@ -62,7 +66,11 @@ function resetMarkup() {
   bodyArticles.innerHTML = '';
 }
 
+//Вставка блока с погодой
 function addWeatherBlock() {
+  if (!bodyArticles.firstChild || !bodyArticles.firstChild.nextSibling) {
+    return;
+  }
   bodyArticles.firstChild.nextSibling.insertAdjacentHTML(
     'afterend',
     `<div class="weather-placeholder"></div>`
