@@ -24,6 +24,17 @@ const valuePage = {
   data: null,
   amountShowCards: 8,
 };
+function handleWindowSizeChange() {
+  if (window.innerWidth < 768) {
+    valuePage.numLinksTwoSide = 0;
+    valuePage.amountShowCards = 4;
+  } else {
+    valuePage.numLinksTwoSide = 1;
+    valuePage.amountShowCards = 8;
+  }
+  pagination();
+}
+window.addEventListener('resize', handleWindowSizeChange);
 
 setTimeout(async () => {
   const response = await fetchPopularArticles();
@@ -43,19 +54,6 @@ setTimeout(async () => {
   }
   pagination();
 }, 0);
-
-function handleWindowSizeChange() {
-  if (window.innerWidth < 768) {
-    valuePage.numLinksTwoSide = 0;
-    valuePage.amountShowCards = 4;
-  } else {
-    valuePage.numLinksTwoSide = 1;
-    valuePage.amountShowCards = 8;
-  }
-  pagination(valuePage);
-}
-
-window.addEventListener('resize', handleWindowSizeChange);
 
 // setTimeout(() => {
 //   pagination();
