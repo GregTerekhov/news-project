@@ -15,15 +15,37 @@ const btnPrevPg = document.querySelector('button.prev-page');
 const valuePage = {
   curPage: 1,
   numLinksTwoSide: 1,
-  totalPages: 10,
+  totalPages: 20,
+  data: null,
+  amountShowCards: 8,
 };
-pagination(valuePage);
+setTimeout(async () => {
+  const response = await fetchPopularArticles();
+  valuePage.data = response.data.results;
+  valuePage.totalPages = Math.ceil(
+    response.data.num_results / valuePage.amountShowCards
+  );
+  if (valuePage.data) {
+    createPopularMarkup(
+      valuePage.data.slice(
+        valuePage.amountShowCards * valuePage.curPage -
+          valuePage.amountShowCards,
+        valuePage.amountShowCards * valuePage.curPage
+      )
+    );
+  }
+  pagination();
+}, 0);
+
+// pagination(valuePage);
 
 function handleWindowSizeChange() {
   if (window.innerWidth < 768) {
     valuePage.numLinksTwoSide = 0;
+    valuePage.amountShowCards = 4;
   } else {
     valuePage.numLinksTwoSide = 1;
+    valuePage.amountShowCards = 8;
   }
   pagination(valuePage);
 }
@@ -38,10 +60,21 @@ pg.addEventListener('click', e => {
   const ele = e.target;
 
   if (ele.dataset.page) {
-    const pageNumber = parseInt(e.target.dataset.page, 10);
+    const pageNumber = parseInt(e.target.dataset.page, 20);
 
     valuePage.curPage = pageNumber;
-    pagination(valuePage);
+    // pagination(valuePage);
+    resetMarkup();
+    if (valuePage.data) {
+      createPopularMarkup(
+        valuePage.data.slice(
+          valuePage.amountShowCards * valuePage.curPage -
+            valuePage.amountShowCards,
+          valuePage.amountShowCards * valuePage.curPage + 1
+        )
+      );
+    }
+    pagination();
     console.log(valuePage);
     handleButtonLeft();
     handleButtonRight();

@@ -11,7 +11,8 @@ export const bodyContainerEl = document.querySelector('.js-body-container');
 export const cardHeader = document.querySelectorAll('.markup-unit');
 export const bodyArticles = bodyContainerEl.children.articles;
 
-getPopularArticles(); //Запрос популярных новостей
+// getPopularArticles(); //Запрос популярных новостей
+// раскомментировать!
 
 export function onInputSubmit(e) {
   e.preventDefault();
@@ -24,7 +25,7 @@ export function onInputSubmit(e) {
   getQueryArticles(1, searchArticle); //Не забыть поменять "1" на переменную номера страницы
 } //Логика действий при взаимодействии с Input
 
-async function getPopularArticles() {
+export async function getPopularArticles() {
   try {
     const response = await fetchPopularArticles();
     const target = response.data.results;
@@ -46,6 +47,6 @@ async function getQueryArticles(page, searchArticle) {
   }
 } //Поисковый запрос
 
-function resetMarkup() {
+export function resetMarkup() {
   bodyArticles.innerHTML = '';
 } //Сброс результата предыдущего запроса

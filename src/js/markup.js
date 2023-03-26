@@ -2,10 +2,16 @@ import { bodyArticles } from './homepage-render';
 import { IMAGE_URL } from './fetchArticles';
 
 //Оптимизация рендеринга карточек не завершена, и будет дорабатываться
+// поменяла функцию:
+// export function createPopularMarkup(unit) {
+//   try {
+//     let templateUnit = unit.data.results
+//       .map(value => {
+//         На:
 
 export function createPopularMarkup(unit) {
   try {
-    let templateUnit = unit.data.results
+    let templateUnit = unit
       .map(value => {
         let image = '../images/card_placeholder.png';
         if (value.media.length !== 0) {
