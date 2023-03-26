@@ -23,8 +23,7 @@ export function onInputSubmit(e) {
   resetMarkup();
   pageValue.pageReset(); //Сброс значения текущей страницы до 1
   if (!searchArticle) {
-    templateCards.buildTemplate();
-    // getPopularArticles();
+    getPopularArticles();
     return;
   }
   getQueryArticles(pageValue.page, searchArticle); //Не забыть поменять "1" на переменную номера страницы
@@ -35,12 +34,8 @@ async function getPopularArticles() {
   try {
     const response = await fetchPopularArticles();
     templateCards.checkTheData(response);
-    // console.log(templateCards.buildTemplate());
-    createPopularMarkup(response); //Рендер карточки популярного запроса
-    bodyArticles.firstChild.nextSibling.insertAdjacentHTML(
-      'afterend',
-      `<div class="weather-placeholder"></div>`
-    );
+    templateCards.buildTemplate(); //Рендер карточки
+    addWeatherBlock();
   } catch (error) {
     console.log(error);
   }
@@ -51,12 +46,12 @@ async function getQueryArticles(page, searchArticle) {
   try {
     const response = await fetchQueryArticles(page, searchArticle);
     templateCards.checkTheData(response);
-    // console.log(templateCards.buildTemplate());
     const target = response.data.response.docs;
     if (target.length === 0) {
       getNoFound(); //Рендер заглушки при ненайденом запросе
     }
-    createQueryMarkup(response); //Рендер карточки поискового запроса\
+    templateCards.buildTemplate(); //Рендер карточки
+    addWeatherBlock();
   } catch (error) {
     console.log(error);
   }
@@ -65,4 +60,11 @@ async function getQueryArticles(page, searchArticle) {
 //Сброс результата предыдущего запроса
 function resetMarkup() {
   bodyArticles.innerHTML = '';
+}
+
+function addWeatherBlock() {
+  bodyArticles.firstChild.nextSibling.insertAdjacentHTML(
+    'afterend',
+    `<div class="weather-placeholder"></div>`
+  );
 }
