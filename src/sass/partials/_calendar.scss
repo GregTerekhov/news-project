@@ -11,22 +11,25 @@ ul {
 .filter-elements {
   display: flex;
   justify-content: space-between;
-
-  margin-bottom: 40px;}
+  align-items: center;
+}
   
 
 .calendar-text {
   display: none;
 
-  @media screen and (min-width: 1280px) {
+  @include respondTo('large') {
+    margin: 0;
+    padding: 0;
+    margin-right: 37px;
     display: inline;
-    margin-left: 238px;
     font-weight: 700;
     font-size: 18px;
     line-height: 1.38;
     color: #111321;
   }
 }
+
 
 //* ---------   INPUT   ---------
 
@@ -46,13 +49,13 @@ ul {
     fill: #4440f6;
     margin-left: 12px;
 
-    transition: cubic-bezier(0.4, 0, 0.2, 1) 250ms;
+    transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   &__icon-calendar.switchedColor {
     z-index: 2;
     fill: #ffffff;
-    transition: cubic-bezier(0.4, 0, 0.2, 1) 250ms;
+    transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
 // Іконка стрілочки на інпуті
