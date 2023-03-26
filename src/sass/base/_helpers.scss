@@ -1,7 +1,8 @@
 body {
-  font-family: $text-primary;
-  color: getColor('primary');
-  background-color: getColor('background-primary');
+    font-family: $text-primary;
+    color: getColor('primary');
+    background-color: getColor('background-primary');
+    line-height: 1.366;
 }
 
 .visually-hidden {

@@ -1,0 +1,115 @@
+.categories {
+  display: flex;
+  padding-top: 28px;
+  padding-bottom: 28px;
+
+  &__list {
+    display: flex;
+    gap: 16px;
+
+    @include respondTo('medium') {
+      margin-right: 16px;
+    }
+  }
+
+  &__button {
+    font-size: 12px;
+    line-height: 16px;
+    text-align: center;
+    white-space: nowrap;
+    color: #4b48db;
+    padding: 8px 21px;
+    border: 1px solid #4b48db;
+    border-radius: 20px;
+    cursor: pointer;
+    background-color: transparent;
+  }
+}
+
+.row {
+  display: flex;
+  align-items: center;
+}
+
+.dropdown {
+  min-width: 130px;
+  width: auto;
+  white-space: nowrap;
+
+  background-color: #f8f8f8;
+  &__switch:checked + &__options-filter &__select {
+    transform: scaleY(1);
+  }
+  &__switch:checked + &__options-filter &__filter:after {
+    transform: rotate(-135deg);
+    border-color: #fff;
+  }
+
+  &__options-filter {
+    width: 100%;
+    cursor: pointer;
+  }
+  &__filter {
+    position: relative;
+    display: flex;
+    padding: 8px 50px 8px 14px;
+    color: #4440f6;
+    background-color: #fff;
+    border: 1px solid #4440f7;
+    border-radius: 20px;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0.01em;
+    transition: 0.3s;
+
+    &:focus {
+      outline: none;
+      background-color: #4440f6;
+      color: #fff;
+    }
+
+    &::after {
+      position: absolute;
+      top: 45%;
+      right: 25px;
+      content: '';
+      width: 10px;
+      height: 10px;
+      border-right: 3px solid;
+      border-bottom: 3px solid;
+      transform: rotate(45deg) translateX(-45%);
+      transition: 0.2s ease-in-out;
+    }
+  }
+  &__select {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    margin-top: 5px;
+    overflow: hidden;
+    transform: scaleY(0);
+    transform-origin: top;
+
+    transition: 0.2s ease-in-out;
+    border-radius: 20px;
+    max-height: 380px;
+    overflow-y: scroll;
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    scrollbar-width: none; /* Firefox */
+    z-index: 1;
+    &::-webkit-scrollbar {
+      display: none; /* Safari and Chrome */
+    }
+  }
+
+  &__select-option {
+    padding: 8px 8px 8px 14px;
+    background-color: #f8f8f8;
+    transition: 0.3s;
+    color: #4440f6;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
