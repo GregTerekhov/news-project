@@ -1,5 +1,6 @@
-import { fetchPopularArticles, createPopularMarkup } from './markup.js';
+import { createPopularMarkup } from './markup.js';
 import { getPopularArticles, resetMarkup } from './homepage-render';
+import { fetchPopularArticles } from './fetchArticles';
 
 const paginationRef = document.querySelector('.pagination');
 function createPagination() {
@@ -19,7 +20,7 @@ const btnPrevPg = document.querySelector('button.prev-page');
 const valuePage = {
   curPage: 1,
   numLinksTwoSide: 1,
-  totalPages: 20,
+  totalPages: 30,
   data: null,
   amountShowCards: 8,
 };
@@ -31,13 +32,14 @@ setTimeout(async () => {
     response.data.num_results / valuePage.amountShowCards
   );
   if (valuePage.data) {
-    createPopularMarkup(
-      valuePage.data.slice(
-        valuePage.amountShowCards * valuePage.curPage -
-          valuePage.amountShowCards,
-        valuePage.amountShowCards * valuePage.curPage
-      )
-    );
+    30,
+      createPopularMarkup(
+        valuePage.data.slice(
+          valuePage.amountShowCards * valuePage.curPage -
+            valuePage.amountShowCards,
+          valuePage.amountShowCards * valuePage.curPage
+        )
+      );
   }
   pagination();
 }, 0);
@@ -63,7 +65,7 @@ pg.addEventListener('click', e => {
   const ele = e.target;
 
   if (ele.dataset.page) {
-    const pageNumber = parseInt(e.target.dataset.page, 20);
+    const pageNumber = parseInt(e.target.dataset.page, 30);
 
     valuePage.curPage = pageNumber;
     // pagination(valuePage);
