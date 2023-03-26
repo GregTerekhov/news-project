@@ -1,7 +1,7 @@
 // Martyniuk Oleh
 import { bodyArticles } from './homepage-render';
 
-const wheaterRef = document.querySelector('.weather');
+// const wheaterRef = document.querySelector('.weather');
 
 // форматуємо дату під формат з макету
 const today = new Date();
