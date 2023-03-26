@@ -1,9 +1,11 @@
 .categories {
   display: flex;
-  padding-top: 28px;
-  padding-bottom: 28px;
+  @extend %list;
+  // padding-top: 28px;
+  // padding-bottom: 28px;
 
   &__list {
+    @extend %list;
     display: flex;
     gap: 16px;
 
@@ -82,6 +84,7 @@
     }
   }
   &__select {
+    @extend %list;
     position: absolute;
     top: 100%;
     left: 0;
