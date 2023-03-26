@@ -1,20 +1,29 @@
 .articles {
+  position: relative;
   @extend %link;
+  @extend %list;
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
   gap: 32px;
-  margin-top: 119px;
+  margin: 0 auto;
+  margin-top: 60px;
+  background-color: #f4f4f4;
 }
 
 .markup-unit {
   position: relative;
   width: calc((100% - (32px * 2)) / 3);
+  padding-bottom: 8px;
 }
 
-.markup-unit__read {
-  background: url(../images/already-read-transparent.png);
-}
+// .markup-unit::before {
+//   content: '';
+//   position: absolute;
+//   width: 395px;
+//   height: 675px;
+//   background-color: rgba(244, 244, 244, 0.4);
+// }
 
 .markup-unit__section {
   @extend %resetGap;
@@ -50,10 +59,7 @@
   object-fit: cover;
   width: auto;
   height: 395px;
-  background-image: url(../images/background_image.png);
   border-radius: 10px;
-  // margin-right: auto;
-  // margin-left: auto;
 }
 
 .markup-unit__add-favorite {
@@ -92,7 +98,7 @@
   font-size: 32px;
   letter-spacing: -0.01em;
   margin-top: 20px;
-  height: 132px;
+  height: 135px;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -102,7 +108,7 @@
   font-weight: 400;
   font-size: 16px;
   margin-top: 20px;
-  height: 66px;
+  height: 100px;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -131,6 +137,36 @@
 
 .weather-placeholder {
   width: 394.66px;
-  height: 711px;
+  height: 675px;
   background-color: getColor('primary');
+}
+
+.no-found {
+  margin-top: 60px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.no-found__text {
+  margin: 0;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 55px;
+  text-align: center;
+  letter-spacing: -0.01em;
+  color: #111321;
+  width: 550px;
+}
+
+.no-found__image {
+  margin-left: auto;
+  margin-right: auto;
+  width: 605px;
+  height: 480px;
+  background-image: url(/src/images/background_image.png);
+  background-repeat: no-repeat;
 }

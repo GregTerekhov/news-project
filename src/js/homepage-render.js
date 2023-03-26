@@ -3,49 +3,68 @@ import {
   fetchQueryArticles,
   fetchCategoryArticles,
 } from './fetchArticles';
-// import { formEl, bodyArticles, bodyContainerEl } from './selectors/homepage';
-import { createPopularMarkup, createQueryMarkup, makeMarkup } from './markup';
+import { createPopularMarkup, createQueryMarkup, getNoFound } from './markup';
+import { PagePagination } from './pagination';
+import { TemplateCards } from './markup';
 
 export const formEl = document.querySelector('.search-form');
-export const bodyContainerEl = document.querySelector('.js-body-container');
-export const cardHeader = document.querySelectorAll('.markup-unit');
+const bodyContainerEl = document.querySelector('.js-body-container');
 export const bodyArticles = bodyContainerEl.children.articles;
+
+const pageValue = new PagePagination();
+const templateCards = new TemplateCards();
 
 getPopularArticles(); //Запрос популярных новостей
 
+//Логика действий при взаимодействии с Input
 export function onInputSubmit(e) {
   e.preventDefault();
   const searchArticle = e.currentTarget.elements.querySearch.value; //Значение Input
   resetMarkup();
+  pageValue.pageReset(); //Сброс значения текущей страницы до 1
   if (!searchArticle) {
     getPopularArticles();
     return;
   }
-  getQueryArticles(1, searchArticle); //Не забыть поменять "1" на переменную номера страницы
-} //Логика действий при взаимодействии с Input
+  getQueryArticles(pageValue.page, searchArticle); //Не забыть поменять "1" на переменную номера страницы
+}
 
+//Популярный запрос
 async function getPopularArticles() {
   try {
     const response = await fetchPopularArticles();
-    const target = response.data.results;
-    console.log(target);
-    createPopularMarkup(response); //Рендер карточки популярного запроса
+    templateCards.checkTheData(response);
+    templateCards.buildTemplate(); //Рендер карточки
+    addWeatherBlock();
   } catch (error) {
     console.log(error);
   }
-} //Популярный запрос
+}
 
+//Поисковый запрос
 async function getQueryArticles(page, searchArticle) {
   try {
     const response = await fetchQueryArticles(page, searchArticle);
-    createQueryMarkup(response); //Рендер карточки поискового запроса
+    templateCards.checkTheData(response);
     const target = response.data.response.docs;
-    console.log(target);
+    if (target.length === 0) {
+      getNoFound(); //Рендер заглушки при ненайденом запросе
+    }
+    templateCards.buildTemplate(); //Рендер карточки
+    addWeatherBlock();
   } catch (error) {
     console.log(error);
   }
-} //Поисковый запрос
+}
 
+//Сброс результата предыдущего запроса
 function resetMarkup() {
   bodyArticles.innerHTML = '';
-} //Сброс результата предыдущего запроса
+}
+
+function addWeatherBlock() {
+  bodyArticles.firstChild.nextSibling.insertAdjacentHTML(
+    'afterend',
+    `<div class="weather-placeholder"></div>`
+  );
+}

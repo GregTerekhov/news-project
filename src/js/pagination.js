@@ -1,3 +1,21 @@
+export class PagePagination {
+  constructor() {
+    this.page = 1;
+  }
+
+  pageReset() {
+    this.page = 1;
+  }
+
+  increasePageValue() {
+    this.page += 1;
+  }
+
+  decreasePageValue() {
+    this.page -= 1;
+  }
+}
+
 const paginationRef = document.querySelector('.pagination');
 function createPagination() {
   paginationRef.innerHTML = ` <ul class="page-container">
