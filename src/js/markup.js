@@ -1,5 +1,6 @@
 import { bodyArticles } from './homepage-render';
 import { IMAGE_URL } from './fetchArticles';
+import * as url from '../images/card_placeholder.jpg';
 
 export function getNoFound() {
   const noFound = `<div class="no-found">
@@ -11,7 +12,7 @@ export function getNoFound() {
 
 class ImageConvertor {
   convertPopularImage(img) {
-    let imagePop = '/src/images/card_placeholder.jpg';
+    let imagePop = url;
     if (img.length !== 0) {
       imagePop = img[0]['media-metadata'][2].url;
     }
@@ -19,7 +20,7 @@ class ImageConvertor {
   }
 
   convertQueryImage(img) {
-    let imageQue = '/src/images/card_placeholder.png';
+    let imageQue = url;
     if (img.length !== 0) {
       imageQue = `${IMAGE_URL}/${img[0].legacy.xlarge}`;
     }
@@ -57,14 +58,17 @@ export class TemplateCards {
   constructor() {
     value: '';
     container: '';
+    newsNumber: '';
   }
 
   checkTheData(response) {
     if (response.data.hasOwnProperty('results')) {
+      this.newsNumber = response.data.num_results;
       this.value = response.data.results;
       this.container = this.takePopularValue();
       return;
     } else {
+      this.newsNumber = response.data.response.meta.offset;
       this.value = response.data.response.docs;
       this.container = this.takeQueryValue();
     }
@@ -112,17 +116,17 @@ export class TemplateCards {
     <p class="markup-unit__section">${unload.tag}</p>
     <p class="markup-unit__already-read">Already read
     <svg class="markup-unit__icon-check" width="18" height="18" viewBox="0 0 37 32">
-    <path stroke="#00DD73" stroke-linejoin="miter" stroke-linecap="square" stroke-miterlimit="4" stroke-width="2.2857" d="M28.779 6.389c-0.288 0.009-0.546 0.131-0.732 0.323l-16.313 16.313-6.713-6.713c-0.195-0.209-0.473-0.339-0.78-0.339-0.589 0-1.067 0.478-1.067 1.067 0 0.308 0.13 0.585 0.339 0.78l0.001 0.001 7.467 7.467c0.193 0.193 0.459 0.312 0.754 0.312s0.561-0.119 0.754-0.312v0l17.067-17.067c0.199-0.194 0.323-0.465 0.323-0.765 0-0.589-0.478-1.067-1.067-1.067-0.011 0-0.022 0-0.033 0l0.002-0z"></path>
+      <path stroke="#00DD73" stroke-linejoin="miter" stroke-linecap="square" stroke-miterlimit="4" stroke-width="2.2857" d="M28.779 6.389c-0.288 0.009-0.546 0.131-0.732 0.323l-16.313 16.313-6.713-6.713c-0.195-0.209-0.473-0.339-0.78-0.339-0.589 0-1.067 0.478-1.067 1.067 0 0.308 0.13 0.585 0.339 0.78l0.001 0.001 7.467 7.467c0.193 0.193 0.459 0.312 0.754 0.312s0.561-0.119 0.754-0.312v0l17.067-17.067c0.199-0.194 0.323-0.465 0.323-0.765 0-0.589-0.478-1.067-1.067-1.067-0.011 0-0.022 0-0.033 0l0.002-0z"></path>
     </svg>
     </p>
     <img class="markup-unit__card-image" src="${
       unload.image
     }" alt="placeholder"/>
     <button class="markup-unit__add-favorite" type="button" data-info>
-    <p class="markup-unit__favorite-text">Add to favorite</p>
-    <svg class="markup-unit__favorite-icon markup-unit__favorite-icon--active" width="15" height="15" viewBox="0 0 37 32">
-    <path style="stroke: var(--color1, #4440f7)" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.2857" d="M10.666 2.286c-4.207 0-7.619 3.377-7.619 7.543 0 3.363 1.333 11.345 14.458 19.413 0.235 0.143 0.505 0.219 0.78 0.219s0.545-0.076 0.78-0.219c13.125-8.069 14.458-16.050 14.458-19.413 0-4.166-3.412-7.543-7.619-7.543s-7.619 4.571-7.619 4.571-3.412-4.571-7.619-4.571z"></path>
-    </svg>
+      <p class="markup-unit__favorite-text">Add to favorite</p>
+      <svg class="markup-unit__favorite-icon markup-unit__favorite-icon--active" width="15" height="15" viewBox="0 0 37 32">
+        <path style="stroke: var(--color1, #4440f7)" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.2857" d="M10.666 2.286c-4.207 0-7.619 3.377-7.619 7.543 0 3.363 1.333 11.345 14.458 19.413 0.235 0.143 0.505 0.219 0.78 0.219s0.545-0.076 0.78-0.219c13.125-8.069 14.458-16.050 14.458-19.413 0-4.166-3.412-7.543-7.619-7.543s-7.619 4.571-7.619 4.571-3.412-4.571-7.619-4.571z"></path>
+      </svg>
     </button>
     <h1 class="markup-unit__card-header" name="card_header">${textRestriction.clipTheHeader(
       unload
@@ -130,10 +134,12 @@ export class TemplateCards {
     <h2 class="markup-unit__card-text" name="card_text">${textRestriction.clipTheText(
       unload
     )}</h2>
+    <div class="markup-unit__card-footer">
     <p class="markup-unit__card-date">${unload.date}</p>
     <a class="markup-unit__read-more" href="${
       unload.path
     } name="read_more">Read more</a>
+    </div>
     </li>`;
         })
         .join('');

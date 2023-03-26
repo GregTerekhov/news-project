@@ -4,13 +4,14 @@ const BASE_URL = 'https://api.nytimes.com/svc';
 export const IMAGE_URL = 'https://www.nytimes.com'; //Ссылка на сайт для получения изображений при поисковом запросе
 const API_KEY = 'uGHJWsajhmnJg2AMcnCD9YXkamMpVOHo';
 
-export const fetchPopularArticles = async () => {
+export const fetchPopularArticles = async pageNumber => {
   try {
     const response = await axios.get(
       `${BASE_URL}/mostpopular/v2/viewed/1.json?`,
       {
         params: {
           'api-key': API_KEY,
+          page: pageNumber,
         },
       }
     );
