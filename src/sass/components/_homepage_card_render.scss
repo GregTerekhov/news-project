@@ -26,7 +26,6 @@
   position: relative;
   @include respondTo('medium') {
     width: calc((100% - (30px * 1)) / 2);
-    height: 675px;
   }
   @include respondTo('large') {
     width: calc((100% - (32px * 2)) / 3);
@@ -137,7 +136,6 @@
   margin-top: 20px;
   height: 135px;
   overflow: hidden;
-  text-overflow: ellipsis;
 
   @include respondTo('medium') {
     font-size: 32px;
@@ -149,20 +147,19 @@
   font-weight: 400;
   font-size: 14px;
   margin-top: 20px;
-  height: 100px;
+  height: 80px;
   overflow: hidden;
-  text-overflow: ellipsis;
 
   @include respondTo('medium') {
     font-size: 16px;
   }
 }
 
-.markup-unit__card-info {
+.markup-unit__card-footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: 20px;
+  margin-top: 20px;
 }
 
 .markup-unit__card-date {
