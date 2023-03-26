@@ -3,10 +3,9 @@ function createPagination() {
   paginationRef.innerHTML = ` <ul class="page-container">
   <button class="prev-page" disabled>
     <svg class="prev-icon">
-      <use href="./images/pagination/symbol-defs.svg#icon-arrow-left"></use>
+      <use href="/images/icons.svg#icon-arrow-left"></use>
     </svg>
     Prev
-
   </button>
   <div class= "pagination-buttons" id="pagination"></div>
   <button class="next-page"> Next
