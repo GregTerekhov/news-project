@@ -60,24 +60,24 @@ export const fetchCategoryArticles = async (PAGE_VALUE, sectionName) => {
   }
 };
 
-const fetchCategoryArticles1 = async (PAGE_VALUE, sectionName) => {
-  try {
-    const response = await axios.get(
-      `${BASE_URL}/news/v3/content/all/${sectionName}.json`,
-      {
-        params: {
-          'api-key': API_KEY,
-          limit: 40,
-          offset: PAGE_VALUE,
-        },
-      }
-    );
+// const fetchCategoryArticles1 = async (PAGE_VALUE, sectionName) => {
+//   try {
+//     const response = await axios.get(
+//       `${BASE_URL}/news/v3/content/all/${sectionName}.json`,
+//       {
+//         params: {
+//           'api-key': API_KEY,
+//           limit: 40,
+//           offset: PAGE_VALUE,
+//         },
+//       }
+//     );
 
-    return response;
-  } catch (error) {
-    console.log(error);
-  }
-};
+//     return response;
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 
 export const fetchQuery = async ({ word, pageNumber }) => {
   try {
