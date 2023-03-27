@@ -35,3 +35,12 @@ $colors: (
   'accent': #4440f6,
   'grey': #a8a8a8,
 );
+
+//анімація світчера
+
+
+$switch-transition: 0;
+
+:root {
+  --switch-transition: #{$switch-transition};
+};
