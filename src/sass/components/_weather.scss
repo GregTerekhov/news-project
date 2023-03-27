@@ -1,7 +1,3 @@
-$small: 320px;
-$medium: 768px;
-$large: 1280px;
-
 .weather {
   padding-top: 36px;
   display: flex;
@@ -10,7 +6,8 @@ $large: 1280px;
   background-color: #4440f6;
   width: 288px;
   height: 469px;
-  border-radius: 4px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px rgb(21, 21, 21);
 }
 @media screen and (min-width: 768px) {
   .weather {
@@ -31,26 +28,23 @@ $large: 1280px;
   justify-content: center;
   color: #fff;
   font-family: 'Roboto';
-  font-style: normal;
   font-weight: 400;
   font-size: 30px;
-
 
   left: 67px;
   top: 319px;
   margin-bottom: -20px;
-  margin-top: 40px;
+  margin-top: 10px;
 }
 
 @media screen and (min-width: 768px) {
   .day {
-  font-size: 36px;
-line-height: 42px;
-margin-top: 90px;
-
+    font-size: 36px;
+    line-height: 42px;
+    margin-top: 0px;
+    margin-bottom: 0px;
   }
 }
-
 
 .date {
   color: #fff;
@@ -77,28 +71,26 @@ margin-top: 90px;
 }
 @media screen and (min-width: 768px) {
   .temp {
-   margin-right: 8px;
+    margin-right: 8px;
   }
 }
 @media screen and (min-width: 1280px) {
   .temp {
     font-size: 64px;
-line-height: 75px;
+    line-height: 75px;
   }
 }
 
-
 .weather-img {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  height: 128px;
-  margin-top: 50px;
+  @extend %resetGap;
+  display: inline-block;
+  width: 170px;
+  margin-top: 30px;
 }
 @media screen and (min-width: 768px) {
   .weather-img {
-    width: 100%;
-    height: 156px;
+    width: 250px;
+    margin-top: 50px;
   }
 }
 @media screen and (min-width: 1280px) {
@@ -106,8 +98,6 @@ line-height: 75px;
     margin-top: 89x;
   }
 }
-
-
 
 .weather-information {
   display: flex;
@@ -119,6 +109,9 @@ line-height: 75px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
 }
 
 .main {
@@ -130,7 +123,6 @@ line-height: 75px;
   display: flex;
   justify-content: flex-start;
   margin-left: 11px;
-
 }
 @media screen and (min-width: 768px) {
   .main {
@@ -139,14 +131,12 @@ line-height: 75px;
   }
 }
 
-
-
 .name-city {
   justify-content: center;
   font-family: 'Roboto';
   align-items: center;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 16px;
   color: #ffffff;
   background-color: rgba(254, 254, 255, 0.3);
@@ -158,23 +148,18 @@ line-height: 75px;
 }
 @media screen and (min-width: 768px) {
   .name-city {
- 
     height: 34px;
     width: 135px;
   }
 }
-
-
-
-
 
 .svg {
   padding-top: 5px;
 }
 
 .rotate-center {
-  -webkit-animation: rotate-center 0.6s ease-in-out both;
-  animation: rotate-center 0.6s ease-in-out both;
+  -webkit-animation: rotate-center 0.2s ease-in-out both;
+  animation: rotate-center 1s ease-in-out both;
 }
 
 @-webkit-keyframes rotate-center {
@@ -183,8 +168,8 @@ line-height: 75px;
     transform: rotate(0);
   }
   100% {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
+    -webkit-transform: rotate(1080deg);
+    transform: rotate(1080deg);
   }
 }
 @keyframes rotate-center {
@@ -193,7 +178,27 @@ line-height: 75px;
     transform: rotate(0);
   }
   100% {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
+    -webkit-transform: rotate(1080deg);
+    transform: rotate(1080deg);
   }
+}
+
+.wind {
+  margin-top: 0px;
+  display: flex;
+  justify-content: center;
+  font-family: 'Roboto';
+  font-weight: 400;
+  font-size: 25px;
+  color: #ffffff;
+  align-items: center;
+}
+@media screen and (min-width: 768px) {
+  .wind {
+    margin-top: 40px;
+  }
+}
+
+.wind-svg {
+  margin-right: 10px;
 }
