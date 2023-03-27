@@ -14,6 +14,8 @@ const weatherViget = new WeatherBlock();
 
 getPopularArticles(); //Запрос популярных новостей
 
+formEl.addEventListener('submit', onInputSubmit);
+
 //Логика действий при взаимодействии с Input
 export function onInputSubmit(e) {
   try {
