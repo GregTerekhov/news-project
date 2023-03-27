@@ -1,6 +1,6 @@
 import { fetchPopularArticles, fetchQueryArticles } from './fetchArticles';
 import { getNoFound } from './markup';
-import { PagePagination } from './pagination';
+import { PagePagination, onPagination } from './pagination';
 import { TemplateCards } from './markup';
 import { WeatherBlock } from './fetch_weather';
 
@@ -35,9 +35,10 @@ export function onInputSubmit(e) {
 async function getPopularArticles() {
   try {
     const response = await fetchPopularArticles();
+    onPagination(response);
     templateCards.checkTheData(response);
-    templateCards.buildTemplate(); //Рендер карточки
-    weatherViget.checkLocation(); //Вставка блока с погодой
+    // templateCards.buildTemplate(); //Рендер карточки
+    // weatherViget.checkLocation(); //Вставка блока с погодой
   } catch (error) {
     console.log(error);
   }
@@ -47,11 +48,13 @@ async function getPopularArticles() {
 async function getQueryArticles(page, searchArticle) {
   try {
     const response = await fetchQueryArticles(page, searchArticle);
+
     templateCards.checkTheData(response);
     const target = response.data.response.docs;
     if (target.length === 0) {
       getNoFound(); //Рендер заглушки при ненайденом запросе
     }
+    // onPagination();
     templateCards.buildTemplate(); //Рендер карточки
     weatherViget.checkLocation(); //Вставка блока с погодой
   } catch (error) {

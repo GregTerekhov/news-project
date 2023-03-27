@@ -1,8 +1,8 @@
 import './js/mobile_menu';
 import './js/categories/init';
 import './js/calendar/index';
-import './js/pagination.js';
 import './js/homepage-render';
+import './js/pagination.js';
 import './js/fetch_weather';
 
 import { formEl } from './js/homepage-render';
