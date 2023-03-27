@@ -8,7 +8,6 @@
   gap: 32px;
   margin: 0 auto;
   margin-top: 60px;
-  background-color: getColor('background-primary');
 
   @include respondTo('medium') {
     flex-direction: row;

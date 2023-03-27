@@ -25,7 +25,6 @@
     if (!e.matches) return;
     document.body.classList.remove('_lock');
     mobileMenuRef.classList.remove('is-open');
-    // mobileMenuRef.classList.remove('open-menu');
     openMenuBtn.setAttribute('aria-expanded', false);
   });
 })();

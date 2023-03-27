@@ -24,7 +24,7 @@
     border: 1px solid #4b48db;
     border-radius: 20px;
     cursor: pointer;
-    background-color: transparent;
+    background-color: getColor('primary-reversed');
   }
 }
 
@@ -38,7 +38,6 @@
   width: auto;
   white-space: nowrap;
 
-  background-color: #f8f8f8;
   &__switch:checked + &__options-filter &__select {
     transform: scaleY(1);
   }
