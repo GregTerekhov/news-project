@@ -53,12 +53,17 @@ async function getQueryArticles(page, searchArticle) {
     const response = await fetchQueryArticles(page, searchArticle);
     templateCards.checkTheData(response);
     const target = response.data.response.docs;
+
+    if (target.length === 0) {
+      getNoFound(); //Рендер заглушки при ненайденом запросе
+      Notiflix.Notify.failure(
+        `Sorry, there are no articles matching your search query. Please try again.`
+      );
+      return;
+    }
     Notiflix.Notify.success(
       `Hooray! We found ${response.data.response.meta.offset} articles.`
     );
-    if (target.length === 0) {
-      getNoFound(); //Рендер заглушки при ненайденом запросе
-    }
     templateCards.buildTemplate(); //Рендер карточки
     weatherViget.checkLocation(); //Вставка блока с погодой
   } catch (error) {
