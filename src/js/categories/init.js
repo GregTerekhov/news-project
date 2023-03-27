@@ -1,8 +1,15 @@
 import { NytimesAPI } from '../nytimesAPI';
 import { elements } from './elements';
 
-import { articlesMarkup } from './markup';
-import { buttonsMarkup, dropdownMarkup } from './markup';
+import { articlesMarkup } from './markupCat';
+import { buttonsMarkup, dropdownMarkup } from './markupCat';
+
+import {
+  templateCards,
+  resetMarkup,
+  pageValue,
+  addWeatherBlock,
+} from '../homepage-render';
 
 const MIN_LARGE_SCREEN_WIDTH = 1280;
 const MIN_MEDIUM_SCREEN_WIDTH = 768;
@@ -49,7 +56,10 @@ async function onCategoriesClick(e) {
   if (e.target.nodeName === 'BUTTON') {
     document.querySelector('.dropdown__filter-selected').textContent = 'Other';
   }
-  await makeCatagoryRequestAndMarkup(category);
+  // await makeCatagoryRequestAndMarkup(category);
+  resetMarkup();
+  pageValue.pageReset();
+  getPopularArticlesBeta(category);
 }
 
 function processScreenSize() {
@@ -70,6 +80,7 @@ function processScreenSize() {
 function initDropdown() {
   // Change option selected
   const label = document.querySelector('.dropdown__filter-selected');
+  if (!categoriesButtonQty) label.textContent = 'Categories';
   const options = Array.from(
     document.querySelectorAll('.dropdown__select-option')
   );
@@ -91,4 +102,24 @@ function initDropdown() {
       toggle.checked = false;
     }
   });
+}
+
+// Популярный запрос
+async function getPopularArticlesBeta(category) {
+  console.log(
+    '🚀 ~ file: init.js:109 ~ getPopularArticlesBeta ~ getPopularArticlesBeta:'
+  );
+  try {
+    const response = await nytimesAPI.fetchLikePopularArticles(
+      category,
+      pageValue.page,
+      limit
+    );
+
+    templateCards.checkTheDataBeta(response);
+    templateCards.buildTemplate(); //Рендер карточки
+    addWeatherBlock();
+  } catch (error) {
+    console.log(error);
+  }
 }

@@ -74,6 +74,12 @@ export class TemplateCards {
     }
   }
 
+  checkTheDataBeta(response) {
+    this.value = response.data.results;
+    this.container = this.takePopularValueBeta();
+    return;
+  }
+
   takePopularValue() {
     let gatheringUnit = this.value.map(
       ({ section, published_date, url, title, abstract, media }) => {
@@ -88,6 +94,28 @@ export class TemplateCards {
 
         return unitCycle;
       }
+    );
+    return gatheringUnit;
+  }
+
+  takePopularValueBeta() {
+    // console.log('takePopularValueBeta', this.value);
+    let gatheringUnit = this.value.map(
+      ({ section, date, url, title, abstract, imageUrl }) => {
+        let unitCycle = {
+          tag: section,
+          date: date,
+          path: url,
+          header: title,
+          description: abstract,
+          image: imageUrl,
+        };
+        return unitCycle;
+      }
+    );
+    console.log(
+      '🚀 ~ file: markup.js:111 ~ TemplateCards ~ takePopularValueBeta ~ gatheringUnit:',
+      gatheringUnit
     );
     return gatheringUnit;
   }

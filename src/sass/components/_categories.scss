@@ -1,30 +1,32 @@
 .categories {
   display: flex;
   @extend %list;
-  // padding-top: 28px;
-  // padding-bottom: 28px;
-
   &__list {
     @extend %list;
     display: flex;
     gap: 16px;
-
     @include respondTo('medium') {
       margin-right: 16px;
     }
   }
-
   &__button {
+    height: 31px;
     font-size: 12px;
     line-height: 16px;
     text-align: center;
     white-space: nowrap;
-    color: #4b48db;
-    padding: 8px 21px;
-    border: 1px solid #4b48db;
+    color: getColor('accent');
+    padding: 0 21px;
+    border: 1px solid getColor('accent');
     border-radius: 20px;
     cursor: pointer;
     background-color: getColor('primary-reversed');
+    transition: all 0.3s cubic-bezier(0.11, 0.7, 0, 1);
+    &:hover {
+      background: getColor('accent');
+      border-color: #4b48db;
+      color: getColor('primary-reversed');
+    }
   }
 }
 
@@ -34,82 +36,105 @@
 }
 
 .dropdown {
-  min-width: 130px;
+  min-width: 148px;
   width: auto;
+  height: 31px;
   white-space: nowrap;
 
+  @include respondTo('medium') {
+    min-width: 112px;
+  }
   &__switch:checked + &__options-filter &__select {
     transform: scaleY(1);
   }
   &__switch:checked + &__options-filter &__filter:after {
-    transform: rotate(-135deg);
-    border-color: #fff;
+    // top: 22%;
+    // right: 14px;
+    transform: rotate(-135deg) translateY(-4px);
+    border-color: getColor('primary-reversed');
   }
-
   &__options-filter {
     width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
   }
   &__filter {
+    @extend %resetGap;
     position: relative;
     display: flex;
-    padding: 8px 50px 8px 14px;
-    color: #4440f6;
-    background-color: #fff;
-    border: 1px solid #4440f7;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    padding: 0 14px;
+    color: getColor('accent');
+    background-color: getColor('primary-reversed');
+    border: 1px solid getColor('accent');
     border-radius: 20px;
     font-size: 12px;
+    height: 100%;
     line-height: 16px;
     letter-spacing: 0.01em;
-    transition: 0.3s;
-
-    &:focus {
+    transition: all 0.3s cubic-bezier(0.11, 0.7, 0, 1);
+    @include respondTo('medium') {
+      padding: 0 24px;
+    }
+    &:focus,
+    &:hover {
       outline: none;
-      background-color: #4440f6;
-      color: #fff;
+      background-color: getColor('accent');
+      color: getColor('primary-reversed');
     }
 
     &::after {
-      position: absolute;
-      top: 45%;
-      right: 25px;
       content: '';
       width: 10px;
       height: 10px;
       border-right: 3px solid;
       border-bottom: 3px solid;
-      transform: rotate(45deg) translateX(-45%);
-      transition: 0.2s ease-in-out;
+      transform-origin: 50% 50%;
+      transform: rotate(45deg);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
   }
+
   &__select {
     @extend %list;
     position: absolute;
     top: 100%;
     left: 0;
-    width: 100%;
+    padding-top: 14px;
+    min-width: 100%;
     margin-top: 5px;
     overflow: hidden;
     transform: scaleY(0);
     transform-origin: top;
-
+    background-color: #f8f8f8;
     transition: 0.2s ease-in-out;
     border-radius: 20px;
     max-height: 380px;
     overflow-y: scroll;
     -ms-overflow-style: none; /* Internet Explorer 10+ */
     scrollbar-width: none; /* Firefox */
-    z-index: 1;
+    z-index: 10;
+    @include respondTo('medium') {
+      width: 168px;
+    }
     &::-webkit-scrollbar {
       display: none; /* Safari and Chrome */
     }
   }
 
   &__select-option {
-    padding: 8px 8px 8px 14px;
-    background-color: #f8f8f8;
+    padding: 0 14px;
+    margin-bottom: 12px;
+    @include respondTo('medium') {
+      padding: 0 24px;
+    }
     transition: 0.3s;
-    color: #4440f6;
+    color: getColor('accent');
     &:hover {
       text-decoration: underline;
     }

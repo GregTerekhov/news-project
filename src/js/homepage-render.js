@@ -8,8 +8,8 @@ export const formEl = document.querySelector('.search-form');
 const bodyContainerEl = document.querySelector('.js-body-container');
 export const bodyArticles = bodyContainerEl.children.articles;
 
-const pageValue = new PagePagination();
-const templateCards = new TemplateCards();
+export const pageValue = new PagePagination();
+export const templateCards = new TemplateCards();
 const weatherViget = new WeatherBlock();
 
 getPopularArticles(); //Запрос популярных новостей
@@ -60,6 +60,6 @@ async function getQueryArticles(page, searchArticle) {
 }
 
 //Сброс результата предыдущего запроса
-function resetMarkup() {
+export function resetMarkup() {
   bodyArticles.innerHTML = '';
 }

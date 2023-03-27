@@ -138,6 +138,38 @@ class NytimesAPI {
     return result.slice(0, limit);
   }
 
+  async fetchLikePopularArticles(category, pageNumber, limit) {
+    try {
+      const { data } = await fetchCategory({
+        category,
+        pageNumber,
+        limit,
+      });
+      const { results, num_results } = data;
+
+      this._currentCategory = category;
+      this._num_results = num_results;
+      const out = results.map(article => {
+        return {
+          title: article.title,
+          date: article.published_date.slice(0, 10),
+          abstract: article.abstract,
+          section: article.section,
+          url: article.url,
+          imageUrl: this.selectByFormat(article.multimedia),
+        };
+      });
+      return {
+        data: {
+          results: out,
+        },
+      };
+    } catch (error) {
+      console.error(`Error fetching news list from category: ${error.message}`);
+      return [];
+    }
+  }
+
   get numResults() {
     return this._num_results;
   }
