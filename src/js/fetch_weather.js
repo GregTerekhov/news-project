@@ -54,17 +54,7 @@ export class WeatherBlock {
           <span class="date">${dateNow}</span>
         </div></div>`;
 
-    if (!bodyArticles.firstChild || !bodyArticles.firstChild.nextSibling) {
-      return;
-    }
-    if (window.matchMedia(`(min-width: 1280px)`).matches) {
-      console.log(bodyArticles);
-      bodyArticles.firstChild.nextSibling.insertAdjacentHTML('afterend', greed);
-    } else if (window.matchMedia(`(min-width: 768px)`).matches) {
-      bodyArticles.firstChild.insertAdjacentHTML('afterend', greed);
-    } else {
-      bodyArticles.firstChild.insertAdjacentHTML('beforebegin', greed);
-    }
+    waffle(greed);
   }
 
   permissionDenied(error) {
@@ -78,23 +68,19 @@ export class WeatherBlock {
     </svg>
       </div>`;
 
-    if (error.code === error.PERMISSION_DENIED) {
-      console.log('you denied me :-(');
-    }
+    waffle(plugSpace);
+  }
+}
 
-    if (!bodyArticles.firstChild || !bodyArticles.firstChild.nextSibling) {
-      return;
-    }
-    if (window.matchMedia(`(min-width: 1280px)`).matches) {
-      console.log(bodyArticles);
-      bodyArticles.firstChild.nextSibling.insertAdjacentHTML(
-        'afterend',
-        plugSpace
-      );
-    } else if (window.matchMedia(`(min-width: 768px)`).matches) {
-      bodyArticles.firstChild.insertAdjacentHTML('afterend', plugSpace);
-    } else {
-      bodyArticles.firstChild.insertAdjacentHTML('beforebegin', plugSpace);
-    }
+function waffle(cash) {
+  if (!bodyArticles.firstChild || !bodyArticles.firstChild.nextSibling) {
+    return;
+  }
+  if (window.matchMedia(`(min-width: 1280px)`).matches) {
+    bodyArticles.firstChild.nextSibling.insertAdjacentHTML('afterend', cash);
+  } else if (window.matchMedia(`(min-width: 768px)`).matches) {
+    bodyArticles.firstChild.insertAdjacentHTML('afterend', cash);
+  } else {
+    bodyArticles.firstChild.insertAdjacentHTML('beforebegin', cash);
   }
 }
