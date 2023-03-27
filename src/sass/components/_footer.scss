@@ -1,0 +1,136 @@
+.footer {
+    padding: 40px 0;
+    @include darkmode;
+
+    @include respondTo('medium') {
+        padding: 48px 0;
+    }
+
+    @include respondTo('large') {
+        padding: 60px 0;
+    }
+}
+
+.footer.darkmode-footer {
+    @include lightmode;
+  }
+
+.footer-title {
+    @extend %resetGap;
+    text-align: center;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 1.375;
+
+    margin-bottom: 30px;
+
+    @include respondTo('medium') {
+        font-size: 32px;
+        margin-bottom: 50px;
+    }
+
+    @include respondTo('large') {
+        font-size: 42px;
+    }
+}
+
+.footer-row-name, 
+.support-text {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.375;
+    text-align: center;
+
+    margin-bottom: 10px;
+
+    @include respondTo('medium') {
+        font-weight: 700;
+    }
+
+    @include respondTo('large') {
+        font-size: 18px;
+    }
+}
+
+.footer-list {
+    @extend %list;
+    text-align: center;
+}
+
+.footer-item:not(:last-child) {
+        margin-bottom: 7px;
+}
+
+.footer-row-thumb {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.375;
+    margin-bottom: 30px;
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+
+    @include respondTo('medium') {
+        font-weight: 700;
+        justify-content: space-around;
+        align-items: flex-start;
+        margin-bottom: 50px;
+        flex-direction: row;
+        gap: 0;
+    }
+
+    @include respondTo('large') {
+        font-size: 18px;
+        line-height: 1.388;
+    }
+}
+
+.support-img {
+    width: 150px;
+}
+
+.footer-link {
+    @extend %link;
+    transition: color .3s cubic-bezier(0.11, 0.7, 0, 1);
+    display: inline-block;
+    position: relative;
+    opacity: 0.7;
+
+    &::after {
+        content: '';
+        position: absolute;
+        margin: 0;
+        bottom: 0;
+        left: 0;
+        top: 100%;
+        display: block;
+        width: 100%;
+        height: 2px;
+        background-color: getColor('accent');
+
+        transform: scaleX(0);
+        transition: transform .3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    &:hover::after {
+        transition: transform .3s cubic-bezier(0.4, 0, 0.2, 1);
+        transform: scaleX(1.1);
+    }
+
+    &:hover {
+        color: getColor('accent');
+        opacity: 1;
+    }
+}
+
+.footer-credits {
+    text-align: center;
+    font-size: 14px;
+    font-weight: 400;
+
+    @include respondTo('medium') {
+        font-size: 16px;
+    }
+}
