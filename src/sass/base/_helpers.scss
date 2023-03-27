@@ -4,11 +4,11 @@ body {
     background-color: getColor('background-primary');
     transition: background-color var(--switch-transition), color var(--switch-transition);
     line-height: 1.366;
-    // @include lightmode;
+    @include lightmode;
 
     &.darkmode {
       font-family: $text-primary;
-      // @include darkmode;
+      @include darkmode;
     }
 }
 
