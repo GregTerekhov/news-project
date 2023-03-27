@@ -60,36 +60,47 @@ export const fetchCategoryArticles = async (PAGE_VALUE, sectionName) => {
   }
 };
 
-const fetchCategoryArticles1 = async (PAGE_VALUE, sectionName) => {
-  try {
-    const response = await axios.get(
-      `${BASE_URL}/news/v3/content/all/${sectionName}.json`,
-      {
-        params: {
-          'api-key': API_KEY,
-          limit: 40,
-          offset: PAGE_VALUE,
-        },
-      }
-    );
+// const fetchCategoryArticles1 = async (PAGE_VALUE, sectionName) => {
+//   try {
+//     const response = await axios.get(
+//       `${BASE_URL}/news/v3/content/all/${sectionName}.json`,
+//       {
+//         params: {
+//           'api-key': API_KEY,
+//           limit: 40,
+//           offset: PAGE_VALUE,
+//         },
+//       }
+//     );
 
-    return response;
-  } catch (error) {
-    console.log(error);
+//     return response;
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+
+export const fetchQuery = async ({
+  word,
+  pageNumber,
+  begin_date,
+  end_date,
+}) => {
+  const params = {
+    'api-key': API_KEY,
+    q: word,
+    page: pageNumber - 1,
+    sort: 'relevance',
+  };
+  if (begin_date && end_date) {
+    params.begin_date = begin_date;
+    params.end_date = end_date;
   }
-};
 
-export const fetchQuery = async ({ word, pageNumber }) => {
   try {
     const response = await axios.get(
       `${BASE_URL}/search/v2/articlesearch.json`,
       {
-        params: {
-          'api-key': API_KEY,
-          q: word,
-          page: pageNumber - 1,
-          sort: 'relevance',
-        },
+        params: params,
       }
     );
     return response;

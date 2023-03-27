@@ -3,14 +3,15 @@ import { getNoFound } from './markup';
 import { PagePagination } from './pagination';
 import { TemplateCards } from './markup';
 import { WeatherBlock } from './fetch_weather';
+import Notiflix, { Notify } from 'notiflix';
 
 export const formEl = document.querySelector('.search-form');
 const bodyContainerEl = document.querySelector('.js-body-container');
 export const bodyArticles = bodyContainerEl.children.articles;
 
-const pageValue = new PagePagination();
-const templateCards = new TemplateCards();
-const weatherViget = new WeatherBlock();
+export const pageValue = new PagePagination();
+export const templateCards = new TemplateCards();
+export const weatherViget = new WeatherBlock();
 
 getPopularArticles(); //Запрос популярных новостей
 
@@ -37,6 +38,9 @@ async function getPopularArticles() {
     const response = await fetchPopularArticles();
     templateCards.checkTheData(response);
     templateCards.buildTemplate(); //Рендер карточки
+    Notiflix.Notify.success(
+      `Hooray! We found ${response.data.num_results} articles.`
+    );
     weatherViget.checkLocation(); //Вставка блока с погодой
   } catch (error) {
     console.log(error);
@@ -49,6 +53,9 @@ async function getQueryArticles(page, searchArticle) {
     const response = await fetchQueryArticles(page, searchArticle);
     templateCards.checkTheData(response);
     const target = response.data.response.docs;
+    Notiflix.Notify.success(
+      `Hooray! We found ${response.data.response.meta.offset} articles.`
+    );
     if (target.length === 0) {
       getNoFound(); //Рендер заглушки при ненайденом запросе
     }
@@ -60,6 +67,6 @@ async function getQueryArticles(page, searchArticle) {
 }
 
 //Сброс результата предыдущего запроса
-function resetMarkup() {
+export function resetMarkup() {
   bodyArticles.innerHTML = '';
 }

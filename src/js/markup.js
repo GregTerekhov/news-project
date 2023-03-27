@@ -1,6 +1,8 @@
 import { bodyArticles } from './homepage-render';
 import { IMAGE_URL } from './fetchArticles';
 import * as url from '../images/card_placeholder.jpg';
+import {} from './categories/init';
+import { switchCategoriesBattonsState } from './categories/init';
 
 export function getNoFound() {
   const noFound = `<div class="no-found">
@@ -42,7 +44,7 @@ class TextRestriction {
   }
 
   clipTheHeader(string) {
-    const size = Number(40);
+    const size = Number(50);
     let header = string.header;
     let headerCut = header;
     if (header.length > size) {
@@ -56,9 +58,7 @@ const textRestriction = new TextRestriction();
 
 export class TemplateCards {
   constructor() {
-    value: '';
-    container: '';
-    newsNumber: '';
+    this.value, this.container, this.newsNumber;
   }
 
   checkTheData(response) {
@@ -72,6 +72,12 @@ export class TemplateCards {
       this.value = response.data.response.docs;
       this.container = this.takeQueryValue();
     }
+  }
+
+  checkTheDataBeta(response) {
+    this.value = response.data.results;
+    this.container = this.takePopularValueBeta();
+    return;
   }
 
   takePopularValue() {
@@ -92,6 +98,23 @@ export class TemplateCards {
     return gatheringUnit;
   }
 
+  takePopularValueBeta() {
+    let gatheringUnit = this.value.map(
+      ({ section, date, url, title, abstract, imageUrl }) => {
+        let unitCycle = {
+          tag: section,
+          date: date,
+          path: url,
+          header: title,
+          description: abstract,
+          image: imageUrl,
+        };
+        return unitCycle;
+      }
+    );
+    return gatheringUnit;
+  }
+
   takeQueryValue() {
     let gatheringUnit = this.value.map(
       ({ section_name, pub_date, web_url, headline, abstract, multimedia }) => {
@@ -106,6 +129,9 @@ export class TemplateCards {
         return unitCycle;
       }
     );
+    if (gatheringUnit.length > 0) {
+      switchCategoriesBattonsState();
+    }
     return gatheringUnit;
   }
 

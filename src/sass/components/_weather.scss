@@ -202,3 +202,29 @@
 .wind-svg {
   margin-right: 10px;
 }
+
+.plug-space {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+}
+
+.plug-space__header {
+  @extend %resetGap;
+  font-weight: 700;
+  font-size: 24px;
+  letter-spacing: -0.01em;
+  margin-top: 20px;
+  overflow: hidden;
+  padding: 0px 15px;
+  color: getColor('primary');
+  @include respondTo('medium') {
+    font-size: 32px;
+  }
+}
+
+.plug-space__icon {
+  text-align: center;
+  fill: getColor('primary');
+}
