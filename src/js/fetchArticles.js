@@ -79,17 +79,28 @@ export const fetchCategoryArticles = async (PAGE_VALUE, sectionName) => {
 //   }
 // };
 
-export const fetchQuery = async ({ word, pageNumber }) => {
+export const fetchQuery = async ({
+  word,
+  pageNumber,
+  begin_date,
+  end_date,
+}) => {
+  const params = {
+    'api-key': API_KEY,
+    q: word,
+    page: pageNumber - 1,
+    sort: 'relevance',
+  };
+  if (begin_date && end_date) {
+    params.begin_date = begin_date;
+    params.end_date = end_date;
+  }
+
   try {
     const response = await axios.get(
       `${BASE_URL}/search/v2/articlesearch.json`,
       {
-        params: {
-          'api-key': API_KEY,
-          q: word,
-          page: pageNumber - 1,
-          sort: 'relevance',
-        },
+        params: params,
       }
     );
     return response;

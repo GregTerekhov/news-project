@@ -8,13 +8,11 @@ export const formEl = document.querySelector('.search-form');
 const bodyContainerEl = document.querySelector('.js-body-container');
 export const bodyArticles = bodyContainerEl.children.articles;
 
-const pageValue = new PagePagination();
-const templateCards = new TemplateCards();
-const weatherViget = new WeatherBlock();
+export const pageValue = new PagePagination();
+export const templateCards = new TemplateCards();
+export const weatherViget = new WeatherBlock();
 
 getPopularArticles(); //Запрос популярных новостей
-
-formEl.addEventListener('submit', onInputSubmit);
 
 //Логика действий при взаимодействии с Input
 export function onInputSubmit(e) {
@@ -62,6 +60,6 @@ async function getQueryArticles(page, searchArticle) {
 }
 
 //Сброс результата предыдущего запроса
-function resetMarkup() {
+export function resetMarkup() {
   bodyArticles.innerHTML = '';
 }
