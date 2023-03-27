@@ -1,0 +1,17 @@
+body {
+  font-family: $text-primary;
+  color: getColor('primary');
+  background-color: getColor('background-primary');
+  transition: background-color var(--switch-transition),
+    color var(--switch-transition);
+  line-height: 1.366;
+  @include lightmode;
+
+  &.darkmode {
+    @include darkmode;
+  }
+
+  &._lock {
+    overflow: hidden;
+  }
+}

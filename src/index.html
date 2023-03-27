@@ -51,7 +51,7 @@
           </ul>
         </nav>
         <!-- Search-form -->
-        <div class="search-btn-container">
+        <div class="header__search-container">
           <form class="search-form" id="form-field" role="search">
             <button class="search-form__btn">
               <svg class="search-form__icon" width="20" height="20">
@@ -88,7 +88,7 @@
             <use href="./images/sprite.svg#sun"></use>
           </svg>
           <p class="toggle-mode__light">Light</p>
-          <label class="toggle-mode__switch switch">
+          <label class="toggle-mode__switch">
             <input type="checkbox" class="toggle-mode__checkbox" />
             <span class="toggle-mode__slider round"></span>
           </label>
@@ -163,55 +163,75 @@
     </div>
     <!-- Main  -->
     <main>
-      <div class="container container-restrittion js-body-container">
-        <h1 class="visually-hidden" name="header">News portal</h1>
-        <div class="choosing-line">
-          <ul class="categories" name="categories"></ul>
-          <div class="calendar" name="calendar">
-            <include src="./partials/calendar.html"></include>
+      <section class="news">
+        <div class="container container-restrittion js-body-container">
+          <h1 class="visually-hidden" name="header">News portal</h1>
+          <div class="choosing-line">
+            <ul class="categories" name="categories"></ul>
+            <div class="calendar" name="calendar">
+              <include src="./partials/calendar.html"></include>
+            </div>
           </div>
+          <!-- <div class="weather" name="weather"></div> -->
+          <ul class="articles articles-background" name="articles"></ul>
+          <!-- <div class="pagination" name="pagination"></div> -->
         </div>
-        <!-- <div class="weather" name="weather"></div> -->
-        <ul class="articles articles-background" name="articles"></ul>
-        <!-- <div class="pagination" name="pagination"></div> -->
-      </div>
+      </section>
     </main>
     <!-- footer -->
     <footer class="footer">
       <div class="container">
-      <p class="footer-title">News</p>
-      <div class="footer-row-thumb">
-            <div class="menu-thumb">
+        <p class="footer-title">News</p>
+        <div class="footer-row-thumb">
+          <div class="menu-thumb">
             <p class="footer-row-name">MENU</p>
             <ul class="footer-list">
-              <li class="footer-item"><a class="footer-link" href="./index.html">Home</a></li>
-              <li class="footer-item"><a class="footer-link" href="./favourite.html">Favorite</a></li>
-              <li class="footer-item"><a class="footer-link" href="./read.html">Read</a></li>
+              <li class="footer-item">
+                <a class="footer-link" href="./index.html">Home</a>
+              </li>
+              <li class="footer-item">
+                <a class="footer-link" href="./favourite.html">Favorite</a>
+              </li>
+              <li class="footer-item">
+                <a class="footer-link" href="./read.html">Read</a>
+              </li>
             </ul>
           </div>
           <div class="about-thumb">
             <p class="footer-row-name">ABOUT</p>
             <ul class="footer-list">
-              <li class="footer-item"><a class="footer-link" href="#">About Us</a></li>
-              <li class="footer-item"><a class="footer-link" href="#">Contact Us</a></li>
-              <li class="footer-item"><a class="footer-link" href="#">Advertising</a></li>
+              <li class="footer-item">
+                <a class="footer-link" href="#">About Us</a>
+              </li>
+              <li class="footer-item">
+                <a class="footer-link" href="#">Contact Us</a>
+              </li>
+              <li class="footer-item">
+                <a class="footer-link" href="#">Advertising</a>
+              </li>
             </ul>
+          </div>
+          <div class="policies-thumb">
+            <p class="footer-row-name">POLICIES</p>
+            <ul class="footer-list">
+              <li class="footer-item">
+                <a class="footer-link" href="#">Privacy Policy</a>
+              </li>
+              <li class="footer-item">
+                <a class="footer-link" href="#">Terms & Conditions</a>
+              </li>
+            </ul>
+          </div>
+          <div class="support-thumb">
+            <p class="support-text">SUPPORT UKRAINE</p>
+            <img class="support-img" src="./images/qr-code.jpg" alt="" />
+          </div>
         </div>
-        <div class="policies-thumb">
-          <p class="footer-row-name">POLICIES</p>
-          <ul class="footer-list">
-            <li class="footer-item"><a class="footer-link" href="#">Privacy Policy</a></li>
-            <li class="footer-item"><a class="footer-link" href="#">Terms & Conditions</a></li>
-          </ul>
-        </div>
-        <div class="support-thumb">
-          <p class="support-text">SUPPORT UKRAINE</p>
-          <img class="support-img" src="./images/qr-code.jpg" alt="">
-        </div>
-      </div>
-    <p class="footer-credits">
-      All materials, including photographs, contained on this site are protected by copyright law and may
-      not be reproduced without the prior written permission.</p>
+        <p class="footer-credits">
+          All materials, including photographs, contained on this site are
+          protected by copyright law and may not be reproduced without the prior
+          written permission.
+        </p>
       </div>
     </footer>
 

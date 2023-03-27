@@ -17,6 +17,10 @@
   @include respondTo('medium') {
     display: none;
   }
+
+  body.darkmode & {
+    background-color: getColor('background-reversed');
+  }
 }
 
 .mobile-menu__container {
