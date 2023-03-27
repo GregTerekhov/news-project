@@ -156,12 +156,12 @@ body._lock {
     background: none;
     transition: 0.4s;
 
-    &:autofill,
-    &:autofill:hover,
-    &:autofill:focus,
-    &:autofill:active {
-      transition: background-color 9999s, color 9999s;
-    }
+    // &:autofill,
+    // &:autofill:hover,
+    // &:autofill:focus,
+    // &:autofill:active {
+    //   transition: background-color 9999s, color 9999s;
+    // }
 
     @include respondTo('pre-medium') {
       padding: 0;
@@ -265,7 +265,7 @@ body._lock {
 .is-open {
   .btn-open__icon {
     stroke: getColor('primary');
-    transform: translateY(1px);
+    // transform: translateY(1px);
   }
 
   @include respondTo('medium') {

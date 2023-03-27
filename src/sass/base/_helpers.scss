@@ -2,8 +2,8 @@ body {
     font-family: $text-primary;
     color: getColor('primary');
     background-color: getColor('background-primary');
-    line-height: 1.366;
     transition: background-color var(--switch-transition), color var(--switch-transition);
+    line-height: 1.366;
     // @include lightmode;
 
     &.darkmode {
