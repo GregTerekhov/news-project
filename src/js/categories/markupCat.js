@@ -68,6 +68,7 @@ export function dropdownMarkup(categories) {
               ${markup}
             </ul>
           </li>
+  
         </ul>
       </label>
     </div>`;

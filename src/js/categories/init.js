@@ -1,8 +1,15 @@
 import { NytimesAPI } from '../nytimesAPI';
 import { elements } from './elements';
+// import { fetchQuery } from '../fetchArticles';
+import { articlesMarkup } from './markupCat';
+import { buttonsMarkup, dropdownMarkup } from './markupCat';
 
-import { articlesMarkup } from './markup';
-import { buttonsMarkup, dropdownMarkup } from './markup';
+import {
+  templateCards,
+  resetMarkup,
+  pageValue,
+  weatherViget,
+} from '../homepage-render';
 
 const MIN_LARGE_SCREEN_WIDTH = 1280;
 const MIN_MEDIUM_SCREEN_WIDTH = 768;
@@ -17,6 +24,11 @@ init();
 async function init() {
   processScreenSize();
   const categoriesList = await nytimesAPI.categoriesList();
+  // const word = 'trump';
+  // const pageNumber = 1;
+  // const begin_date = '20120101';
+  // const end_date = '20220101';
+  // fetchQuery({ word, pageNumber, begin_date, end_date });
   makeCategoryButtonsAndDropdown(categoriesList);
 }
 
@@ -49,7 +61,16 @@ async function onCategoriesClick(e) {
   if (e.target.nodeName === 'BUTTON') {
     document.querySelector('.dropdown__filter-selected').textContent = 'Other';
   }
-  await makeCatagoryRequestAndMarkup(category);
+  // await makeCatagoryRequestAndMarkup(category);
+
+  // tests with date
+  const currentDate = new Date();
+  const twoHundredDaysAgo = new Date(currentDate);
+  twoHundredDaysAgo.setDate(currentDate.getDate() - 2000);
+
+  resetMarkup();
+  pageValue.pageReset();
+  getPopularArticlesBeta(category, twoHundredDaysAgo);
 }
 
 function processScreenSize() {
@@ -70,6 +91,7 @@ function processScreenSize() {
 function initDropdown() {
   // Change option selected
   const label = document.querySelector('.dropdown__filter-selected');
+  if (!categoriesButtonQty) label.textContent = 'Categories';
   const options = Array.from(
     document.querySelectorAll('.dropdown__select-option')
   );
@@ -91,4 +113,31 @@ function initDropdown() {
       toggle.checked = false;
     }
   });
+}
+
+// Популярный запрос
+async function getPopularArticlesBeta(category, date) {
+  try {
+    const response = await nytimesAPI.fetchLikePopularArticles(
+      category,
+      pageValue.page,
+      limit,
+      date
+    );
+
+    templateCards.checkTheDataBeta(response);
+    templateCards.buildTemplate(); //Рендер карточки
+    weatherViget.checkLocation();
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export function switchCategoriesBattonsState(state) {
+  console.log('switchCategoriesBattonsState');
+  const buttonsEl = document.querySelectorAll('.categories__button');
+
+  buttonsEl.forEach(button => (button.disabled = true));
+  const dropDownEl = document.querySelector('#filter-switch');
+  dropDownEl.disabled = true;
 }
