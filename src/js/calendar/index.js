@@ -13,7 +13,7 @@ const selectedDate = document.getElementById('input-picker');
 
 const calendar = {
   openModalBtn: document.querySelector('[data-modal-open]'),
-  closeModalBtn: document.querySelector('body'),
+  // closeModalBtn: document.querySelector('body'),
   modal: document.querySelector('[data-modal]'),
   inputField: document.querySelector('.calendar-input'),
   toggleBtn: document.querySelector('.calendar__button-down'),
@@ -40,16 +40,16 @@ const months = [
 ];
 
 // зміна розмітки при закритті
-const closeModalAndResetCalendar = () => {
-  calendarForm.querySelector('[data-modal]').classList.add('hidden');
-  calendarForm.querySelector('.calendar-input').classList.remove('isActive');
-  calendarForm
-    .querySelector('.calendar__button-down')
-    .classList.remove('switched');
-  calendarForm
-    .querySelector('.form-container__icon-calendar')
-    .classList.remove('switchedColor');
-};
+// const closeModalAndResetCalendar = () => {
+//   calendarForm.classList.add('hidden'); // querySelector('[data-modal]').
+//   calendarForm.querySelector('.calendar-input').classList.remove('isActive');
+//   calendarForm
+//     .querySelector('.calendar__button-down')
+//     .classList.remove('switched');
+//   calendarForm
+//     .querySelector('.form-container__icon-calendar')
+//     .classList.remove('switchedColor');
+// };
 
 function calendarEl(e) {
   const { modal, inputField, toggleBtn, calendarBtn } = calendar;
@@ -168,11 +168,11 @@ const handleSelectedBeginDate = async () => {
       throw new Error(err);
     } else {
       setDateApi(`${selectedDateStr}`);
-      closeModalAndResetCalendar();
+      // closeModalAndResetCalendar();
       errorDisplayed = false;
     }
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.log(error);
   }
 };
 
