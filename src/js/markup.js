@@ -42,7 +42,7 @@ class TextRestriction {
   }
 
   clipTheHeader(string) {
-    const size = Number(40);
+    const size = Number(50);
     let header = string.header;
     let headerCut = header;
     if (header.length > size) {
@@ -56,9 +56,7 @@ const textRestriction = new TextRestriction();
 
 export class TemplateCards {
   constructor() {
-    value: '';
-    container: '';
-    newsNumber: '';
+    this.value, this.container, this.newsNumber;
   }
 
   checkTheData(response) {
