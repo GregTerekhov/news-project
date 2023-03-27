@@ -3,6 +3,13 @@ body {
     color: getColor('primary');
     background-color: getColor('background-primary');
     line-height: 1.366;
+    transition: background-color var(--switch-transition), color var(--switch-transition);
+    // @include lightmode;
+
+    &.darkmode {
+      font-family: $text-primary;
+      // @include darkmode;
+    }
 }
 
 .visually-hidden {
