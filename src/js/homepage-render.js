@@ -20,6 +20,10 @@ export function onInputSubmit(e) {
   try {
     e.preventDefault();
     const searchArticle = e.currentTarget.elements.querySearch.value; //Значение Input
+    console.log(
+      '🚀 ~ file: homepage-render.js:23 ~ onInputSubmit ~ searchArticle:',
+      searchArticle
+    );
     resetMarkup();
     pageValue.pageReset(); //Сброс значения текущей страницы до 1
     if (!searchArticle) {
