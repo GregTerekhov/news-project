@@ -13,7 +13,7 @@ export const pageValue = new PagePagination();
 export const templateCards = new TemplateCards();
 export const weatherViget = new WeatherBlock();
 
-getPopularArticles(); //Запрос популярных новостей
+getPopularArticles(1); //Запрос популярных новостей
 
 //Логика действий при взаимодействии с Input
 export async function onInputSubmit(e) {
@@ -24,7 +24,7 @@ export async function onInputSubmit(e) {
     resetMarkup();
     //Сброс значения текущей страницы до 1
     if (!pageValue.word) {
-      getPopularArticles();
+      pageValue.totalHits = await getPopularArticles(1);
       return;
     }
 
@@ -38,15 +38,17 @@ export async function onInputSubmit(e) {
 }
 
 //Популярный запрос
-async function getPopularArticles() {
+export async function getPopularArticles(page) {
   try {
     const response = await fetchPopularArticles();
+    const totalHits = response.data?.num_results;
     templateCards.checkTheData(response);
     templateCards.buildTemplate(); //Рендер карточки
     Notiflix.Notify.success(
       `Hooray! We found ${response.data.num_results} articles.`
     );
     weatherViget.checkLocation(); //Вставка блока с погодой
+    return totalHits;
   } catch (error) {
     console.log(error);
   }
@@ -60,10 +62,6 @@ export async function getQueryArticles(page, searchArticle) {
 
     const target = response.data.response.docs;
     const totalHits = response.data?.response?.meta?.hits;
-    console.log(
-      '🚀 ~ file: homepage-render.js:62 ~ getQueryArticles ~ totalHits:',
-      totalHits
-    );
     if (target.length === 0) {
       getNoFound(); //Рендер заглушки при ненайденом запросе
       Notiflix.Notify.failure(

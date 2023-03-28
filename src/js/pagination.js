@@ -1,4 +1,9 @@
-import { pageValue, getQueryArticles, resetMarkup } from './homepage-render';
+import {
+  pageValue,
+  getQueryArticles,
+  getPopularArticles,
+  resetMarkup,
+} from './homepage-render';
 
 export class PagePagination {
   constructor() {
@@ -43,6 +48,7 @@ createPagination();
 const pg = document.getElementById('pagination');
 const btnNextPg = document.querySelector('button.next-page');
 const btnPrevPg = document.querySelector('button.prev-page');
+
 export const valuePage = {
   curPage: 1,
   numLinksTwoSide: 1,
@@ -69,6 +75,9 @@ pg.addEventListener('click', async e => {
         pageValue.word
       );
       valuePage.totalPages = Math.round(totalHits / 10); // appromimate data, need correction!!!!
+    } else {
+      const totalHits = await getPopularArticles();
+      valuePage.totalPages = Math.round(totalHits / 10);
     }
 
     console.log(valuePage);

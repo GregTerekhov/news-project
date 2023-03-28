@@ -15,7 +15,6 @@ export const fetchPopularArticles = async pageNumber => {
         },
       }
     );
-
     return response;
   } catch (error) {
     console.log(error);
