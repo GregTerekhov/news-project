@@ -3,8 +3,7 @@ import { getNoFound } from './markup';
 import { PagePagination } from './pagination';
 import { TemplateCards } from './markup';
 import { WeatherBlock } from './fetch_weather';
-import Notiflix, { Notify } from 'notiflix';
-import { valuePage } from './categories/myPagination';
+import Notiflix from 'notiflix';
 
 export const formEl = document.querySelector('.search-form');
 const bodyContainerEl = document.querySelector('.js-body-container');
@@ -28,9 +27,11 @@ export async function onInputSubmit(e) {
       getPopularArticles();
       return;
     }
-    const totalHits = await getQueryArticles(pageValue.page, pageValue.word); //Не забыть поменять "1" на переменную номера страницы
 
-    pageValue.totalHits = totalHits;
+    pageValue.totalHits = await getQueryArticles(
+      pageValue.page,
+      pageValue.word
+    ); //Не забыть поменять "1" на переменную номера страницы
   } catch (error) {
     console.log(error);
   }

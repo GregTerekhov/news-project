@@ -120,7 +120,7 @@ export class TemplateCards {
       ({ section_name, pub_date, web_url, headline, abstract, multimedia }) => {
         let unitCycle = {
           tag: section_name,
-          date: pub_date,
+          date: pub_date.slice(0, 10),
           path: web_url,
           header: headline.main,
           description: abstract,
