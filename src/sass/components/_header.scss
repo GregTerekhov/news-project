@@ -1,7 +1,7 @@
 .header {
   min-height: 81px;
   border-bottom: 1px solid transparentize($color: #000000, $amount: 0.8);
-  
+
   body.darkmode & {
     border-color: transparentize(getColor('background-primary'), 0.8);
   }
@@ -10,6 +10,7 @@
 .header__box {
   display: flex;
   align-items: center;
+  justify-content: space-between;
 
   @include respondTo('medium') {
     align-items: none;
@@ -19,10 +20,10 @@
 .header__search-container {
   display: flex;
   align-items: baseline;
-  margin-left: auto;
 
   @include respondTo('large') {
     margin-right: auto;
+    margin-left: auto;
   }
 }
 
@@ -72,18 +73,19 @@
 }
 
 .is-open {
+  @extend %resetGap;
   border: none;
   background-color: transparent;
-}
-
-.is-open {
-  .btn-open__icon {
-    stroke: getColor('primary');
-    // transform: translateY(1px);
-  }
-
   @include respondTo('medium') {
     display: none;
+  }
+}
+
+.btn-open__icon {
+  margin-left: 14px;
+  stroke: getColor('primary');
+  body.darkmode & {
+    stroke: getColor('background-primary');
   }
 }
 
