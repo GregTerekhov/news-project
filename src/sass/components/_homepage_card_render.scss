@@ -241,14 +241,39 @@
   }
 }
 
-.up-button {
+.lift-buttons {
   position: fixed;
   bottom: 30px;
-  left: 30px;
-  cursor: pointer;
+  left: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 85px;
+}
+
+.up-button {
   color: getColor('accent');
   border-radius: 20px;
-  border: 1 solid getColor('accent');
   @extend %resetGap;
+  border: 1 solid getColor('accent');
+  cursor: pointer;
+  padding: 5px 7px;
+}
+
+.middle-button {
+  color: getColor('accent');
+  border-radius: 20px;
+  @extend %resetGap;
+  border: 1 solid getColor('accent');
+  cursor: pointer;
+  padding: 5px 7px;
+}
+
+.down-button {
+  color: getColor('accent');
+  border-radius: 20px;
+  @extend %resetGap;
+  border: 1 solid getColor('accent');
+  cursor: pointer;
   padding: 5px 7px;
 }
