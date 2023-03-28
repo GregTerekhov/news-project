@@ -86,8 +86,12 @@
 .markup-unit__card-image {
   object-fit: cover;
   width: 100%;
-  height: 395px;
+  height: 100%;
   border-radius: 10px;
+}
+
+.markup-unit__image-wrapper {
+  min-height: 395px;
 }
 
 .markup-unit__add-favorite {
@@ -135,7 +139,10 @@
   margin-top: 20px;
   // height: 135px;
   overflow: hidden;
-
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* number of lines to show */
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
   @include respondTo('medium') {
     font-size: 32px;
   }
@@ -185,6 +192,22 @@
     margin: 0;
     font-size: 16px;
   }
+}
+
+.markup-unit__read {
+  min-height: 630px;
+  display: flex;
+  flex-direction: column;
+  @include respondTo('medium') {
+    min-height: 675px;
+  }
+}
+
+.markup-unit__details {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .weather-placeholder {
