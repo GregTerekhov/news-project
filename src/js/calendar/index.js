@@ -21,10 +21,12 @@ const calendar = {
 };
 
 let today = new Date(),
+currentDay = today.getDate(),
   currentMonth = today.getMonth(),
   currentYear = today.getFullYear();
 
 const months = [
+
   'January',
   'February',
   'March',
@@ -79,12 +81,8 @@ function hideModals(e) {
 const render = () => {
   // отримаємо перший день місяця, останній день місяця, останній день попереднього місяця
   const firstDayofMonth = new Date(currentYear, currentMonth, 1).getDay() - 1, // для відображення понеділка
-    lastDateofMonth = new Date(currentYear, currentMonth, 0).getDate(),
-    lastDayofMonth = new Date(
-      currentYear,
-      currentMonth,
-      lastDateofMonth
-    ).getDay(),
+    lastDateofMonth = new Date(currentYear, currentMonth + 1, 0).getDate(),
+    lastDayofMonth = new Date(currentYear, currentMonth,lastDateofMonth).getDay(),
     lastDateofLastMonth = new Date(currentYear, currentMonth, 0).getDate();
 
   let liTag = '';
@@ -108,7 +106,7 @@ const render = () => {
   }
 
   // додаємо елементи для днів наступного місяця
-  for (let i = lastDayofMonth; i < 7; i++) {
+  for (let i = lastDayofMonth; i < 6; i++) {
     liTag += `<li class="inactive">${i - lastDayofMonth + 1}</li>`;
   }
 
@@ -116,13 +114,14 @@ const render = () => {
   currentDate.innerText = `${months[currentMonth]} ${currentYear}`;
   daysTag.innerHTML = liTag;
 
+  
   // обробник події по кліку на день
   const dayChange = document.querySelector('.days');
   dayChange.addEventListener('click', e => {
     // перевіряємо чи є елемент неактивним
-    if (e.target.classList.contains('inactive')) {
-      return;
-    }
+    // if (e.target.classList.contains('inactive')) {
+    //   return;
+    // }
 
     // видаляємо клас active і всіх днів і додаємо його тільки вибраному
     [...e.currentTarget.children].forEach(item => {
@@ -135,7 +134,10 @@ const render = () => {
     if (selectedDay.length > 10) {
       return;
     }
-
+    else {
+      calendarEl();
+    }
+     
     const selectedMonth = (currentMonth + 1).toString();
     selectedDate.value = `${selectedDay.padStart(
       2,
@@ -212,8 +214,7 @@ nextYearBtn.addEventListener('click', () => {
 // --------  ПЕРЕМИКАЧ МІСЯЦІВ  --------
 switchesMonth.forEach(switchMonth => {
   switchMonth.addEventListener('click', () => {
-    const nextMonth =
-      switchMonth.id === 'prev' ? currentMonth - 1 : currentMonth + 1;
+  nextMonth = switchMonth.id === 'prev' ? currentMonth - 1 : currentMonth + 1;
 
     if (nextMonth < 0 || nextMonth > 11) {
       const nextYear = nextMonth < 0 ? currentYear - 1 : currentYear + 1;
