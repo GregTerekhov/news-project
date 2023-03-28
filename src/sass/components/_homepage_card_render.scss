@@ -240,3 +240,15 @@
     margin-bottom: 226px;
   }
 }
+
+.up-button {
+  position: fixed;
+  bottom: 30px;
+  left: 30px;
+  cursor: pointer;
+  color: getColor('accent');
+  border-radius: 20px;
+  border: 1 solid getColor('accent');
+  @extend %resetGap;
+  padding: 5px 7px;
+}

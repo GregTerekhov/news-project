@@ -75,3 +75,15 @@ async function getQueryArticles(page, searchArticle) {
 export function resetMarkup() {
   bodyArticles.innerHTML = '';
 }
+
+const mark = document.querySelector(`.up-button`);
+mark.addEventListener('click', onUnClick);
+
+function onUnClick(e) {
+  const { height: upButtonEl } = bodyArticles.getBoundingClientRect();
+
+  window.scrollBy({
+    top: -(upButtonEl * upButtonEl),
+    behavior: `smooth`,
+  });
+}
