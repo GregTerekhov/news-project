@@ -124,7 +124,10 @@ export function onPagination() {
           (valuePage.curPage - 1) * quantity,
           (valuePage.curPage - 1) * quantity + quantity
         ); //Рендер карточки//////////////////////////////////////////
-        if (valuePage.curPage === 1) {
+        if (
+          valuePage.curPage === 1 &&
+          !document.querySelector('.weather-information')
+        ) {
           weatherViget.checkLocation();
         } //Вставка блока с погодой}
       }
@@ -222,7 +225,10 @@ export function onPagination() {
       (valuePage.curPage - 1) * quantity,
       (valuePage.curPage - 1) * quantity + quantity
     ); //Рендер карточки//////////////////////////////////////////
-    if (valuePage.curPage === 1) {
+    if (
+      valuePage.curPage === 1 &&
+      !document.querySelector('.weather-information')
+    ) {
       weatherViget.checkLocation();
     } //Вставка блока с погодой}
     pagination();
