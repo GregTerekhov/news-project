@@ -22,11 +22,10 @@ const calendar = {
 
 let today = new Date(),
 currentDay = today.getDate(),
-  currentMonth = today.getMonth(),
+currentMonth = today.getMonth(),
   currentYear = today.getFullYear();
 
 const months = [
-
   'January',
   'February',
   'March',
@@ -62,9 +61,7 @@ function calendarEl(e) {
 }
 
 // обробник події по кліку на інпут
-calendar.openModalBtn.addEventListener('click', function () {
-  calendarEl();
-});
+calendar.openModalBtn.addEventListener('click', calendarEl);
 
 // обробник події по кліку поза календарем
 document.addEventListener('click', hideModals);
@@ -76,24 +73,78 @@ function hideModals(e) {
   }
 }
 
+let someChocko = 2; //ПРИНИМАЕТ ЧИСЛО, РАВНОЕ ВЫБРАННОЙ ДАТЕ. 120 строка.ВСТАВИТЬ ОБЯЗАТЕЛЬНО ЗНАЧЕНИЕ ПО УМОЛЧАНИЮ = ТЕКУЩИЙ ДЕНЬ
+
 // ---------  Рендеринг календаря  ---------
 
 const render = () => {
   // отримаємо перший день місяця, останній день місяця, останній день попереднього місяця
   const firstDayofMonth = new Date(currentYear, currentMonth, 1).getDay() - 1, // для відображення понеділка
     lastDateofMonth = new Date(currentYear, currentMonth + 1, 0).getDate(),
-    lastDayofMonth = new Date(currentYear, currentMonth,lastDateofMonth).getDay(),
+    lastDayofMonth = new Date(
+      currentYear,
+      currentMonth,
+      lastDateofMonth
+    ).getDay(),
     lastDateofLastMonth = new Date(currentYear, currentMonth, 0).getDate();
 
-  let liTag = '';
+  bakeWaffles(firstDayofMonth, lastDateofLastMonth, lastDayofMonth); //КОЛБЕК ФУНКЦИЯ. ЧАСТЬ КОДА, ЧТО БЫЛА ЗДЕСЬ ПЕРЕХАЛА В ЭТУ ФУНКЦИЮ. НОВОГО НИЧЕГО НЕ ДЕЛАЕТ, ТОЛЬКО РАЗЧИЩАЕТ КОД.
 
-  // елементи для днів попереднього місяця
-  for (let j = firstDayofMonth; j > 0; j--) {
-    liTag += `<li class="inactive">${lastDateofLastMonth - j + 1}</li>`;
+  // обробник події по кліку на день
+  const dayChange = document.querySelector('.days');
+  dayChange.addEventListener('click', dayimio); //СТРАРАЯ СТРЕЛОЧНАЯ ФУНКЦИЯ БЫЛА ЗАМЕНЕНА НА ОБЫЧНУЮ. ПРИНИМАЕТ ТО-ЖЕ САМЫЙ АРГУМЕНТ, ЧТО И ДО ЭТОГО
+
+  // !!!!!!!!!!-----КОДБ ОТВЕТСТВЕННЫЙ ЗА СОХРАНЕНИЕ ВЫБРАННОЙ ДАТЫ В КАЛЕНДАРЕ ПРИ СМЕНЕ МЕСЯЦА\\ГОДА ======!!!!!!!!!!!!!
+  const dsad = document.querySelector(`.js-days`); //СЕЛЕКТОР ДИВА С ЛИШКАМИ, ОТВЕЧАЮЩИЕ ЗА ДАТЫ
+  [...dsad.children].forEach(e => {
+    if (e.dataset.art === `num-${someChocko}`) {
+      e.classList.add(`active`);
+      return;
+    }
+  });
+};
+
+// ФУНКЦИЯ ПРИ ВЫЗОВЕ СОБЫТИЯ dayChange
+function dayimio(e) {
+  // перевіряємо чи є елемент неактивним
+  if (e.target.classList.contains('inactive')) {
+    return;
   }
 
-  // додаємо елементи для днів поточного місяця
-  for (let i = 1; i <= lastDateofMonth; i++) {
+  // видаляємо клас active і всіх днів і додаємо його тільки вибраному
+  [...e.currentTarget.children].forEach(item => {
+    item.classList.remove('active');
+  });
+  e.target.classList.add('active');
+
+  someChocko = e.target.textContent;
+  console.log(someChocko);
+
+  // отримуємо вибрану дату і виводимо її в input
+  let selectedDay = e.target.textContent;
+  if (selectedDay.length > 10) {
+    return;
+  }
+
+  const selectedMonth = (currentMonth + 1).toString();
+  selectedDate.value = `${selectedDay.padStart(
+    2,
+    '0'
+  )}/${selectedMonth.padStart(2, '0')}/${currentYear}`;
+
+  // відправляємо вибрану дату на сервер
+  // handleSelectedBeginDate(); //ФУНКЦИЯ, ОТВЕЧАЮЩАЯ ЗА НЕИЗВЕСТНО ЧТО, ПОТОМУ ЗАКОМЕНЧАНА
+}
+
+// РЕНДЕР ДНЕЙ ОДНОГО МЕСЯЦА. СЮДА ПЕРЕЕХАЛА ЧАСТЬ СТАРОГО КОДА ИЗ ФУНКЦИИ render()
+function bakeWaffles(firstDay, someData, lastDay) {
+  let liTag = ''; //Переменная сборщик. В неё приходят значения дней текущего месяца. НЕОБХОДИМА ДЛЯ РЕНДЕРА
+
+  for (let j = firstDay; j > 0; j--) {
+    liTag += `<li class="inactive">${someData - j + 1}</li>`;
+  } //Цикл для дней предыдущего месяца
+
+  for (let i = 1; i <= someData; i++) {
     const currentDateObj = new Date(currentYear, currentMonth, i);
     const isToday =
       i === today.getDate() &&
@@ -102,8 +153,8 @@ const render = () => {
     const isFuture = currentDateObj > today;
     liTag += `<li class="${isToday ? 'active' : ''} ${
       isFuture ? 'future' : ''
-    }">${i}</li>`;
-  }
+    }" id="date-${i}" data-art="num-${i}">${i}</li>`;
+  } //Цикл для дней текущего месяца
 
   // додаємо елементи для днів наступного місяця
   for (let i = lastDayofMonth; i < 6; i++) {
@@ -114,7 +165,6 @@ const render = () => {
   currentDate.innerText = `${months[currentMonth]} ${currentYear}`;
   daysTag.innerHTML = liTag;
 
-  
   // обробник події по кліку на день
   const dayChange = document.querySelector('.days');
   dayChange.addEventListener('click', e => {
@@ -122,22 +172,42 @@ const render = () => {
     // if (e.target.classList.contains('inactive')) {
     //   return;
     // }
+  dayChange.addEventListener('click', dayimio); //СТРАРАЯ СТРЕЛОЧНАЯ ФУНКЦИЯ БЫЛА ЗАМЕНЕНА НА ОБЫЧНУЮ. ПРИНИМАЕТ ТО-ЖЕ САМЫЙ АРГУМЕНТ, ЧТО И ДО ЭТОГО
 
-    // видаляємо клас active і всіх днів і додаємо його тільки вибраному
-    [...e.currentTarget.children].forEach(item => {
-      item.classList.remove('active');
-    });
-    e.target.classList.add('active');
+  // !!!!!!!!!!-----КОДБ ОТВЕТСТВЕННЫЙ ЗА СОХРАНЕНИЕ ВЫБРАННОЙ ДАТЫ В КАЛЕНДАРЕ ПРИ СМЕНЕ МЕСЯЦА\\ГОДА ======!!!!!!!!!!!!!
+  const dsad = document.querySelector(`.js-days`); //СЕЛЕКТОР ДИВА С ЛИШКАМИ, ОТВЕЧАЮЩИЕ ЗА ДАТЫ
+  [...dsad.children].forEach(e => {
+    if (e.dataset.art === `num-${someChocko}`) {
+      e.classList.add(`active`);
+      return;
+    }
+  });
+};
+
+// ФУНКЦИЯ ПРИ ВЫЗОВЕ СОБЫТИЯ dayChange
+function dayimio(e) {
+  // перевіряємо чи є елемент неактивним
+  if (e.target.classList.contains('inactive')) {
+    return;
+  }
+
+  // видаляємо клас active і всіх днів і додаємо його тільки вибраному
+  [...e.currentTarget.children].forEach(item => {
+    item.classList.remove('active');
+  });
+  e.target.classList.add('active');
+
+  someChocko = e.target.textContent;
+  console.log(someChocko);
 
     // отримуємо вибрану дату і виводимо її в input
     let selectedDay = e.target.textContent;
     if (selectedDay.length > 10) {
       return;
-    }
-    else {
+    } else {
       calendarEl();
     }
-     
+
     const selectedMonth = (currentMonth + 1).toString();
     selectedDate.value = `${selectedDay.padStart(
       2,
@@ -147,7 +217,13 @@ const render = () => {
     // відправляємо вибрану дату на сервер
     handleSelectedBeginDate();
   });
-};
+}
+for (let i = lastDay; i < 7; i++) {
+  liTag += `<li class="inactive">${i - lastDay + 1}</li>`;
+} //Цикл для дней следующего месяца
+
+currentDate.innerText = `${months[currentMonth]} ${currentYear}`; //РЕНДЕР ТЕКУЩИХ ЗНАЧЕНИЙ МЕСЯЦА\\ГОДА
+return (daysTag.innerHTML = liTag);
 
 // --------  ФУНКЦІЯ ДЛЯ ВІДПРАВКИ ДАТИ НА API  --------
 let errorDisplayed = false; // для виводу помилки на екран
@@ -160,7 +236,6 @@ const handleSelectedBeginDate = async () => {
       '0'
     )}`,
     selectedDateObj = new Date(selectedDateStr);
-
   try {
     if (selectedDateObj > today) {
       if (!errorDisplayed) {
@@ -185,7 +260,7 @@ setDateApi(
     .padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')}`
 );
 
-// --------  ПЕРЕМИКАЧ РОКІВ  --------
+// --------  ПЕРЕМИКАЧ РОКІВ  -------- //ОТКЛЮЧИТЬ ПЕРЕНОС ТЕКУЩЕЙ ДАТЫ ПРИ СМЕНЕ ГОДА
 const prevYearBtn = document.getElementById('prev-years');
 const nextYearBtn = document.getElementById('next-years');
 
@@ -214,7 +289,7 @@ nextYearBtn.addEventListener('click', () => {
 // --------  ПЕРЕМИКАЧ МІСЯЦІВ  --------
 switchesMonth.forEach(switchMonth => {
   switchMonth.addEventListener('click', () => {
-  nextMonth = switchMonth.id === 'prev' ? currentMonth - 1 : currentMonth + 1;
+    nextMonth = switchMonth.id === 'prev' ? currentMonth - 1 : currentMonth + 1;
 
     if (nextMonth < 0 || nextMonth > 11) {
       const nextYear = nextMonth < 0 ? currentYear - 1 : currentYear + 1;
