@@ -24,8 +24,11 @@
     border: 1px solid getColor('accent');
     border-radius: 20px;
     cursor: pointer;
-    background-color: getColor('primary-reversed');
+    background-color: transparent;
     transition: all 0.3s cubic-bezier(0.11, 0.7, 0, 1);
+    .darkmode & {
+      background-color: getColor('primary-reversed');
+    }
     &:hover {
       background: getColor('accent');
       border-color: #4b48db;
