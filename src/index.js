@@ -4,6 +4,7 @@ import './js/calendar/index';
 import './js/homepage-render';
 import './js/pagination.js';
 import './js/fetch_weather';
+import './js/vertical_buttons';
 
 import { formEl } from './js/homepage-render';
 import { onInputSubmit } from './js/homepage-render';
