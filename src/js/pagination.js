@@ -30,6 +30,30 @@ import {
 import { getPopularArticles, resetMarkup } from './homepage-render';
 import { fetchPopularArticles } from './fetchArticles';
 
+// const pagePagination = new PagePagination();
+const valuePage = {
+  curPage: 1,
+  numLinksTwoSide: 1,
+  totalPages: null,
+  data: null,
+  amountShowCards: null,
+};
+
+const mediaQuantity = {
+  mobile: 4,
+  tablet: 8,
+};
+
+let quantity =
+  window.innerWidth < 768 ? mediaQuantity.mobile : mediaQuantity.tablet;
+window.addEventListener('resize', () => {
+  quantity =
+    window.innerWidth < 768 ? mediaQuantity.mobile : mediaQuantity.tablet;
+  templateCards.buildTemplate(
+    (valuePage.curPage - 1) * quantity,
+    (valuePage.curPage - 1) * quantity + quantity
+  ); //Рендер карточки//////////////////////////////////////////
+});
 export function onPagination() {
   const paginationRef = document.querySelector('.pagination');
   function createPagination() {
@@ -46,13 +70,13 @@ export function onPagination() {
   const pg = document.getElementById('pagination');
   const btnNextPg = document.querySelector('button.next-page');
   const btnPrevPg = document.querySelector('button.prev-page');
-  const valuePage = {
-    curPage: 1,
-    numLinksTwoSide: 1,
-    totalPages: null,
-    data: null,
-    amountShowCards: null,
-  };
+  // const valuePage = {
+  //   curPage: 1,
+  //   numLinksTwoSide: 1,
+  //   totalPages: null,
+  //   data: null,
+  //   amountShowCards: null,
+  // };
 
   handleWindowSizeChange();
   setTimeout(() => {
@@ -95,7 +119,14 @@ export function onPagination() {
         //   )
         // );
         // weatherViget.checkLocation();
-        templateCards.buildTemplate(); //Рендер карточки//////////////////////////////////////////
+
+        templateCards.buildTemplate(
+          (valuePage.curPage - 1) * quantity,
+          (valuePage.curPage - 1) * quantity + quantity
+        ); //Рендер карточки//////////////////////////////////////////
+        if (valuePage.curPage === 1) {
+          weatherViget.checkLocation();
+        } //Вставка блока с погодой}
       }
       pagination();
       handleButtonLeft();
@@ -187,8 +218,16 @@ export function onPagination() {
       handleButtonRight();
       btnPrevPg.disabled = false;
     }
+    templateCards.buildTemplate(
+      (valuePage.curPage - 1) * quantity,
+      (valuePage.curPage - 1) * quantity + quantity
+    ); //Рендер карточки//////////////////////////////////////////
+    if (valuePage.curPage === 1) {
+      weatherViget.checkLocation();
+    } //Вставка блока с погодой}
     pagination();
   }
+
   function handleButtonLeft() {
     if (valuePage.curPage === 1) {
       btnPrevPg.disabled = true;
