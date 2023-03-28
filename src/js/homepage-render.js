@@ -98,8 +98,15 @@ async function getQueryArticles(page, searchArticle, date) {
     );
     if (target.length === 0) {
       getNoFound(); //Рендер заглушки при ненайденом запросе
+      Notiflix.Notify.failure(
+        `Sorry, there are no articles matching your search query. Please try again.`
+      );
+      return;
     }
     onPagination();
+    Notiflix.Notify.success(
+      `Hooray! We found ${response.data.response.meta.offset} articles.`
+    );
     templateCards.buildTemplate(); //Рендер карточки
     weatherViget.checkLocation(); //Вставка блока с погодой
   } catch (error) {
