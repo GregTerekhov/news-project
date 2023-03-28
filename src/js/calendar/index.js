@@ -21,7 +21,8 @@ const calendar = {
 };
 
 let today = new Date(),
-  currentMonth = today.getMonth(),
+currentDay = today.getDate(),
+currentMonth = today.getMonth(),
   currentYear = today.getFullYear();
 
 const months = [
@@ -79,7 +80,7 @@ let someChocko = 2; //ПРИНИМАЕТ ЧИСЛО, РАВНОЕ ВЫБРАНН
 const render = () => {
   // отримаємо перший день місяця, останній день місяця, останній день попереднього місяця
   const firstDayofMonth = new Date(currentYear, currentMonth, 1).getDay() - 1, // для відображення понеділка
-    lastDateofMonth = new Date(currentYear, currentMonth, 0).getDate(),
+    lastDateofMonth = new Date(currentYear, currentMonth + 1, 0).getDate(),
     lastDayofMonth = new Date(
       currentYear,
       currentMonth,
@@ -155,13 +156,74 @@ function bakeWaffles(firstDay, someData, lastDay) {
     }" id="date-${i}" data-art="num-${i}">${i}</li>`;
   } //Цикл для дней текущего месяца
 
-  for (let i = lastDay; i < 7; i++) {
-    liTag += `<li class="inactive">${i - lastDay + 1}</li>`;
-  } //Цикл для дней следующего месяца
+  // додаємо елементи для днів наступного місяця
+  for (let i = lastDayofMonth; i < 6; i++) {
+    liTag += `<li class="inactive">${i - lastDayofMonth + 1}</li>`;
+  }
 
-  currentDate.innerText = `${months[currentMonth]} ${currentYear}`; //РЕНДЕР ТЕКУЩИХ ЗНАЧЕНИЙ МЕСЯЦА\\ГОДА
-  return (daysTag.innerHTML = liTag);
+  // виводимо поточну дату та елементи календаря в HTML
+  currentDate.innerText = `${months[currentMonth]} ${currentYear}`;
+  daysTag.innerHTML = liTag;
+
+  // обробник події по кліку на день
+  const dayChange = document.querySelector('.days');
+  dayChange.addEventListener('click', e => {
+    // перевіряємо чи є елемент неактивним
+    // if (e.target.classList.contains('inactive')) {
+    //   return;
+    // }
+  dayChange.addEventListener('click', dayimio); //СТРАРАЯ СТРЕЛОЧНАЯ ФУНКЦИЯ БЫЛА ЗАМЕНЕНА НА ОБЫЧНУЮ. ПРИНИМАЕТ ТО-ЖЕ САМЫЙ АРГУМЕНТ, ЧТО И ДО ЭТОГО
+
+  // !!!!!!!!!!-----КОДБ ОТВЕТСТВЕННЫЙ ЗА СОХРАНЕНИЕ ВЫБРАННОЙ ДАТЫ В КАЛЕНДАРЕ ПРИ СМЕНЕ МЕСЯЦА\\ГОДА ======!!!!!!!!!!!!!
+  const dsad = document.querySelector(`.js-days`); //СЕЛЕКТОР ДИВА С ЛИШКАМИ, ОТВЕЧАЮЩИЕ ЗА ДАТЫ
+  [...dsad.children].forEach(e => {
+    if (e.dataset.art === `num-${someChocko}`) {
+      e.classList.add(`active`);
+      return;
+    }
+  });
+};
+
+// ФУНКЦИЯ ПРИ ВЫЗОВЕ СОБЫТИЯ dayChange
+function dayimio(e) {
+  // перевіряємо чи є елемент неактивним
+  if (e.target.classList.contains('inactive')) {
+    return;
+  }
+
+  // видаляємо клас active і всіх днів і додаємо його тільки вибраному
+  [...e.currentTarget.children].forEach(item => {
+    item.classList.remove('active');
+  });
+  e.target.classList.add('active');
+
+  someChocko = e.target.textContent;
+  console.log(someChocko);
+
+    // отримуємо вибрану дату і виводимо її в input
+    let selectedDay = e.target.textContent;
+    if (selectedDay.length > 10) {
+      return;
+    } else {
+      calendarEl();
+    }
+
+    const selectedMonth = (currentMonth + 1).toString();
+    selectedDate.value = `${selectedDay.padStart(
+      2,
+      '0'
+    )}/${selectedMonth.padStart(2, '0')}/${currentYear}`;
+
+    // відправляємо вибрану дату на сервер
+    handleSelectedBeginDate();
+  });
 }
+for (let i = lastDay; i < 7; i++) {
+  liTag += `<li class="inactive">${i - lastDay + 1}</li>`;
+} //Цикл для дней следующего месяца
+
+currentDate.innerText = `${months[currentMonth]} ${currentYear}`; //РЕНДЕР ТЕКУЩИХ ЗНАЧЕНИЙ МЕСЯЦА\\ГОДА
+return (daysTag.innerHTML = liTag);
 
 // --------  ФУНКЦІЯ ДЛЯ ВІДПРАВКИ ДАТИ НА API  --------
 let errorDisplayed = false; // для виводу помилки на екран
@@ -227,8 +289,7 @@ nextYearBtn.addEventListener('click', () => {
 // --------  ПЕРЕМИКАЧ МІСЯЦІВ  --------
 switchesMonth.forEach(switchMonth => {
   switchMonth.addEventListener('click', () => {
-    const nextMonth =
-      switchMonth.id === 'prev' ? currentMonth - 1 : currentMonth + 1;
+    nextMonth = switchMonth.id === 'prev' ? currentMonth - 1 : currentMonth + 1;
 
     if (nextMonth < 0 || nextMonth > 11) {
       const nextYear = nextMonth < 0 ? currentYear - 1 : currentYear + 1;
