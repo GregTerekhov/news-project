@@ -6,10 +6,10 @@ import { switchCategoriesBattonsState } from './categories/init';
 
 export function getNoFound() {
   const noFound = `<div class="no-found">
-  <h1 class="no-found__text">We haven’t found news from this category</h1>
+  <h1 class="no-found__text">We haven't found news from this category</h1>
   <div class="no-found__image"></div>
   </div>`;
-  return bodyArticles.insertAdjacentHTML('beforeend', noFound);
+  return (bodyArticles.innerHTML = noFound);
 }
 
 class ImageConvertor {
@@ -135,9 +135,10 @@ export class TemplateCards {
     return gatheringUnit;
   }
 
-  buildTemplate() {
+  buildTemplate(start, end) {
     try {
-      let valueReceiver = this.container
+      let valueReceiver = [...this.container]
+        .slice(start, end)
         .map(unload => {
           const toJson = {
             category: unload.tag,
@@ -210,7 +211,7 @@ export class TemplateCards {
     </li>`;
         })
         .join('');
-      return bodyArticles.insertAdjacentHTML('beforeend', valueReceiver);
+      return (bodyArticles.innerHTML = valueReceiver);
     } catch (error) {
       console.log(error);
     }

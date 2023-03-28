@@ -1,6 +1,6 @@
 import { fetchPopularArticles, fetchQueryArticles } from './fetchArticles';
 import { getNoFound } from './markup';
-import { PagePagination } from './pagination';
+import { PagePagination, onPagination } from './pagination';
 import { TemplateCards } from './markup';
 import { WeatherBlock } from './fetch_weather';
 import Notiflix, { Notify } from 'notiflix';
@@ -51,12 +51,25 @@ function dateConvert(inputDate) {
   return outputDate;
 }
 
+const mediaQuantity = {
+  mobile: 4,
+  tablet: 8,
+};
+
+let quantity =
+  window.innerWidth < 768 ? mediaQuantity.mobile : mediaQuantity.tablet;
+window.addEventListener('resize', () => {
+  quantity =
+    window.innerWidth < 768 ? mediaQuantity.mobile : mediaQuantity.tablet;
+});
+
 //Популярный запрос
 async function getPopularArticles() {
   try {
     const response = await fetchPopularArticles();
+    onPagination();
     templateCards.checkTheData(response);
-    templateCards.buildTemplate(); //Рендер карточки
+    templateCards.buildTemplate(0, quantity); //Рендер карточки
     Notiflix.Notify.success(
       `Hooray! We found ${response.data.num_results} articles.`
     );
@@ -80,6 +93,17 @@ async function getQueryArticles(page, searchArticle, date) {
       );
       return;
     }
+    Notiflix.Notify.success(
+      `Hooray! We found ${response.data.response.meta.offset} articles.`
+    );
+    if (target.length === 0) {
+      getNoFound(); //Рендер заглушки при ненайденом запросе
+      Notiflix.Notify.failure(
+        `Sorry, there are no articles matching your search query. Please try again.`
+      );
+      return;
+    }
+    onPagination();
     Notiflix.Notify.success(
       `Hooray! We found ${response.data.response.meta.offset} articles.`
     );
