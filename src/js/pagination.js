@@ -1,10 +1,12 @@
 export class PagePagination {
   constructor() {
-    this.page = 1;
+    this.pageReset();
   }
 
   pageReset() {
     this.page = 1;
+    this.word = '';
+    this.totalHits = null;
   }
 
   increasePageValue() {

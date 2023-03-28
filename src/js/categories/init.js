@@ -66,7 +66,7 @@ async function onCategoriesClick(e) {
   // tests with date
   const currentDate = new Date();
   const twoHundredDaysAgo = new Date(currentDate);
-  twoHundredDaysAgo.setDate(currentDate.getDate() - 2000);
+  twoHundredDaysAgo.setDate(currentDate.getDate() - 5000);
 
   resetMarkup();
   pageValue.pageReset();

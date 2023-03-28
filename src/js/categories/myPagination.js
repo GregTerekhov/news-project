@@ -4,7 +4,9 @@ const btnPrevPg = document.querySelector('button.prev-page');
 const btnFirstPg = document.querySelector('button.first-page');
 const btnLastPg = document.querySelector('button.last-page');
 
-const valuePage = {
+import { pageValue, getQueryArticles, resetMarkup } from '../homepage-render';
+
+export const valuePage = {
   curPage: 1,
   numLinksTwoSide: 1,
   totalPages: 10,
@@ -12,7 +14,7 @@ const valuePage = {
 
 pagination();
 
-pg.addEventListener('click', e => {
+pg.addEventListener('click', async e => {
   const ele = e.target;
 
   if (ele.dataset.page) {
@@ -20,7 +22,15 @@ pg.addEventListener('click', e => {
 
     valuePage.curPage = pageNumber;
     pagination(valuePage);
-    console.log(valuePage);
+    resetMarkup();
+    if (pageValue.word.length) {
+      const totalHits = await getQueryArticles(
+        valuePage.curPage,
+        pageValue.word
+      );
+      valuePage.totalPages = Math.round(totalHits / 10); // appromimate data, need correction!!!!
+    }
+    console.log('🚀 ~ file: index.js:29 ~ valuePage:', valuePage);
     handleButtonLeft();
     handleButtonRight();
   }
