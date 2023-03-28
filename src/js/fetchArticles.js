@@ -22,17 +22,22 @@ export const fetchPopularArticles = async pageNumber => {
   }
 };
 
-export const fetchQueryArticles = async (PAGE_VALUE, searchTerm) => {
+export const fetchQueryArticles = async (PAGE_VALUE, searchTerm, date) => {
+  const params = {
+    'api-key': API_KEY,
+    q: searchTerm,
+    page: PAGE_VALUE,
+    sort: 'relevance',
+  };
+  if (date) {
+    params.begin_date = date;
+    params.end_date = date;
+  }
   try {
     const response = await axios.get(
       `${BASE_URL}/search/v2/articlesearch.json`,
       {
-        params: {
-          'api-key': API_KEY,
-          page: PAGE_VALUE,
-          q: searchTerm,
-          sort: 'relevance',
-        },
+        params,
       }
     );
     return response;
