@@ -26,7 +26,7 @@ export class PagePagination {
 }
 
 const paginationRef = document.querySelector('.pagination');
-function createPagination() {
+export function createPagination() {
   paginationRef.innerHTML = ` <ul class="page-container">
   <button class="prev-page" disabled>
     <svg class="prev-icon">
@@ -52,12 +52,12 @@ const btnPrevPg = document.querySelector('button.prev-page');
 export const valuePage = {
   curPage: 1,
   numLinksTwoSide: 1,
-  totalPages: 20,
+  totalPages: 10,
 };
 
 setTimeout(() => {
   pagination();
-}, 0);
+}, 3000);
 
 pg.addEventListener('click', async e => {
   const ele = e.target;
@@ -89,6 +89,10 @@ pg.addEventListener('click', async e => {
 
 // DYNAMIC PAGINATION
 function pagination() {
+  console.log(
+    '🚀 ~ file: pagination.js:93 ~ pagination ~ valuePage:',
+    valuePage
+  );
   const { totalPages, curPage, numLinksTwoSide: delta } = valuePage;
 
   const range = delta + 4; // use for handle visible number of links left side

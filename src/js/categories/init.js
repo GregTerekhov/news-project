@@ -14,7 +14,7 @@ import {
 const MIN_LARGE_SCREEN_WIDTH = 1280;
 const MIN_MEDIUM_SCREEN_WIDTH = 768;
 
-const nytimesAPI = new NytimesAPI();
+export const nytimesAPI = new NytimesAPI();
 // limit зберігає кількість новин в залежності від ширини екрану
 export let limit = 0;
 let categoriesButtonQty = 0;
@@ -23,6 +23,7 @@ init();
 
 async function init() {
   processScreenSize();
+  nytimesAPI.limit = limit;
   const categoriesList = await nytimesAPI.categoriesList();
   // const word = 'trump';
   // const pageNumber = 1;

@@ -3,6 +3,8 @@ import { getNoFound } from './markup';
 import { PagePagination } from './pagination';
 import { TemplateCards } from './markup';
 import { WeatherBlock } from './fetch_weather';
+import { nytimesAPI } from './categories/init';
+
 import Notiflix from 'notiflix';
 
 export const formEl = document.querySelector('.search-form');
@@ -58,7 +60,7 @@ export async function getPopularArticles(page) {
 export async function getQueryArticles(page, searchArticle) {
   try {
     const response = await fetchQueryArticles(page, searchArticle);
-    templateCards.checkTheData(response);
+    templateCards.checkTheData(response, page);
 
     const target = response.data.response.docs;
     const totalHits = response.data?.response?.meta?.hits;

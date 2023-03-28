@@ -1,5 +1,6 @@
 import { bodyArticles } from './homepage-render';
 import { IMAGE_URL } from './fetchArticles';
+import { nytimesAPI } from './categories/init';
 import * as url from '../images/card_placeholder.jpg';
 import {} from './categories/init';
 import { switchCategoriesBattonsState } from './categories/init';
@@ -61,7 +62,7 @@ export class TemplateCards {
     this.value, this.container, this.newsNumber;
   }
 
-  checkTheData(response) {
+  checkTheData(response, page) {
     if (response.data.hasOwnProperty('results')) {
       this.newsNumber = response.data.num_results;
       this.value = response.data.results;
@@ -70,7 +71,7 @@ export class TemplateCards {
     } else {
       this.newsNumber = response.data.response.meta.offset;
       this.value = response.data.response.docs;
-      this.container = this.takeQueryValue();
+      this.container = this.takeQueryValue(page);
     }
   }
 
@@ -115,7 +116,7 @@ export class TemplateCards {
     return gatheringUnit;
   }
 
-  takeQueryValue() {
+  takeQueryValue(page = 1) {
     let gatheringUnit = this.value.map(
       ({ section_name, pub_date, web_url, headline, abstract, multimedia }) => {
         let unitCycle = {
@@ -132,7 +133,22 @@ export class TemplateCards {
     if (gatheringUnit.length > 0) {
       switchCategoriesBattonsState();
     }
-    return gatheringUnit;
+    console.log(
+      '🚀 ~ file: markup.js:138 ~ TemplateCards ~ takeQueryValue ~ nytimesAPI.limit:',
+      nytimesAPI.limit
+    );
+    console.log(
+      '🚀 ~ file: markup.js:120 ~ TemplateCards ~ takeQueryValue ~ page:',
+      page
+    );
+    const finalLength = page === 1 ? nytimesAPI.limit - 1 : nytimesAPI.limit;
+    console.log(
+      '🚀 ~ file: markup.js:145 ~ TemplateCards ~ takeQueryValue ~ finalLength:',
+      finalLength
+    );
+
+    const result = gatheringUnit.slice(0, finalLength);
+    return result;
   }
 
   buildTemplate() {

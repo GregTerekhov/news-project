@@ -18,6 +18,7 @@ class NytimesAPI {
     this._word = null;
     this._popular = null;
     this._num_results = 0;
+    this.limit = 0;
   }
 
   // функція для використання Пагінації, повертає масив даних для подальшої заливки новин

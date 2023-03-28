@@ -83,6 +83,7 @@ export const fetchQuery = async ({
   pageNumber,
   begin_date,
   end_date,
+  limit,
 }) => {
   const params = {
     'api-key': API_KEY,
@@ -90,6 +91,7 @@ export const fetchQuery = async ({
     page: pageNumber - 1,
     sort: 'relevance',
   };
+  if (!limit) params.limit = 8;
   if (begin_date && end_date) {
     params.begin_date = begin_date;
     params.end_date = end_date;
