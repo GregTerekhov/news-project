@@ -4,12 +4,8 @@ import { elements } from './elements';
 import { articlesMarkup } from './markupCat';
 import { buttonsMarkup, dropdownMarkup } from './markupCat';
 
-import {
-  templateCards,
-  resetMarkup,
-  pageValue,
-  weatherViget,
-} from '../homepage-render';
+import { resetMarkup, pageValue, weatherViget } from '../homepage-render';
+import { templateCards } from '../markup';
 
 const MIN_LARGE_SCREEN_WIDTH = 1280;
 const MIN_MEDIUM_SCREEN_WIDTH = 768;

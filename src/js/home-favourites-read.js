@@ -1,5 +1,6 @@
+import { onGetLocaleStorageData } from './refs';
 //================================ Логика страницы Index, действие с Прочитанными =====================================================
-const newsGallery = document.querySelector('.js-articles');
+const newsGallery = document.querySelector('.articles');
 const READ_KEY = 'HAVE_READ'; // ключ для массива прочитанных новостей в Локальном Хранилище
 const READ_URL_KEY = 'READ_URL'; // ключ для массива URL прочитанных новостей в Локальном Хранилище
 
@@ -8,7 +9,7 @@ newsGallery.addEventListener('click', onReadMoreClick);
 //============== Функция обработчик по клику на ссылку ReadMore ==============================================
 function onReadMoreClick(event) {
   //   event.preventDefault();
-  if (!event.target.classList.contains('markup-unit__read-more')) return; // проверяем туда ли тырнули
+  if (!event.target.classList.contains('markup-unit__global-link')) return; // проверяем туда ли тырнули
 
   const clickDate = receiveDate(); // получаем дату клика в виде 20/02/2023
   const parsedCardData = makeParseJson(event.target.dataset.favorite); // получаем объект данных с карточки которая находится на странице
@@ -96,13 +97,13 @@ function onAddRemoveLocaleStorageData(event) {
 }
 
 //========== Функция для Получения Данных из Locale Storage =======================================
-function onGetLocaleStorageData(key) {
-  try {
-    return JSON.parse(localStorage.getItem(key)); // получаем массив объектов из Локального Хранилища
-  } catch (error) {
-    console.log(error);
-  }
-}
+// function onGetLocaleStorageData(key) {
+//   try {
+//     return JSON.parse(localStorage.getItem(key)); // получаем массив объектов из Локального Хранилища
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
 
 //========== Функция парсинга данных из JSON файла =================================================
 function makeParseJson(stringData) {

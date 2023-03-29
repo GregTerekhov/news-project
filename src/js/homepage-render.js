@@ -1,17 +1,17 @@
 import { fetchPopularArticles, fetchQueryArticles } from './fetchArticles';
 import { getNoFound } from './markup';
 import { PagePagination, onPagination } from './pagination';
-import { TemplateCards } from './markup';
+import { templateCards } from './markup';
 import { WeatherBlock } from './fetch_weather';
 import Notiflix, { Notify } from 'notiflix';
 import { elements } from './categories/elements';
 
+
 export const formEl = document.querySelector('.search-form');
 const bodyContainerEl = document.querySelector('.js-body-container');
-export const bodyArticles = bodyContainerEl.children.articles;
-
+//export const bodyArticles = bodyContainerEl.children.articles;
 export const pageValue = new PagePagination();
-export const templateCards = new TemplateCards();
+
 export const weatherViget = new WeatherBlock();
 
 getPopularArticles(); //Запрос популярных новостей
@@ -87,7 +87,7 @@ async function getQueryArticles(page, searchArticle, date) {
     const target = response.data.response.docs;
 
     if (target.length === 0) {
-      getNoFound(); //Рендер заглушки при ненайденом запросе
+      getNoFound(bodyContainerEl.children.articles); //Рендер заглушки при ненайденом запросе
       Notiflix.Notify.failure(
         `Sorry, there are no articles matching your search query. Please try again.`
       );
@@ -97,7 +97,7 @@ async function getQueryArticles(page, searchArticle, date) {
       `Hooray! We found ${response.data.response.meta.offset} articles.`
     );
     if (target.length === 0) {
-      getNoFound(); //Рендер заглушки при ненайденом запросе
+      getNoFound(bodyContainerEl.children.articles); //Рендер заглушки при ненайденом запросе
       Notiflix.Notify.failure(
         `Sorry, there are no articles matching your search query. Please try again.`
       );
@@ -116,7 +116,7 @@ async function getQueryArticles(page, searchArticle, date) {
 
 //Сброс результата предыдущего запроса
 export function resetMarkup() {
-  bodyArticles.innerHTML = '';
+  bodyContainerEl.children.articles.innerHTML = '';
 }
 
 // =================================================== //

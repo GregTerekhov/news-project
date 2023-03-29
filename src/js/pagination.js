@@ -21,11 +21,10 @@ export class PagePagination {
 }
 import {
   pageValue,
-  templateCards,
-  bodyArticles,
   weatherViget,
 } from './homepage-render';
-
+import {templateCards} from './markup'
+const bodyContainerEl = document.querySelector('.js-body-container');
 // import { createPopularMarkup } from './markup.js';
 import { getPopularArticles, resetMarkup } from './homepage-render';
 import { fetchPopularArticles } from './fetchArticles';

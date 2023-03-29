@@ -1,13 +1,22 @@
-import './js/home-favourites-read';
-
+import {
+  onSwitcherClick,
+  onStart,
+  enableAnimation,
+  refs,
+  onInputSubmit,
+} from './js/themeSwitcher';
+import { onGetLocaleStorageData } from './js/refs';
+export const formEl = document.querySelector('.toggle-mode');
+formEl.addEventListener('submit', onInputSubmit);
 const READ_KEY = 'HAVE_READ'; // ключ для массива прочитанных новостей в Локальном Хранилище
 const READ_URL_KEY = 'READ_URL'; // ключ для массива URL прочитанных новостей в Локальном Хранилище
 const FAVORITES_KEY = 'FAVORITES'; // ключ для массива новостей Фавориты в Локальном Хранилище
+const urlFromLocaleStorage = onGetLocaleStorageData(READ_URL_KEY);
 
 const favouriteGallery = document.querySelector('.js-articles-favourites');
 
 favouriteGallery.addEventListener('click', onRemoveFromFavorites); // вешаем слушатель событий на галерею новостей
-
+console.log('urlFromLocaleStorage', urlFromLocaleStorage);
 onOpenFavorites(FAVORITES_KEY); // запуск функции для рендера страницы
 
 //=============== Функция при открытии страныцы "Фавориты" ==================================
@@ -82,11 +91,15 @@ function onCreateMurkup(arrayOfObjects) {
 
       return `<li class="markup-unit markup-unit__read" name="card">
     <p class="markup-unit__section">${category}</p>
-    <p class="markup-unit__already-read" style='${check}'>Already read
+   ${
+     urlFromLocaleStorage?.find(readLink => readLink === link)
+       ? ` <p class="markup-unit__already-read" style='${check}'>Already read
     <svg class="markup-unit__icon-check" width="18" height="18" viewBox="0 0 37 32">
       <path stroke="#00DD73" stroke-linejoin="miter" stroke-linecap="square" stroke-miterlimit="4" stroke-width="2.2857" d="M28.779 6.389c-0.288 0.009-0.546 0.131-0.732 0.323l-16.313 16.313-6.713-6.713c-0.195-0.209-0.473-0.339-0.78-0.339-0.589 0-1.067 0.478-1.067 1.067 0 0.308 0.13 0.585 0.339 0.78l0.001 0.001 7.467 7.467c0.193 0.193 0.459 0.312 0.754 0.312s0.561-0.119 0.754-0.312v0l17.067-17.067c0.199-0.194 0.323-0.465 0.323-0.765 0-0.589-0.478-1.067-1.067-1.067-0.011 0-0.022 0-0.033 0l0.002-0z"></path>
     </svg>
-    </p>
+    </p>`
+       : ''
+   }
     <img 
         class="markup-unit__card-image" 
         src="${imageURL}" 
@@ -126,9 +139,10 @@ function onCreateMurkup(arrayOfObjects) {
     <div class="markup-unit__card-footer">
         <p class="markup-unit__card-date">${date}</p>
       <a 
-        class="markup-unit__read-more" 
+        class="markup-unit__global-link" 
         href="${link}" 
         name="read_more"
+        target="_blank"
         data-favorite='${favorite}'
       >
           Read more
@@ -157,7 +171,7 @@ function onReadMoreClick(event) {
 
   const clickDate = receiveDate(); // получаем дату клика в виде 20/02/2023
   const parsedCardData = makeParseJson(event.target.dataset.favorite); // получаем объект данных с карточки которая находится на странице
-  const urlFromLocaleStorage = onGetLocaleStorageData(READ_URL_KEY); // получаем из локального хранилища массив URL прочитанных новстей
+  // получаем из локального хранилища массив URL прочитанных новстей
   const dataFromLocaleStorage = onGetLocaleStorageData(READ_KEY); // получаем массив объектов прочитанных новостей из Локального Хранилища
 
   //------ Логика для массива ссылок прочитаных новостей
@@ -262,13 +276,13 @@ function addHaveReadNews(newsArr, cardObj, date, key) {
 //-----------------------------------------------------------------------------------------------------------------------------------
 
 //==================== Сервис Функции ===========================================
-function onGetLocaleStorageData(key) {
-  try {
-    return JSON.parse(localStorage.getItem(key)); // получаем массив объектов из Локального Хранилища
-  } catch (error) {
-    console.log(error);
-  }
-}
+// export function onGetLocaleStorageData(key) {
+//   try {
+//     return JSON.parse(localStorage.getItem(key)); // получаем массив объектов из Локального Хранилища
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
 
 function makeParseJson(stringData) {
   try {

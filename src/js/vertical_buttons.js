@@ -1,6 +1,7 @@
-import { bodyArticles } from './homepage-render';
+
 
 const mark = document.querySelector(`.lift-buttons`);
+const bodyContainerEl = document.querySelector('.js-body-container');
 
 mark.addEventListener('click', onUnClick);
 document.addEventListener('scroll', onUnScrooll);
@@ -40,7 +41,9 @@ function onUnClick(e) {
     return;
   }
 
-  const { top: upButtonEl } = bodyArticles.getBoundingClientRect();
+  const {
+    top: upButtonEl,
+  } = bodyContainerEl.children.articles.getBoundingClientRect();
 
   if (e.target.classList.contains('up-button')) {
     ladyBug = window.scrollY;

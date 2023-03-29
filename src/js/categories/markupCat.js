@@ -40,7 +40,7 @@ export function articlesMarkup(articles) {
           <div class="articles__row">
             <p class="articles__date">${date.split(' ')[0]}</p>
   
-            <a href="${url}" class="articles__link">Read more</a>
+            <a href="${url}" target="_blank" class="markup-unit__read-more">Read more</a>
           </div>
         </div>
       </li>

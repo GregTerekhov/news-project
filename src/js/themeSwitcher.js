@@ -52,3 +52,11 @@ export function onSwitcherClick() {
   }
   makeLightMode();
 }
+export function onInputSubmit(e) {
+  try {
+    e.preventDefault();
+
+  } catch (error) {
+    console.log(error);
+  }
+}
