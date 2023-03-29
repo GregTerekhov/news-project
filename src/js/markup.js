@@ -3,6 +3,7 @@ import { IMAGE_URL } from './fetchArticles';
 import * as url from '../images/card_placeholder.jpg';
 import {} from './categories/init';
 import { switchCategoriesBattonsState } from './categories/init';
+import { isInStorage } from './fav-bacup/storage';
 
 export function getNoFound() {
   const noFound = `<div class="no-found">
@@ -148,10 +149,17 @@ export class TemplateCards {
             title: textRestriction.clipTheHeader(unload),
             description: textRestriction.clipTheText(unload),
           };
-
+          let buttonText, classCard;
           const favorite = JSON.stringify(toJson);
+          if (isInStorage(favorite)) {
+            buttonText = 'Remove from Favorites';
+            classCard = 'favorites';
+          } else {
+            buttonText = 'Add to Favorite';
+            classCard = '';
+          }
 
-          return `<li class="markup-unit markup-unit__read" name="card">
+          return `<li class="markup-unit markup-unit__read ${classCard}" name="card">
     <p class="markup-unit__section">${unload.tag}</p>
     <p class="markup-unit__already-read">Already read
     <svg class="markup-unit__icon-check" width="18" height="18" viewBox="0 0 37 32">
@@ -178,7 +186,7 @@ export class TemplateCards {
         data-favorite='${favorite}'
         style="pointer-events: none;"
       >
-          Add to favorite
+          ${buttonText}
       </p>
       <svg 
           data-favorite='${favorite}'  

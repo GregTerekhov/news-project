@@ -113,7 +113,7 @@
 .markup-unit__add-favorite {
   position: absolute;
   top: 355px;
-  left: 154px;
+  right: 12px;
   z-index: 4;
   display: flex;
   align-items: center;
@@ -122,17 +122,20 @@
   border-radius: 15px;
   border-style: none;
   cursor: pointer;
-
+  white-space: nowrap;
   @include respondTo('medium') {
-    left: 215px;
+    // left: 215px;
   }
   @include respondTo('large') {
-    left: 257px;
+    // left: 257px;
   }
 }
 
 .markup-unit__favorite-icon {
   fill: none;
+  .favorites & {
+    fill: #4b48da;
+  }
 }
 
 // .markup-unit__favorite-icon.markup-unit__favorite-icon--active {
