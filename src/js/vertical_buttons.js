@@ -35,7 +35,6 @@ function onUnScrooll() {
 let ladyBug = 0;
 
 function onUnClick(e) {
-  console.log(e.target.nodeName);
 
   if (e.target.nodeName === 'DIV') {
     return;

@@ -1,7 +1,6 @@
 // Martyniuk Oleh
 
-
-// const wheaterRef = document.querySelector('.weather');
+import { refs } from './refs';
 const bodyContainerEl = document.querySelector('.js-body-container');
 
 // форматуємо дату під формат з макету
@@ -29,7 +28,6 @@ export class WeatherBlock {
   async locationSuccess(position) {
     let latitude = position.coords.latitude;
     let longitude = position.coords.longitude;
- 
     const URL = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=50fae40a64fcd40464e14d0d20ee5d02`;
 
     const getWeather = await fetch(URL);
@@ -84,14 +82,26 @@ export class WeatherBlock {
 }
 
 function waffle(cash) {
-  if (!bodyContainerEl.children.articles.firstChild || !bodyContainerEl.children.articles.firstChild.nextSibling) {
+  if (
+    !refs.bodyContainerEl.children.articles.firstChild ||
+    !refs.bodyContainerEl.children.articles.firstChild.nextSibling
+  ) {
     return;
   }
   if (window.matchMedia(`(min-width: 1280px)`).matches) {
-    bodyContainerEl.children.articles.firstChild.nextSibling.insertAdjacentHTML('afterend', cash);
+    refs.bodyContainerEl.children.articles.firstChild.nextSibling.insertAdjacentHTML(
+      'afterend',
+      cash
+    );
   } else if (window.matchMedia(`(min-width: 768px)`).matches) {
-    bodyContainerEl.children.articles.firstChild.insertAdjacentHTML('afterend', cash);
+    refs.bodyContainerEl.children.articles.firstChild.insertAdjacentHTML(
+      'afterend',
+      cash
+    );
   } else {
-    bodyContainerEl.children.articles.firstChild.insertAdjacentHTML('beforebegin', cash);
+    refs.bodyContainerEl.children.articles.firstChild.insertAdjacentHTML(
+      'beforebegin',
+      cash
+    );
   }
 }

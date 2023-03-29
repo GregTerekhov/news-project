@@ -1,3 +1,5 @@
+import { refs } from './refs';
+
 let darkMode = localStorage.getItem('darkMode');
 
 export const refs = {
@@ -13,35 +15,42 @@ onStart();
 
 export function onStart() {
   if (darkMode) {
-    refs.switcher.checked = true;
+    for (let i = 0; i < refs.switcher.length; i += 1) {
+      refs.switcher[i].checked = true;
+    }
     refs.footer.classList.add('darkmode-footer');
-    console.log('onstart');
   }
 }
 
-refs.switcher.addEventListener('click', onSwitcherClick);
-refs.switcher.addEventListener('click', enableAnimation, { once: true });
+for (let i = 0; i < refs.switcher.length; i += 1) {
+  refs.switcher[i].addEventListener('click', onSwitcherClick);
+  refs.switcher[i].addEventListener('click', enableAnimation, { once: true });
+}
 
 function makeDarkMode() {
+  if (refs.switcher[0].checked !== true) {
+    refs.switcher[0].checked = true;
+  } else if (refs.switcher[1].checked !== true) {
+    refs.switcher[1].checked = true;
+  }
   refs.body.classList.add('darkmode');
   refs.footer.classList.add('darkmode-footer');
   localStorage.setItem('darkMode', true);
-  // console.log('makedarkmode')
-  // refs.darkText.classList.add('switch-is-active');
 }
 
 export function enableAnimation() {
-  //   refs.switchSlider.style.transition = '0.4s';
   refs.body.style.transition = '1s';
-  console.log('animation');
 }
 
 function makeLightMode() {
+  if (refs.switcher[0].checked !== false) {
+    refs.switcher[0].checked = false;
+  } else if (refs.switcher[1].checked !== false) {
+    refs.switcher[1].checked = false;
+  }
   refs.body.classList.remove('darkmode');
   refs.footer.classList.remove('darkmode-footer');
   localStorage.removeItem('darkMode');
-  // console.log('makelightmode')
-  // refs.lightText.classList.add('switch-is-active');
 }
 
 export function onSwitcherClick() {

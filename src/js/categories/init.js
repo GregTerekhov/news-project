@@ -1,5 +1,5 @@
 import { NytimesAPI } from '../nytimesAPI';
-import { elements } from './elements';
+import { refs } from '../refs';
 // import { fetchQuery } from '../fetchArticles';
 import { articlesMarkup } from './markupCat';
 import { buttonsMarkup, dropdownMarkup } from './markupCat';
@@ -15,8 +15,6 @@ const nytimesAPI = new NytimesAPI();
 export let limit = 0;
 let categoriesButtonQty = 0;
 
-init();
-
 async function init() {
   processScreenSize();
   const categoriesList = await nytimesAPI.categoriesList();
@@ -27,7 +25,7 @@ async function init() {
   // fetchQuery({ word, pageNumber, begin_date, end_date });
   makeCategoryButtonsAndDropdown(categoriesList);
 }
-
+refs.bodyContainerEl && init();
 async function makeCatagoryRequestAndMarkup(category) {
   const pageNumber = 1;
   const newsCatagory = await nytimesAPI.fetchNewsListFromCategorie({
@@ -35,20 +33,22 @@ async function makeCatagoryRequestAndMarkup(category) {
     pageNumber,
     limit,
   });
-  elements.articles.innerHTML = articlesMarkup(newsCatagory);
+  refs.articles.innerHTML = articlesMarkup(newsCatagory);
 }
 
 export function makeCategoryButtonsAndDropdown(categories) {
-  elements.categories.insertAdjacentHTML(
-    'beforeend',
-    buttonsMarkup(categories.slice(0, categoriesButtonQty))
-  );
-  elements.categories.insertAdjacentHTML(
-    'beforeend',
-    dropdownMarkup(categories.slice(categoriesButtonQty))
-  );
-  initDropdown();
-  elements.categories.addEventListener('click', onCategoriesClick);
+  if (refs.categories) {
+    refs.categories.insertAdjacentHTML(
+      'beforeend',
+      buttonsMarkup(categories.slice(0, categoriesButtonQty))
+    );
+    refs.categories.insertAdjacentHTML(
+      'beforeend',
+      dropdownMarkup(categories.slice(categoriesButtonQty))
+    );
+    initDropdown();
+    refs.categories.addEventListener('click', onCategoriesClick);
+  }
 }
 
 async function onCategoriesClick(e) {
@@ -130,7 +130,6 @@ async function getPopularArticlesBeta(category, date) {
 }
 
 export function switchCategoriesBattonsState(state) {
-  console.log('switchCategoriesBattonsState');
   const buttonsEl = document.querySelectorAll('.categories__button');
 
   buttonsEl.forEach(button => (button.disabled = true));
