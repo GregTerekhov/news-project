@@ -1,6 +1,5 @@
-import { refs } from './js/refs';
-import { getNoFound } from './js/markup';
-
+import { onGetLocaleStorageData } from './js/refs';
+import { getNoFound } from './js/refs';
 import {
   onSwitcherClick,
   onStart,
@@ -8,10 +7,8 @@ import {
   refs,
   onInputSubmit,
 } from './js/themeSwitcher';
-
 export const formEl = document.querySelector('.toggle-mode');
 formEl.addEventListener('submit', onInputSubmit);
-
 const READ_KEY = 'HAVE_READ'; // ключ для массива прочитанных новостей в Локальном Хранилище
 const READ_URL_KEY = 'READ_URL'; // ключ для массива URL прочитанных новостей в Локальном Хранилище
 const FAVORITES_KEY = 'FAVORITES';
@@ -40,7 +37,7 @@ function onFavoriteClick(event) {
 
     if (!dataFromLocaleStorage) {
       // проверка на null из пустого Локального Хранилища
-      console.log("News isn't in favorites");
+    
       return;
     }
 
@@ -76,7 +73,7 @@ function onFavoriteClick(event) {
 
     if (findPresenceResult) {
       // делаем условие новости на присутствие в Локальном Хранилище в избранном
-      console.log("It's allredy in Favorites");
+    
       return;
     }
 
@@ -96,7 +93,6 @@ function onOpenFavorites(key) {
 
   if (!dataFromLocaleStorage || dataFromLocaleStorage.length === 0) {
     // проверка на null или пустой массив
-    // alert('Добавьте страницу заглушку пожалуйста. Файл read.js, 78-строка');
     getNoFound(accordionRef);
     return;
   }
@@ -117,8 +113,14 @@ function onCreateReadMurkup(array) {
     accordionPanel.innerHTML = date.newsArray
       .map(newsObject => {
         // рендерим разметку непосредственно новостей (разметка второго внутреннего уровня)
-        const { title, category, date, link, description, imageURL } =
-          newsObject;
+        const {
+          title,
+          category,
+          date,
+          link,
+          description,
+          imageURL,
+        } = newsObject;
         const favorite = JSON.stringify(newsObject);
 
         //Логика проверки наличия новости в Фаворитах ------------------------------------------
@@ -204,13 +206,13 @@ function createFirstMurkup(obj) {
             </li>`;
 }
 
-function onGetLocaleStorageData(key) {
-  try {
-    return JSON.parse(localStorage.getItem(key)); // получаем массив объектов из Локального Хранилища
-  } catch (error) {
-    console.log(error);
-  }
-}
+// function onGetLocaleStorageData(key) {
+//   try {
+//     return JSON.parse(localStorage.getItem(key)); // получаем массив объектов из Локального Хранилища
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
 
 //========== Функция парсинга данных из JSON файла =================================================
 function makeParseJson(stringData) {

@@ -12,3 +12,18 @@ export const refs = {
   categories: document.querySelector('.categories'),
   date: document.querySelector('#input-picker'),
 };
+
+export function onGetLocaleStorageData(key) {
+  try {
+    return JSON.parse(localStorage.getItem(key)); // получаем массив объектов из Локального Хранилища
+  } catch (error) {
+    console.log(error);
+  }
+}
+export function getNoFound(element) {
+  const noFound = `<div class="no-found">
+  <h1 class="no-found__text">We haven't found news from this category</h1>
+  <div class="no-found__image"></div>
+  </div>`;
+  return (element.innerHTML = noFound);
+}

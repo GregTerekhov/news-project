@@ -5,7 +5,6 @@ import { articlesMarkup } from './markupCat';
 import { buttonsMarkup, dropdownMarkup } from './markupCat';
 
 import { resetMarkup, pageValue, weatherViget } from '../homepage-render';
-
 import { templateCards } from '../markup';
 
 const MIN_LARGE_SCREEN_WIDTH = 1280;
@@ -15,8 +14,6 @@ const nytimesAPI = new NytimesAPI();
 // limit зберігає кількість новин в залежності від ширини екрану
 export let limit = 0;
 let categoriesButtonQty = 0;
-
-init();
 
 async function init() {
   processScreenSize();
@@ -28,7 +25,7 @@ async function init() {
   // fetchQuery({ word, pageNumber, begin_date, end_date });
   makeCategoryButtonsAndDropdown(categoriesList);
 }
-
+refs.bodyContainerEl && init();
 async function makeCatagoryRequestAndMarkup(category) {
   const pageNumber = 1;
   const newsCatagory = await nytimesAPI.fetchNewsListFromCategorie({
@@ -40,16 +37,18 @@ async function makeCatagoryRequestAndMarkup(category) {
 }
 
 export function makeCategoryButtonsAndDropdown(categories) {
-  refs.categories.insertAdjacentHTML(
-    'beforeend',
-    buttonsMarkup(categories.slice(0, categoriesButtonQty))
-  );
-  refs.categories.insertAdjacentHTML(
-    'beforeend',
-    dropdownMarkup(categories.slice(categoriesButtonQty))
-  );
-  initDropdown();
-  refs.categories.addEventListener('click', onCategoriesClick);
+  if (refs.categories) {
+    refs.categories.insertAdjacentHTML(
+      'beforeend',
+      buttonsMarkup(categories.slice(0, categoriesButtonQty))
+    );
+    refs.categories.insertAdjacentHTML(
+      'beforeend',
+      dropdownMarkup(categories.slice(categoriesButtonQty))
+    );
+    initDropdown();
+    refs.categories.addEventListener('click', onCategoriesClick);
+  }
 }
 
 async function onCategoriesClick(e) {
@@ -131,7 +130,6 @@ async function getPopularArticlesBeta(category, date) {
 }
 
 export function switchCategoriesBattonsState(state) {
-  console.log('switchCategoriesBattonsState');
   const buttonsEl = document.querySelectorAll('.categories__button');
 
   buttonsEl.forEach(button => (button.disabled = true));

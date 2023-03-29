@@ -1,6 +1,7 @@
-import { bodyArticles } from './homepage-render';
+
 
 const mark = document.querySelector(`.lift-buttons`);
+const bodyContainerEl = document.querySelector('.js-body-container');
 
 mark.addEventListener('click', onUnClick);
 document.addEventListener('scroll', onUnScrooll);
@@ -34,13 +35,14 @@ function onUnScrooll() {
 let ladyBug = 0;
 
 function onUnClick(e) {
-  console.log(e.target.nodeName);
 
   if (e.target.nodeName === 'DIV') {
     return;
   }
 
-  const { top: upButtonEl } = bodyArticles.getBoundingClientRect();
+  const {
+    top: upButtonEl,
+  } = bodyContainerEl.children.articles.getBoundingClientRect();
 
   if (e.target.classList.contains('up-button')) {
     ladyBug = window.scrollY;

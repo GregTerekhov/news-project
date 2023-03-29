@@ -2,24 +2,16 @@ import { refs } from './refs';
 
 let darkMode = localStorage.getItem('darkMode');
 
-// export const refs = {
-//   switcher: document.querySelector('.toggle-mode__checkbox'),
-//   switchSlider: document.querySelector('.toggle-mode__slider'),
-//   body: document.querySelector('body'),
-//   footer: document.querySelector('.footer'),
-//   darkText: document.querySelector('.toggle-mode__dark'),
-//   lightText: document.querySelector('.toggle-mode__light'),
-// };
+export const refs = {
+  switcher: document.querySelector('.toggle-mode__checkbox'),
+  switchSlider: document.querySelector('.toggle-mode__slider'),
+  body: document.querySelector('body'),
+  footer: document.querySelector('.footer'),
+  darkText: document.querySelector('.toggle-mode__dark'),
+  lightText: document.querySelector('.toggle-mode__light'),
+};
 
 onStart();
-
-export function onInputSubmit(e) {
-  try {
-    e.preventDefault();
-  } catch (error) {
-    console.log(error);
-  }
-}
 
 export function onStart() {
   if (darkMode) {
@@ -68,4 +60,12 @@ export function onSwitcherClick() {
     return;
   }
   makeLightMode();
+}
+export function onInputSubmit(e) {
+  try {
+    e.preventDefault();
+
+  } catch (error) {
+    console.log(error);
+  }
 }

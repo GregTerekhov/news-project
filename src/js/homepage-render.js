@@ -1,39 +1,38 @@
 import { fetchPopularArticles, fetchQueryArticles } from './fetchArticles';
-import { getNoFound } from './markup';
 import { PagePagination, onPagination } from './pagination';
 import { templateCards } from './markup';
 import { WeatherBlock } from './fetch_weather';
 import Notiflix, { Notify } from 'notiflix';
-// import { elements } from './categories/elements';
-import { refs } from './refs';
+import { refs, getNoFound } from './refs';
 
 export const formEl = document.querySelector('.search-form');
-
+const bodyContainerEl = document.querySelector('.js-body-container');
+//export const bodyArticles = bodyContainerEl.children.articles;
 export const pageValue = new PagePagination();
 export const weatherViget = new WeatherBlock();
 
 getPopularArticles(); //Запрос популярных новостей
 
 //Логика действий при взаимодействии с Input
-// export function onInputSubmit(e) {
-//   try {
-//     e.preventDefault();
-//     const searchArticle = e.currentTarget.elements.querySearch.value; //Значение Input
-//     resetMarkup();
-//     pageValue.pageReset(); //Сброс значения текущей страницы до 1
-//     if (!searchArticle) {
-//       getPopularArticles();
-//       return;
-//     }
-//     getQueryArticles(
-//       pageValue.page,
-//       searchArticle,
-//       dateConvert(elements.date.value)
-//     ); //Не забыть поменять "1" на переменную номера страницы
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
+export function onInputSubmit(e) {
+  try {
+    e.preventDefault();
+    const searchArticle = e.currentTarget.elements.querySearch.value; //Значение Input
+    resetMarkup();
+    pageValue.pageReset(); //Сброс значения текущей страницы до 1
+    if (!searchArticle) {
+      getPopularArticles();
+      return;
+    }
+    getQueryArticles(
+      pageValue.page,
+      searchArticle,
+      dateConvert(elements.date.value)
+    ); //Не забыть поменять "1" на переменную номера страницы
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 function dateConvert(inputDate) {
   const dateRegex = /^(\d{2})\/(\d{2})\/(\d{4})$/; // regular expression for DD/MM/YYYY format
@@ -65,7 +64,7 @@ window.addEventListener('resize', () => {
 async function getPopularArticles() {
   try {
     const response = await fetchPopularArticles();
-    onPagination();
+    refs.bodyContainerEl && onPagination();
     templateCards.checkTheData(response);
     templateCards.buildTemplate(0, quantity); //Рендер карточки
     Notiflix.Notify.success(
@@ -101,7 +100,7 @@ async function getQueryArticles(page, searchArticle, date) {
       );
       return;
     }
-    onPagination();
+    refs.bodyContainerEl && onPagination();
     Notiflix.Notify.success(
       `Hooray! We found ${response.data.response.meta.offset} articles.`
     );

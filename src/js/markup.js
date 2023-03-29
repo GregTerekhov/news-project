@@ -1,20 +1,14 @@
+
+import { onGetLocaleStorageData } from './refs';
 import { IMAGE_URL } from './fetchArticles';
 import * as url from '../images/card_placeholder.jpg';
 import {} from './categories/init';
-import { switchCategoriesBattonsState } from './categories/init';
-import { onGetLocaleStorageData } from '../favourite';
+import { switchCategoriesBattonsState } from './categories/init';// ключ для массива URL прочитанных новостей в Локальном Хранилище
 import { refs } from './refs';
 
 const currentFavourite = onGetLocaleStorageData(refs.FAVORITES_KEY);
 const currentRead = onGetLocaleStorageData(refs.READ_URL_KEY);
 
-export function getNoFound(element) {
-  const noFound = `<div class="no-found">
-  <h1 class="no-found__text">We haven't found news from this category</h1>
-  <div class="no-found__image"></div>
-  </div>`;
-  return (element.innerHTML = noFound);
-}
 
 class ImageConvertor {
   convertPopularImage(img) {
@@ -159,7 +153,7 @@ export class TemplateCards {
     <p class="markup-unit__section">${unload.tag}</p>
     ${
       currentRead?.find(readNews => readNews === unload.path)
-        ? `<p class="markup-unit__already-read" style='${check}'>Already read
+        ? `<p class="markup-unit__already-read">Already read
     <svg class="markup-unit__icon-check" width="18" height="18" viewBox="0 0 37 32">
       <path stroke="#00DD73" stroke-linejoin="miter" stroke-linecap="square" stroke-miterlimit="4" stroke-width="2.2857" d="M28.779 6.389c-0.288 0.009-0.546 0.131-0.732 0.323l-16.313 16.313-6.713-6.713c-0.195-0.209-0.473-0.339-0.78-0.339-0.589 0-1.067 0.478-1.067 1.067 0 0.308 0.13 0.585 0.339 0.78l0.001 0.001 7.467 7.467c0.193 0.193 0.459 0.312 0.754 0.312s0.561-0.119 0.754-0.312v0l17.067-17.067c0.199-0.194 0.323-0.465 0.323-0.765 0-0.589-0.478-1.067-1.067-1.067-0.011 0-0.022 0-0.033 0l0.002-0z"></path>
     </svg>
@@ -219,15 +213,16 @@ export class TemplateCards {
         </p>
         <div class="markup-unit__card-footer">
           <p class="markup-unit__card-date">${unload.date}</p>
-          <p 
-            class="markup-unit__read-more" 
-          >
-            Read more
-          </p>
+           <a class="markup-unit__global-link"
+      href="${unload.path}" 
+      name="read_more"
+      target="_blank"
+      data-favorite='${favorite}'
+    >Read more</a>
         </div>
       </div>
     </div>
-  </a>
+
 </li>`;
         })
         .join('');
@@ -240,5 +235,4 @@ export class TemplateCards {
     }
   }
 }
-
 export const templateCards = new TemplateCards();

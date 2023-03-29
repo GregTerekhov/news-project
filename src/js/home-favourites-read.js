@@ -1,5 +1,4 @@
-// import { refs } from "./refs";
-
+import { onGetLocaleStorageData } from './refs';
 //================================ Логика страницы Index, действие с Прочитанными =====================================================
 const newsGallery = document.querySelector('.articles');
 const READ_KEY = 'HAVE_READ'; // ключ для массива прочитанных новостей в Локальном Хранилище
@@ -74,7 +73,7 @@ function onAddRemoveLocaleStorageData(event) {
   event.target.textContent = 'Remove from favorites'; // изменение текстового контента кнопки
 
   event.target.classList.add('js-favorites'); // добавляем класс-метку что карточка добавлена в избранное
-  console.log('add to fav', event.target);
+
   if (dataFromLocaleStorage) {
     // проверка на возврат null из пустого массива
     const findPresenceResult = dataFromLocaleStorage.some(
@@ -98,13 +97,13 @@ function onAddRemoveLocaleStorageData(event) {
 }
 
 //========== Функция для Получения Данных из Locale Storage =======================================
-function onGetLocaleStorageData(key) {
-  try {
-    return JSON.parse(localStorage.getItem(key)); // получаем массив объектов из Локального Хранилища
-  } catch (error) {
-    console.log(error);
-  }
-}
+// function onGetLocaleStorageData(key) {
+//   try {
+//     return JSON.parse(localStorage.getItem(key)); // получаем массив объектов из Локального Хранилища
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
 
 //========== Функция парсинга данных из JSON файла =================================================
 function makeParseJson(stringData) {

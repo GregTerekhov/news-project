@@ -19,12 +19,12 @@ export class PagePagination {
     this.page = number;
   }
 }
-import { pageValue, bodyArticles, weatherViget } from './homepage-render';
-
+import { pageValue, weatherViget } from './homepage-render';
 // import { createPopularMarkup } from './markup.js';
 import { getPopularArticles, resetMarkup } from './homepage-render';
 import { fetchPopularArticles } from './fetchArticles';
 import { templateCards } from './markup';
+import { refs } from './refs';
 
 // const pagePagination = new PagePagination();
 const valuePage = {
@@ -52,6 +52,7 @@ window.addEventListener('resize', () => {
 });
 export function onPagination() {
   const paginationRef = document.querySelector('.pagination');
+
   function createPagination() {
     paginationRef.innerHTML = ` <ul class="page-container">
   <button class="prev-page" disabled> <  Prev
@@ -61,7 +62,7 @@ export function onPagination() {
   </button>
 </ul>`;
   }
-  createPagination();
+  refs.bodyContainerEl && createPagination();
 
   const pg = document.getElementById('pagination');
   const btnNextPg = document.querySelector('button.next-page');
@@ -81,6 +82,7 @@ export function onPagination() {
     );
     valuePage.data = templateCards.value;
   }, 0);
+  
   function handleWindowSizeChange() {
     if (window.innerWidth < 768) {
       valuePage.numLinksTwoSide = 0;
@@ -94,7 +96,7 @@ export function onPagination() {
   window.addEventListener('resize', handleWindowSizeChange);
 
   setTimeout(() => {
-    pagination();
+    refs.bodyContainerEl && pagination();
   }, 500);
 
   pg.addEventListener('click', e => {

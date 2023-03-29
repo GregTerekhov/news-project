@@ -1,4 +1,5 @@
 // Martyniuk Oleh
+
 import { refs } from './refs';
 const bodyContainerEl = document.querySelector('.js-body-container');
 
@@ -27,7 +28,6 @@ export class WeatherBlock {
   async locationSuccess(position) {
     let latitude = position.coords.latitude;
     let longitude = position.coords.longitude;
-
     const URL = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=50fae40a64fcd40464e14d0d20ee5d02`;
 
     const getWeather = await fetch(URL);
