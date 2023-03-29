@@ -35,16 +35,16 @@
 
   &__icon-calendar {
     position: absolute;
-    fill: #4440f6;
+    fill: getColor('accent');
     margin-left: 12px;
 
-    transition: cubic-bezier(0.4, 0, 0.2, 1) 250ms;
+    transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   &__icon-calendar.switchedColor {
     z-index: 2;
-    fill: #ffffff;
-    transition: cubic-bezier(0.4, 0, 0.2, 1) 250ms;
+    fill: getColor('primary-reversed');
+    transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
 // Іконка стрілочки на інпуті
@@ -62,29 +62,26 @@
     fill 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 
   &.switched {
-    fill: #ffffff;
+    fill: getColor('primary-reversed');
     rotate: -180deg;
   }
 }
 
 .calendar-input {
   position: relative;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 13px;
 
-  width: 152px;
+  max-width: 152px;
+  width: 100%;
   height: 31px;
   padding: 5px 12px;
-  border: 1px solid #4440f6;
+  border: 1px solid getColor('accent');
   border-radius: 20px;
   font-size: 12px;
-  line-height: 21px;
+  line-height: 1.71;
 
   text-align: center;
 
-  color: #111321;
+  color: getColor('primary');
   background-color: transparent;
   cursor: pointer;
 

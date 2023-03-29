@@ -34,9 +34,9 @@
     &:disabled {
       opacity: 0.5;
       cursor: default;
-      border-color: gray;
-      background-color: gray;
-      color: white;
+      border-color: getColor('grey');
+      background-color: getColor('grey');
+      color: getColor('primary-reversed');
     }
   }
 }
@@ -47,7 +47,6 @@
 }
 
 .dropdown {
-  min-width: 112px;
   width: auto;
   height: 31px;
   white-space: nowrap;
@@ -95,7 +94,6 @@
     border-radius: 20px;
     font-size: 12px;
     height: 100%;
-    line-height: 16px;
     letter-spacing: 0.01em;
     transition: all 0.3s cubic-bezier(0.11, 0.7, 0, 1);
     @include respondTo('medium') {

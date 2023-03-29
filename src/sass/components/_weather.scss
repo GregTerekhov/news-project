@@ -3,54 +3,46 @@
   display: flex;
   justify-content: center;
   text-align: center;
-  background-color: #4440f6;
+  background-color: getColor('accent');
   width: 288px;
   height: 469px;
   border-radius: 10px;
-  // box-shadow: 5px 5px 5px rgb(21, 21, 21);
-}
-@media screen and (min-width: 768px) {
-  .weather {
+  box-shadow: 5px 6px 8px transparentize(getColor('primary'), 0.5);
+
+  @include respondTo('medium') {
     width: 353px;
     height: 675px;
   }
-}
-@media screen and (min-width: 1280px) {
-  .weather {
+
+  @include respondTo('large') {
     width: calc((100% - (32px * 2)) / 3);
-    height: 675px;
     padding-top: 40px;
   }
 }
 
 .day {
+  @extend %resetGap;
   display: flex;
   justify-content: center;
-  color: #fff;
+  color: getColor('primary-reversed');
   font-family: 'Roboto';
-  font-weight: 400;
   font-size: 30px;
 
   left: 67px;
   top: 319px;
   margin-bottom: -20px;
   margin-top: 10px;
-}
 
-@media screen and (min-width: 768px) {
-  .day {
+  @include respondTo('medium') {
     font-size: 36px;
-    line-height: 42px;
-    margin-top: 0px;
-    margin-bottom: 0px;
+    line-height: 1.166;
   }
 }
 
 .date {
-  color: #fff;
+  @extend %resetGap;
+  color: getColor('primary-reversed');
   font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 400;
   font-size: 30px;
   line-height: 2.5;
   width: 155px;
@@ -59,42 +51,36 @@
 }
 
 .temp {
-  color: #ffffff;
+  @extend %resetGap;
+  color: getColor('primary-reversed');
   width: 83px;
   height: 64px;
   left: -1px;
   top: 5px;
   font-family: 'Roboto';
-  font-weight: 400;
   font-size: 55px;
-  line-height: 64px;
-}
-@media screen and (min-width: 768px) {
-  .temp {
+  line-height: 1.166;
+
+  @include respondTo('medium') {
     margin-right: 8px;
   }
-}
-@media screen and (min-width: 1280px) {
-  .temp {
+
+  @include respondTo('large') {
     font-size: 64px;
-    line-height: 75px;
   }
 }
 
 .weather-img {
   @extend %resetGap;
-  display: inline-block;
   width: 170px;
   margin-top: 30px;
-}
-@media screen and (min-width: 768px) {
-  .weather-img {
+
+  @include respondTo('medium') {
     width: 250px;
     margin-top: 50px;
   }
-}
-@media screen and (min-width: 1280px) {
-  .weather-img {
+
+  @include respondTo('large') {
     margin-top: 89x;
   }
 }
@@ -105,29 +91,26 @@
 }
 
 .weather-city {
-  border-left: 1px solid #fff;
+  @extend %resetGap;
+  border-left: 1px solid getColor('primary-reversed');
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 400;
 }
 
 .main {
   font-family: 'Roboto';
-  font-weight: 400;
   font-size: 24px;
-  line-height: 1, 17;
-  color: #ffffff;
+  line-height: 1,166;
+  color: getColor('primary-reversed');
   display: flex;
   justify-content: flex-start;
   margin-left: 11px;
-}
-@media screen and (min-width: 768px) {
-  .main {
+
+  @include respondTo('medium') {
     font-size: 36px;
-    line-height: 42px;
+    line-height: 1.166;
   }
 }
 
@@ -135,22 +118,20 @@
   justify-content: center;
   font-family: 'Roboto';
   align-items: center;
-  font-weight: 400;
   font-size: 16px;
   line-height: 16px;
-  color: #ffffff;
+  color: getColor('primary-reversed');
   background-color: rgba(254, 254, 255, 0.3);
   height: 34px;
   width: 121px;
   border-radius: 10px;
   margin-left: 11px;
   padding-top: 4px;
-}
-@media screen and (min-width: 768px) {
-  .name-city {
+
+  @include respondTo('medium') {
     height: 34px;
     width: 135px;
-  }
+}
 }
 
 .svg {
@@ -188,13 +169,11 @@
   display: flex;
   justify-content: center;
   font-family: 'Roboto';
-  font-weight: 400;
   font-size: 25px;
-  color: #ffffff;
+  color: getColor('primary-reversed');
   align-items: center;
-}
-@media screen and (min-width: 768px) {
-  .wind {
+
+  @include respondTo('medium') {
     margin-top: 40px;
   }
 }
