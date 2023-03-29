@@ -75,7 +75,7 @@ async function onCategoriesClick(e) {
 
 function processScreenSize() {
   if (window.matchMedia(`(min-width: ${MIN_LARGE_SCREEN_WIDTH}px)`).matches) {
-    limit = 9;
+    limit = 8;
     categoriesButtonQty = 6;
   } else if (
     window.matchMedia(`(min-width: ${MIN_MEDIUM_SCREEN_WIDTH}px)`).matches
@@ -83,7 +83,7 @@ function processScreenSize() {
     limit = 8;
     categoriesButtonQty = 4;
   } else {
-    limit = 5;
+    limit = 4;
     categoriesButtonQty = 0;
   }
 }
@@ -126,7 +126,7 @@ async function getPopularArticlesBeta(category, date) {
     );
 
     templateCards.checkTheDataBeta(response);
-    templateCards.buildTemplate(); //Рендер карточки
+    templateCards.buildTemplate(0, limit); //Рендер карточки
     weatherViget.checkLocation();
   } catch (error) {
     console.log(error);
