@@ -189,7 +189,24 @@
     <!-- footer -->
     <footer class="footer">
       <div class="container">
-        <p class="footer-title">News</p>
+        <div class="footer-top-thumb">
+            <p class="footer-title">News</p>
+            <!-- Toggle mode -->
+          <div class="toggle-mode footer-toggle">
+            <svg class="toggle-mode__icon sun" width="21" height="21">
+              <use href="./images/sprite.svg#sun"></use>
+            </svg>
+            <p class="toggle-mode__light">Light</p>
+            <label class="toggle-mode__switch">
+              <input type="checkbox" class="toggle-mode__checkbox" />
+              <span class="toggle-mode__slider round"></span>
+            </label>
+            <p class="toggle-mode__dark opacity">Dark</p>
+            <svg class="toggle-mode__icon moon" width="21" height="21">
+              <use href="./images/sprite.svg#moon"></use>
+            </svg>
+          </div>
+        </div>
         <div class="footer-row-thumb">
           <div class="menu-thumb">
             <p class="footer-row-name">MENU</p>

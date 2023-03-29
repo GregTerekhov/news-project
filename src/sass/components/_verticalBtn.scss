@@ -1,0 +1,67 @@
+.lift-buttons {
+    position: fixed;
+    bottom: 30px;
+    left: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .up-button,
+  .middle-button,
+  .down-button {
+    @extend %resetGap;
+    cursor: pointer;
+    display: inline-flex;
+      align-items: center;
+      justify-content: center;
+  
+    width: 40px;
+      height: 40px;
+      padding: .25em;
+  
+    background-color: getColor('accent');
+      border-radius: 50%;
+    border: 0.5px solid transparent;
+    opacity: 0.8;
+  
+    transition: all .25s ease-in-out;
+  
+    .darkmode & {
+      background-color: getColor('background-primary');
+      border: 0.5px solid getColor('accent');
+    }
+  
+      &:hover {
+        box-shadow: rgba(80, 63, 205, 0.5) 0 1px 30px;
+        opacity: 1;
+        transform: translateY(-2px);
+      }
+  
+      &:active {
+        box-shadow: none;
+        transform: translateY(0);
+      }
+  }
+  
+  .svg-up,
+  .svg-back,
+  .svg-down {
+    fill: getColor('background-primary');
+  
+    .darkmode & {
+      fill: getColor('accent');
+    }
+  }
+  
+  .svg-down {
+    transform: rotate(180deg);
+  }
+  
+  .middle-button.rot-down {
+    transform: rotate(90deg);
+  }
+  
+  .middle-button.rot-up {
+    transform: rotate(270deg);
+  }
