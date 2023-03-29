@@ -28,6 +28,10 @@
   @include respondTo('medium') {
     margin-right: 32px;
   }
+
+  @include respondTo('large') {
+    margin-right: 0;
+  }
 }
 
 .header__search-container {
@@ -35,7 +39,11 @@
   align-items: center;
 
   @include respondTo('medium') {
-    margin-right: 24px;
+    margin-right: 32px;
+  }
+
+  @include respondTo('large') {
+    margin-right: 0;
   }
 }
 

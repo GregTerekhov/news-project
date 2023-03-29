@@ -23,10 +23,12 @@
   @include respondTo('medium') {
     border: 1px solid;
     border-radius: 20px;
+    width: 213px;
   }
 
   @include respondTo('large') {
     margin: 0 auto;
+    width: 288px;
   }
 
   & input {
