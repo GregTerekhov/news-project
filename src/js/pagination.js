@@ -19,16 +19,12 @@ export class PagePagination {
     this.page = number;
   }
 }
-import {
-  pageValue,
-  templateCards,
-  bodyArticles,
-  weatherViget,
-} from './homepage-render';
+import { pageValue, bodyArticles, weatherViget } from './homepage-render';
 
 // import { createPopularMarkup } from './markup.js';
 import { getPopularArticles, resetMarkup } from './homepage-render';
 import { fetchPopularArticles } from './fetchArticles';
+import { templateCards } from './markup';
 
 // const pagePagination = new PagePagination();
 const valuePage = {

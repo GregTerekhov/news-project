@@ -1,5 +1,7 @@
+// import { refs } from "./refs";
+
 //================================ Логика страницы Index, действие с Прочитанными =====================================================
-const newsGallery = document.querySelector('.js-articles');
+const newsGallery = document.querySelector('.articles');
 const READ_KEY = 'HAVE_READ'; // ключ для массива прочитанных новостей в Локальном Хранилище
 const READ_URL_KEY = 'READ_URL'; // ключ для массива URL прочитанных новостей в Локальном Хранилище
 
@@ -8,7 +10,7 @@ newsGallery.addEventListener('click', onReadMoreClick);
 //============== Функция обработчик по клику на ссылку ReadMore ==============================================
 function onReadMoreClick(event) {
   //   event.preventDefault();
-  if (!event.target.classList.contains('markup-unit__read-more')) return; // проверяем туда ли тырнули
+  if (!event.target.classList.contains('markup-unit__global-link')) return; // проверяем туда ли тырнули
 
   const clickDate = receiveDate(); // получаем дату клика в виде 20/02/2023
   const parsedCardData = makeParseJson(event.target.dataset.favorite); // получаем объект данных с карточки которая находится на странице
@@ -72,7 +74,7 @@ function onAddRemoveLocaleStorageData(event) {
   event.target.textContent = 'Remove from favorites'; // изменение текстового контента кнопки
 
   event.target.classList.add('js-favorites'); // добавляем класс-метку что карточка добавлена в избранное
-
+  console.log('add to fav', event.target);
   if (dataFromLocaleStorage) {
     // проверка на возврат null из пустого массива
     const findPresenceResult = dataFromLocaleStorage.some(
