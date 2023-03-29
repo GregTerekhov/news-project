@@ -40,16 +40,17 @@
               <a href="./index.html" class="menu__link">Home</a>
             </li>
             <li class="menu__item">
-              <a href="./favourite.html" class="menu__link menu__link"
-                >Favorite</a
-              >
+              <a href="./favourite.html" class="menu__link menu__link">
+                Favorite
+              </a>
             </li>
             <li class="menu__item">
               <a
                 href="./read.html"
                 class="menu__link menu__link menu__link--current"
-                >Read</a
               >
+                Read
+              </a>
             </li>
           </ul>
         </nav>
@@ -168,7 +169,13 @@
       <section class="read">
         <div class="container">
           <h1 class="visually-hidden">Read news</h1>
-          <div class="articles"></div>
+          <div class="articles js-haveread">
+            <div class="accordion" id="accordion">
+              <ul class="accordion-list">
+
+              </ul>
+            </div>
+          </div>
         </div>
       </section>
     </main>
@@ -228,6 +235,6 @@
         </p>
       </div>
     </footer>
-    <script type="module" src="./index.js"></script>
+    <script type="module" src="./read.js"></script>
   </body>
 </html>
