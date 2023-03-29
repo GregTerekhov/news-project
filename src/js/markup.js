@@ -1,14 +1,12 @@
-
 import { onGetLocaleStorageData } from './refs';
 import { IMAGE_URL } from './fetchArticles';
 import * as url from '../images/card_placeholder.jpg';
 import {} from './categories/init';
-import { switchCategoriesBattonsState } from './categories/init';// ключ для массива URL прочитанных новостей в Локальном Хранилище
+import { switchCategoriesBattonsState } from './categories/init'; // ключ для массива URL прочитанных новостей в Локальном Хранилище
 import { refs } from './refs';
 
 const currentFavourite = onGetLocaleStorageData(refs.FAVORITES_KEY);
 const currentRead = onGetLocaleStorageData(refs.READ_URL_KEY);
-
 
 class ImageConvertor {
   convertPopularImage(img) {
@@ -213,12 +211,8 @@ export class TemplateCards {
         </p>
         <div class="markup-unit__card-footer">
           <p class="markup-unit__card-date">${unload.date}</p>
-           <a class="markup-unit__global-link"
-      href="${unload.path}" 
-      name="read_more"
-      target="_blank"
-      data-favorite='${favorite}'
-    >Read more</a>
+           <p class="markup-unit__read-more"
+    >Read more</p>
         </div>
       </div>
     </div>
