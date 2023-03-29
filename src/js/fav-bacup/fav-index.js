@@ -1,19 +1,24 @@
-import { elements } from '../categories/elements';
-import { addToStorage, removeFromStorage } from './storage';
+import { addToStorage, removeFromStorage, addToStorageRead } from './storage';
 
-elements.articles.addEventListener('click', onArticlesClick);
+const articlesEl = document.querySelector('.articles');
+articlesEl.addEventListener('click', onArticlesClick);
 
 function onArticlesClick(e) {
+  // e.preventDefault();
+  const liElem = e.target.closest('li');
+  const aEl = e.target.closest('a');
   if (e.target.nodeName === 'BUTTON') {
-    const li = e.target.closest('li');
     if (e.target.innerText.includes('Remove from Favorites')) {
       removeFromStorage(e.target.dataset.favorite);
       e.target.querySelector('.js-fbutton').innerText = 'Add to Favorite';
-      li.classList.remove('favorites');
+      liElem.classList.remove('favorites');
     } else {
-      li.classList.add('favorites');
+      liElem.classList.add('favorites');
       e.target.querySelector('.js-fbutton').innerText = 'Remove from Favorites';
       addToStorage(e.target.dataset.favorite);
     }
+  } else if (aEl?.dataset?.favorite) {
+    e.preventDefault();
+    addToStorageRead(aEl.dataset.favorite);
   }
 }

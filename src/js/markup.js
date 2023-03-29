@@ -3,7 +3,7 @@ import { IMAGE_URL } from './fetchArticles';
 import * as url from '../images/card_placeholder.jpg';
 import {} from './categories/init';
 import { switchCategoriesBattonsState } from './categories/init';
-import { isInStorage } from './fav-bacup/storage';
+import { isInStorage, isInStorageRead } from './fav-bacup/storage';
 
 export function getNoFound() {
   const noFound = `<div class="no-found">
@@ -149,7 +149,7 @@ export class TemplateCards {
             title: textRestriction.clipTheHeader(unload),
             description: textRestriction.clipTheText(unload),
           };
-          let buttonText, classCard;
+          let buttonText, classCard, classCardRead;
           const favorite = JSON.stringify(toJson);
           if (isInStorage(favorite)) {
             buttonText = 'Remove from Favorites';
@@ -158,10 +158,15 @@ export class TemplateCards {
             buttonText = 'Add to Favorite';
             classCard = '';
           }
+          if (isInStorageRead(favorite)) {
+            classCardRead = 'Already read';
+          } else {
+            classCardRead = '';
+          }
 
           return `<li class="markup-unit markup-unit__read ${classCard}" name="card">
     <p class="markup-unit__section">${unload.tag}</p>
-    <p class="markup-unit__already-read">Already read
+    <p class="markup-unit__already-read">${classCardRead}
     <svg class="markup-unit__icon-check" width="18" height="18" viewBox="0 0 37 32">
       <path stroke="#00DD73" stroke-linejoin="miter" stroke-linecap="square" stroke-miterlimit="4" stroke-width="2.2857" d="M28.779 6.389c-0.288 0.009-0.546 0.131-0.732 0.323l-16.313 16.313-6.713-6.713c-0.195-0.209-0.473-0.339-0.78-0.339-0.589 0-1.067 0.478-1.067 1.067 0 0.308 0.13 0.585 0.339 0.78l0.001 0.001 7.467 7.467c0.193 0.193 0.459 0.312 0.754 0.312s0.561-0.119 0.754-0.312v0l17.067-17.067c0.199-0.194 0.323-0.465 0.323-0.765 0-0.589-0.478-1.067-1.067-1.067-0.011 0-0.022 0-0.033 0l0.002-0z"></path>
     </svg>
