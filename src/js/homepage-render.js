@@ -107,7 +107,7 @@ async function getQueryArticles(page, searchArticle, date) {
     Notiflix.Notify.success(
       `Hooray! We found ${response.data.response.meta.offset} articles.`
     );
-    templateCards.buildTemplate(); //Рендер карточки
+    templateCards.buildTemplate(0, quantity); //Рендер карточки
     weatherViget.checkLocation(); //Вставка блока с погодой
   } catch (error) {
     console.log(error);
