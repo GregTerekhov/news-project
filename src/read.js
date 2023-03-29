@@ -1,4 +1,16 @@
+import { refs } from './js/refs';
 import { getNoFound } from './js/markup';
+
+import {
+  onSwitcherClick,
+  onStart,
+  enableAnimation,
+  refs,
+  onInputSubmit,
+} from './js/themeSwitcher';
+
+export const formEl = document.querySelector('.toggle-mode');
+formEl.addEventListener('submit', onInputSubmit);
 
 const READ_KEY = 'HAVE_READ'; // ключ для массива прочитанных новостей в Локальном Хранилище
 const READ_URL_KEY = 'READ_URL'; // ключ для массива URL прочитанных новостей в Локальном Хранилище
@@ -84,8 +96,8 @@ function onOpenFavorites(key) {
 
   if (!dataFromLocaleStorage || dataFromLocaleStorage.length === 0) {
     // проверка на null или пустой массив
-    alert('Добавьте страницу заглушку пожалуйста. Файл read.js, 78-строка');
-    getNoFound();
+    // alert('Добавьте страницу заглушку пожалуйста. Файл read.js, 78-строка');
+    getNoFound(accordionRef);
     return;
   }
 

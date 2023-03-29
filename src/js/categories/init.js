@@ -1,15 +1,12 @@
 import { NytimesAPI } from '../nytimesAPI';
-import { elements } from './elements';
+import { refs } from '../refs';
 // import { fetchQuery } from '../fetchArticles';
 import { articlesMarkup } from './markupCat';
 import { buttonsMarkup, dropdownMarkup } from './markupCat';
 
-import {
-  templateCards,
-  resetMarkup,
-  pageValue,
-  weatherViget,
-} from '../homepage-render';
+import { resetMarkup, pageValue, weatherViget } from '../homepage-render';
+
+import { templateCards } from '../markup';
 
 const MIN_LARGE_SCREEN_WIDTH = 1280;
 const MIN_MEDIUM_SCREEN_WIDTH = 768;
@@ -39,20 +36,20 @@ async function makeCatagoryRequestAndMarkup(category) {
     pageNumber,
     limit,
   });
-  elements.articles.innerHTML = articlesMarkup(newsCatagory);
+  refs.articles.innerHTML = articlesMarkup(newsCatagory);
 }
 
 export function makeCategoryButtonsAndDropdown(categories) {
-  elements.categories.insertAdjacentHTML(
+  refs.categories.insertAdjacentHTML(
     'beforeend',
     buttonsMarkup(categories.slice(0, categoriesButtonQty))
   );
-  elements.categories.insertAdjacentHTML(
+  refs.categories.insertAdjacentHTML(
     'beforeend',
     dropdownMarkup(categories.slice(categoriesButtonQty))
   );
   initDropdown();
-  elements.categories.addEventListener('click', onCategoriesClick);
+  refs.categories.addEventListener('click', onCategoriesClick);
 }
 
 async function onCategoriesClick(e) {
