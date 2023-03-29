@@ -82,7 +82,7 @@ export function onPagination() {
     );
     valuePage.data = templateCards.value;
   }, 0);
-  
+
   function handleWindowSizeChange() {
     if (window.innerWidth < 768) {
       valuePage.numLinksTwoSide = 0;
@@ -227,7 +227,7 @@ export function onPagination() {
       valuePage.curPage === 1 &&
       !document.querySelector('.weather-information')
     ) {
-      weatherViget.checkLocation();
+      // weatherViget.checkLocation();
     } //Вставка блока с погодой}
     pagination();
   }

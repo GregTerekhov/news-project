@@ -24,7 +24,6 @@
   box-shadow: 8px 10px 20px transparentize(getColor('primary'), 0.5);
   transition: transform 250ms ease;
 
-
   @include respondTo('medium') {
     width: calc((100% - (30px * 1)) / 2);
   }
@@ -167,8 +166,9 @@
   margin-top: 20px;
   padding: 0 6px 6px 6px;
   height: 100%;
-  display: grid;
-  grid: auto-flow;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .markup-unit__subdetails {
@@ -290,6 +290,10 @@
     background-image: url(/src/images/background_image.png);
     margin-bottom: 226px;
   }
+}
+
+.heart-fav {
+  fill: getColor('accent');
 }
 
 // .lift-buttons {
