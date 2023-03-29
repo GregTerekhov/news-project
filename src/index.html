@@ -124,14 +124,16 @@
               href="./index.html"
               class="mobile-list__link mobile-list__link--current"
             >
-              <div class="icon-wrapper">
-                <svg
-                  class="mobile-list__icon mobile-list__icon--current navbar-mobile__icon"
-                  width="32"
-                  height="32"
-                >
-                  <use href="./images/sprite.svg#home"></use>
-                </svg>
+              <div class="icon-wrapper icon-wrapper--current">
+                <div class="icon-wrapper">
+                  <svg
+                    class="mobile-list__icon mobile-list__icon--current navbar-mobile__icon"
+                    width="18"
+                    height="18"
+                  >
+                    <use href="./images/sprite.svg#home"></use>
+                  </svg>
+                </div>
               </div>
               Home
               <svg width="24" height="12" class="current-page__icon">
@@ -142,9 +144,11 @@
           <li class="mobile-list__item">
             <a href="./favourite.html" class="mobile-list__link">
               <div class="icon-wrapper">
-                <svg class="mobile-list__icon" width="32" height="32">
-                  <use href="./images/sprite.svg#favourite"></use>
-                </svg>
+                <div class="icon-wrapper">
+                  <svg class="mobile-list__icon" width="18" height="18">
+                    <use href="./images/sprite.svg#favourite"></use>
+                  </svg>
+                </div>
               </div>
               Favorite
             </a>
@@ -152,9 +156,11 @@
           <li class="mobile-list__item">
             <a href="./read.html" class="mobile-list__link">
               <div class="icon-wrapper">
-                <svg class="mobile-list__icon" width="32" height="32">
-                  <use href="./images/sprite.svg#read"></use>
-                </svg>
+                <div class="icon-wrapper">
+                  <svg class="mobile-list__icon" width="18" height="18">
+                    <use href="./images/sprite.svg#read"></use>
+                  </svg>
+                </div>
               </div>
               Read
             </a>
@@ -174,8 +180,17 @@
             </div>
           </div>
           <!-- <div class="weather" name="weather"></div> -->
-          <ul class="articles articles-background js-articles" name="articles"></ul>
-          <!-- <div class="pagination" name="pagination"></div> -->
+          <ul class="articles articles-background" name="articles"></ul>
+          <div class="pagination" name="pagination"></div>
+        </div>
+        <div class="lift-buttons" name="lift-buttons">
+          <button class="up-button" type="button" name="go_up">Go UP</button>
+          <button class="middle-button" type="button" name="get_back">
+            Go back
+          </button>
+          <button class="down-button" type="button" name="go_down">
+            Go Down
+          </button>
         </div>
       </section>
     </main>

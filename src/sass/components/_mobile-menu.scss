@@ -35,6 +35,7 @@
 }
 
 .menu-close {
+  @extend %resetGap;
   margin-left: auto;
   border: none;
   background-color: transparent;
@@ -52,7 +53,7 @@
   width: 32px;
   height: 32px;
   background-color: getColor('accent');
-  border-radius: 50% 50%;
+  border-radius: 50%;
 
   &--current {
     border: 1px solid getColor('background-primary');
@@ -67,14 +68,23 @@
 }
 
 .mobile-list__link {
-  @extend %link;
+  position: relative;
   display: flex;
   align-items: center;
   gap: 14px;
+  @extend %link;
   font-weight: 500;
   font-size: 16px;
   line-height: calc(22 / 16);
-  position: relative;
+
+  &:hover {
+    height: 44px;
+    width: 100%;
+    background-color: getColor('accent');
+    box-shadow: 0 0 0 100vmax getColor('accent');
+    clip-path: inset(0 -100vmax);
+    color: getColor('background-primary');
+  }
 
   &--current {
     height: 44px;
@@ -95,5 +105,6 @@
 
 .mobile-list__icon {
   fill: none;
+  fill: getColor('accent');
   stroke: getColor('background-primary');
 }

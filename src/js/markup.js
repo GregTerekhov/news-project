@@ -6,10 +6,10 @@ import { switchCategoriesBattonsState } from './categories/init';
 
 export function getNoFound() {
   const noFound = `<div class="no-found">
-  <h1 class="no-found__text">We haven’t found news from this category</h1>
+  <h1 class="no-found__text">We haven't found news from this category</h1>
   <div class="no-found__image"></div>
   </div>`;
-  return bodyArticles.insertAdjacentHTML('beforeend', noFound);
+  return (bodyArticles.innerHTML = noFound);
 }
 
 class ImageConvertor {
@@ -44,7 +44,7 @@ class TextRestriction {
   }
 
   clipTheHeader(string) {
-    const size = Number(40);
+    const size = Number(50);
     let header = string.header;
     let headerCut = header;
     if (header.length > size) {
@@ -58,9 +58,7 @@ const textRestriction = new TextRestriction();
 
 export class TemplateCards {
   constructor() {
-    value: '';
-    container: '';
-    newsNumber: '';
+    this.value, this.container, this.newsNumber;
   }
 
   checkTheData(response) {
@@ -137,9 +135,10 @@ export class TemplateCards {
     return gatheringUnit;
   }
 
-  buildTemplate() {
+  buildTemplate(start, end) {
     try {
-      let valueReceiver = this.container
+      let valueReceiver = [...this.container]
+        .slice(start, end)
         .map(unload => {
           const toJson = {
             category: unload.tag,
@@ -159,11 +158,14 @@ export class TemplateCards {
       <path stroke="#00DD73" stroke-linejoin="miter" stroke-linecap="square" stroke-miterlimit="4" stroke-width="2.2857" d="M28.779 6.389c-0.288 0.009-0.546 0.131-0.732 0.323l-16.313 16.313-6.713-6.713c-0.195-0.209-0.473-0.339-0.78-0.339-0.589 0-1.067 0.478-1.067 1.067 0 0.308 0.13 0.585 0.339 0.78l0.001 0.001 7.467 7.467c0.193 0.193 0.459 0.312 0.754 0.312s0.561-0.119 0.754-0.312v0l17.067-17.067c0.199-0.194 0.323-0.465 0.323-0.765 0-0.589-0.478-1.067-1.067-1.067-0.011 0-0.022 0-0.033 0l0.002-0z"></path>
     </svg>
     </p>
-    <img 
-        class="markup-unit__card-image" 
-        src="${unload.image}" 
-        alt="placeholder"
-        />
+    <div class="markup-unit__image-wrapper"> 
+      <img 
+      class="markup-unit__card-image" 
+      src="${unload.image}" 
+      alt="placeholder"
+      />
+    </div>
+
     <button 
         class="markup-unit__add-favorite js-fbutton" 
         type="button" 
@@ -207,7 +209,8 @@ export class TemplateCards {
       </a>
     </div>
     </li>`;
-    }).join('');
+        })
+        .join('');
       return bodyArticles.insertAdjacentHTML('beforeend', valueReceiver);
     } catch (error) {
       console.log(error);
