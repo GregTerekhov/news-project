@@ -1,5 +1,3 @@
-
-
 const mark = document.querySelector(`.lift-buttons`);
 const bodyContainerEl = document.querySelector('.js-body-container');
 
@@ -20,6 +18,7 @@ function onUnScrooll() {
 
   if (silk !== 0 || silk > 100) {
     topButton.removeAttribute('disabled');
+    topButton.classList.remove('button-lock');
   } else {
     topButton.setAttribute('disabled', true);
   }
@@ -27,31 +26,32 @@ function onUnScrooll() {
   if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
     forest = window.scrollY;
     bottomButton.setAttribute('disabled', true);
+    bottomButton.classList.add('button-lock');
   } else if (forest !== currency) {
     bottomButton.removeAttribute('disabled');
+    bottomButton.classList.remove('button-lock');
   }
 }
 
 let ladyBug = 0;
 
 function onUnClick(e) {
-
   if (e.target.nodeName === 'DIV') {
     return;
   }
 
-  const {
-    top: upButtonEl,
-  } = bodyContainerEl.children.articles.getBoundingClientRect();
+  const { top: upButtonEl } =
+    bodyContainerEl.children.articles.getBoundingClientRect();
 
   if (e.target.classList.contains('up-button')) {
     ladyBug = window.scrollY;
     window.scrollBy({
       top: -(upButtonEl * upButtonEl),
-      behavior: `smooth`,
+      behavior: 'smooth',
     });
     backButton.removeAttribute('disabled');
-    backButton.classList.add(`rot-down`);
+    backButton.classList.add('rot-down');
+    backButton.classList.remove('button-lock');
   } else if (e.target.classList.contains('down-button')) {
     ladyBug = window.scrollY;
     window.scrollBy({
@@ -59,7 +59,8 @@ function onUnClick(e) {
       behavior: `smooth`,
     });
     backButton.removeAttribute('disabled');
-    backButton.classList.add(`rot-up`);
+    backButton.classList.add('rot-up');
+    backButton.classList.remove('button-lock');
   } else {
     rotate();
   }
@@ -67,6 +68,7 @@ function onUnClick(e) {
 
 function rotate() {
   backButton.setAttribute('disabled', true);
+  backButton.classList.add('button-lock');
 
   if (
     backButton.classList.contains(`rot-down`) ||

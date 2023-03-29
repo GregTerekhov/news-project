@@ -24,10 +24,9 @@
     border: 1px solid getColor('accent');
     border-radius: 20px;
     cursor: pointer;
-    background-color: getColor('primary-reversed');
-    transition: all 0.3s cubic-bezier(0.11, 0.7, 0, 1);
+    transition: background-color 0.3s cubic-bezier(0.11, 0.7, 0, 1), color 0.3s cubic-bezier(0.11, 0.7, 0, 1), border-color 0.3s cubic-bezier(0.11, 0.7, 0, 1);
     &:hover {
-      background: getColor('accent');
+      background-color: getColor('accent');
       border-color: #4b48db;
       color: getColor('primary-reversed');
     }
