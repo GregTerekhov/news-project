@@ -216,7 +216,7 @@ export class TemplateCards {
         </div>
       </div>
     </div>
-
+</a>
 </li>`;
         })
         .join('');
