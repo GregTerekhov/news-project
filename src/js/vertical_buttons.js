@@ -5,6 +5,10 @@ const mark = document.querySelector(`.lift-buttons`);
 mark.addEventListener('click', onUnClick);
 document.addEventListener('scroll', onUnScrooll);
 
+const topButton = mark.firstElementChild;
+const backButton = mark.firstElementChild.nextElementSibling;
+const bottomButton = mark.lastElementChild;
+
 mark.firstElementChild.setAttribute('disabled', true);
 mark.firstElementChild.nextElementSibling.setAttribute('disabled', true);
 
@@ -14,23 +18,25 @@ function onUnScrooll() {
   const currency = window.scrollY;
 
   if (silk !== 0 || silk > 100) {
-    mark.firstElementChild.removeAttribute('disabled');
+    topButton.removeAttribute('disabled');
   } else {
-    mark.firstElementChild.setAttribute('disabled', true);
+    topButton.setAttribute('disabled', true);
   }
 
   if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
     forest = window.scrollY;
-    mark.lastElementChild.setAttribute('disabled', true);
+    bottomButton.setAttribute('disabled', true);
   } else if (forest !== currency) {
-    mark.lastElementChild.removeAttribute('disabled');
+    bottomButton.removeAttribute('disabled');
   }
 }
 
 let ladyBug = 0;
 
 function onUnClick(e) {
-  if (e.target.nodeName !== 'BUTTON') {
+  console.log(e.target.nodeName);
+
+  if (e.target.nodeName === 'DIV') {
     return;
   }
 
@@ -42,22 +48,31 @@ function onUnClick(e) {
       top: -(upButtonEl * upButtonEl),
       behavior: `smooth`,
     });
-    mark.firstElementChild.nextElementSibling.removeAttribute('disabled');
+    backButton.removeAttribute('disabled');
+    backButton.classList.add(`rot-down`);
   } else if (e.target.classList.contains('down-button')) {
     ladyBug = window.scrollY;
     window.scrollBy({
       top: upButtonEl * upButtonEl,
       behavior: `smooth`,
     });
-    mark.firstElementChild.nextElementSibling.removeAttribute('disabled');
+    backButton.removeAttribute('disabled');
+    backButton.classList.add(`rot-up`);
   } else {
     rotate();
   }
 }
 
 function rotate() {
-  mark.firstElementChild.nextElementSibling.setAttribute('disabled', true);
+  backButton.setAttribute('disabled', true);
 
+  if (
+    backButton.classList.contains(`rot-down`) ||
+    backButton.classList.contains(`rot-up`)
+  ) {
+    backButton.classList.remove(`rot-down`);
+    backButton.classList.remove(`rot-up`);
+  }
   window.scrollTo({
     top: window.scrollY * 0 + ladyBug,
     behavior: `smooth`,
