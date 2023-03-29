@@ -27,7 +27,7 @@ export function onInputSubmit(e) {
     getQueryArticles(
       pageValue.page,
       searchArticle,
-      dateConvert(elements.date.value)
+      dateConvert(refs.date.value)
     ); //Не забыть поменять "1" на переменную номера страницы
   } catch (error) {
     console.log(error);
