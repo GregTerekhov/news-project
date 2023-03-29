@@ -1,6 +1,7 @@
 .header {
   min-height: 81px;
   border-bottom: 1px solid transparentize($color: #000000, $amount: 0.8);
+  transition: border-color 1000ms ease ;
 
   body.darkmode & {
     border-color: transparentize(getColor('background-primary'), 0.8);
@@ -11,64 +12,30 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
 
+.header__thumb {
+  align-items: baseline;
+  display: flex;
+  margin-left: auto;
+
+  @include respondTo('large') {
+    gap: 147px;
+  }
+}
+
+.header__nav {
   @include respondTo('medium') {
-    align-items: none;
+    margin-right: 32px;
   }
 }
 
 .header__search-container {
   display: flex;
-  align-items: baseline;
-
-  @include respondTo('large') {
-    margin-right: auto;
-    margin-left: auto;
-  }
-}
-
-.toggle-mode {
-  gap: 8px;
-
-  &__text {
-    @extend %list;
-    font-family: $text-secondary;
-  }
-
-  @include respondTo('pre-medium') {
-    display: none;
-    opacity: 0;
-    pointer-events: none;
-    visibility: hidden;
-
-    &.mobile {
-      display: flex;
-      position: absolute;
-      z-index: 6;
-      bottom: 18;
-      opacity: 100%;
-      pointer-events: all;
-      visibility: inherit;
-    }
-  }
+  align-items: center;
 
   @include respondTo('medium') {
-    display: flex;
-    align-items: center;
-    width: 98px;
-    height: 21px;
-    margin-left: 24px;
-    margin-top: 49px;
-    margin-bottom: 36px;
-  }
-
-  @include respondTo('large') {
-    gap: 12px;
-    width: 148px;
-    height: 24px;
-    margin: 0;
-    margin-top: 54px;
-    margin-bottom: 35px;
+    margin-right: 24px;
   }
 }
 
@@ -76,6 +43,7 @@
   @extend %resetGap;
   border: none;
   background-color: transparent;
+
   @include respondTo('medium') {
     display: none;
   }
@@ -84,86 +52,8 @@
 .btn-open__icon {
   margin-left: 14px;
   stroke: getColor('primary');
+
   body.darkmode & {
     stroke: getColor('background-primary');
   }
-}
-
-input:checked + .toggle-mode__slider:before {
-  background-color: getColor('primary-reversed');
-}
-
-input:checked + .toggle-mode__slider {
-  background-color: getColor('accent');
-  border: 1px solid getColor('primary-reversed');
-}
-
-input:focus + .toggle-mode__slider {
-  box-shadow: 0 0 1px getColor('accent');
-}
-
-input:checked + .toggle-mode__slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(20px);
-}
-
-.toggle-mode__slider.round {
-  border-radius: 34px;
-}
-
-.toggle-mode__slider.round:before {
-  border-radius: 50%;
-}
-
-.toggle-mode__dark {
-  display: none;
-}
-
-.toggle-mode__light {
-  display: none;
-}
-
-@include respondTo('large') {
-  .toggle-mode {
-    gap: 12px;
-  }
-  .toggle-mode__icon {
-    display: none;
-  }
-  .toggle-mode__dark {
-    display: block;
-    margin: 0;
-    font-size: 18px;
-    line-height: 1.3;
-
-    color: #4440f7;
-  }
-  .toggle-mode__light {
-    display: block;
-    font-size: 18px;
-    line-height: 1.3;
-  }
-  .opacity {
-    opacity: 0.4;
-  }
-}
-
-input:checked + .toggle-mode__dark {
-  color: getColor('accent');
-}
-
-.toggle-mode__light {
-  color: #4b48db;
-}
-.toggle-mode__dark:checked + .toggle-mode__slider {
-  color: getColor('accent');
-}
-.sun {
-  fill: getColor('accent');
-  stroke: getColor('accent');
-}
-.moon {
-  fill: getColor('primary-reversed');
-  stroke: getColor('accent');
 }

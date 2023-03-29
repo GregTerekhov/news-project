@@ -7,22 +7,23 @@
   justify-content: flex-start;
   gap: 32px;
   margin: 0 auto;
-  margin-top: 60px;
 
   @include respondTo('medium') {
     flex-direction: row;
     gap: 30px;
-    margin-top: 48px;
   }
 
   @include respondTo('large') {
     gap: 32px;
-    margin-top: 60px;
   }
 }
 
 .markup-unit {
   position: relative;
+  border-radius: 10px;
+  box-shadow: 8px 10px 20px transparentize(getColor('primary'), 0.5);
+  transition: transform 250ms ease;
+
   @include respondTo('medium') {
     width: calc((100% - (30px * 1)) / 2);
   }
@@ -30,6 +31,20 @@
     width: calc((100% - (32px * 2)) / 3);
     padding-bottom: 8px;
   }
+
+  &:hover,
+  &:focus {
+    transform: scale(1.03);
+  }
+
+  body.darkmode & {
+    box-shadow: 8px 10px 20px transparentize(getColor('primary'), 0.5), -5px 3px 20px transparentize(getColor('primary'), 0.5);
+  }
+}
+
+.markup-unit__global-link {
+  @extend %link;
+  cursor: pointer;
 }
 
 // .markup-unit::before {
@@ -131,34 +146,60 @@
   margin: 0 auto;
 }
 
+.markup-unit__card-thumb {
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-bottom: 6px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 175px;
+
+  @include respondTo('medium') {
+    height: 220px;
+  }
+}
+
 .markup-unit__card-header {
   @extend %resetGap;
   font-weight: 700;
   font-size: 24px;
   letter-spacing: -0.01em;
-  margin-top: 20px;
-  // height: 135px;
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 3; /* number of lines to show */
   line-clamp: 3;
   -webkit-box-orient: vertical;
+  height: 85px;
+  pointer-events: none;
+
   @include respondTo('medium') {
     font-size: 32px;
+    // height: 125px;
   }
+
+  // @include respondTo('large') {
+  //   height: 115px;
+  // }
 }
 
 .markup-unit__card-text {
   @extend %resetGap;
-  font-weight: 400;
   font-size: 14px;
   margin-top: 20px;
-  // height: 80px;
+  // height: 85px;
   overflow: hidden;
+  pointer-events: none;
 
   @include respondTo('medium') {
     font-size: 16px;
+    // height: 105px;
   }
+
+  // @include respondTo('large') {
+  //   height: 110px;
+  // }
 }
 
 .markup-unit__card-footer {
@@ -172,10 +213,9 @@
   @extend %resetGap;
   font-size: 14px;
   color: getColor('grey');
-  margin-top: 20px;
+  pointer-events: none;
 
   @include respondTo('medium') {
-    margin: 0;
     font-size: 16px;
   }
 }
@@ -183,13 +223,11 @@
 .markup-unit__read-more {
   @extend %resetGap;
   @extend %link;
-  margin: 0;
   font-size: 14px;
   color: getColor('accent');
-  margin-top: 20px;
+  pointer-events: none;
 
   @include respondTo('medium') {
-    margin: 0;
     font-size: 16px;
   }
 }
@@ -230,7 +268,6 @@
 
 .no-found__text {
   margin: 0 auto;
-  margin-left: auto;
   font-weight: 700;
   font-size: 20px;
   line-height: 2.75;
@@ -239,7 +276,6 @@
   color: getColor('primary');
   @include respondTo('medium') {
     font-size: 40px;
-    line-height: 1.366;
     width: 550px;
   }
 }
@@ -264,39 +300,14 @@
   }
 }
 
-.lift-buttons {
+.up-button {
   position: fixed;
   bottom: 30px;
-  left: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  width: 85px;
-}
-
-.up-button {
+  left: 30px;
+  cursor: pointer;
   color: getColor('accent');
   border-radius: 20px;
-  @extend %resetGap;
   border: 1 solid getColor('accent');
-  cursor: pointer;
-  padding: 5px 7px;
-}
-
-.middle-button {
-  color: getColor('accent');
-  border-radius: 20px;
   @extend %resetGap;
-  border: 1 solid getColor('accent');
-  cursor: pointer;
-  padding: 5px 7px;
-}
-
-.down-button {
-  color: getColor('accent');
-  border-radius: 20px;
-  @extend %resetGap;
-  border: 1 solid getColor('accent');
-  cursor: pointer;
   padding: 5px 7px;
 }

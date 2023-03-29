@@ -1,183 +1,156 @@
 ul {
-  list-style: none;
-}
-.page-container {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 6px;
-  padding-inline-start: 0px;
-  margin-top: 20px;
-  // margin-top: 2rem;
-  // background-color: #fff;
-  // box-shadow: 0 0 10px #d3d3d3;
-  // border-radius: 5px;
-  // padding: 10px 15px;
-}
-
-.prev-page,
-.next-page {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 50px;
-  height: 24px;
-  background: #f4f4f4;
-  border: 1px solid #4440f6;
-  border-radius: 2px;
-  cursor: pointer;
-  font-family: 'Manrope';
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 19px;
-
-  color: #111321;
-  padding: 4px 4px;
-}
-// // увеличение размера
-// @media screen and (min-width: 768px) {
-//   .prev-page, .next-page {
-//     width: 72px;
-//     height: 28px;
-//     font-size: 14px;
-//     padding: 4px 10px;
-//   }
-//   .page-container {
-//     gap: 10px;
-//   }
-//   .page-item {
-//     width: 24px;
-//     height: 24px;
-//   }
-//   .pg-link {
-//     font-size: 14px;
-//   }
-//   .pagination-buttons {
-//      gap: 10px;
-//   }
-// }
-
-// .prev-icon,
-// .next-icon {
-//   pointer-events: none;
-//   width: 24px;
-//   height: 24px;
-//   fill: currentColor;
-// }
-
-.prev-page:disabled,
-.next-page:disabled {
-  color: #aaadc7;
-}
-.next-icon {
-  transform: rotate(180deg);
-}
-
-.pg-item {
-  overflow: hidden;
-  width: 24px;
-  height: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #f4f4f4;
-  border: 1px solid #4440f6;
-  border-radius: 2px;
-  cursor: pointer;
-
-  &.active,
-  &:hover,
-  &:focus {
-    background-color: #4440f6;
+    list-style: none;
   }
-}
 
-.pagination-buttons {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 6px;
-}
+  .pagination {
+    margin-top: 40px;
 
-#pagination li.active a {
-  color: #fff;
-}
-.pg-link {
-  pointer-events: none;
-  text-decoration: none;
-  font-family: 'Manrope';
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 19px;
-  color: #111321;
-}
+    @include respondTo('medium') {
+      margin-top: 48px;
+    }
 
-#pagination li:hover a {
-  color: #fff;
-}
+    @include respondTo('large') {
+      margin-top: 60px;
+    }
+  }
 
-@media screen and (min-width: 768px) {
-  .prev-page, .next-page {
+  .page-container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    // margin-top: 2rem;
+    // background-color: #fff;
+    // box-shadow: 0 0 10px #d3d3d3;
+    // border-radius: 5px;
+    // padding: 10px 15px;
+  }
+  
+  .prev-page,
+  .next-page {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     width: 72px;
     height: 28px;
+    background: #f4f4f4;
+    border: 1px solid #4440f6;
+    border-radius: 2px;
+    cursor: pointer;
+    font-family: 'Manrope';
+    font-weight: 500;
     font-size: 14px;
+    line-height: 19px;
+  
+    color: #111321;
     padding: 4px 10px;
   }
-  .page-container {
-    gap: 10px;
-  }
-  .page-item {
+  
+  .prev-icon,
+  .next-icon {
+    pointer-events: none;
     width: 24px;
     height: 24px;
+    fill: currentColor;
+  }
+  
+  .prev-page:disabled,
+  .next-page:disabled {
+    color: #aaadc7;
+  }
+  .next-icon {
+    transform: rotate(180deg);
+  }
+  
+  .pg-item {
+    overflow: hidden;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f4f4f4;
+    border: 1px solid #4440f6;
+    border-radius: 2px;
+    cursor: pointer;
+  
+    &.active,
+    &:hover,
+    &:focus {
+      background-color: #4440f6;
+    }
+  }
+  
+  .pagination-buttons {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  #pagination li.active a {
+    color: #fff;
   }
   .pg-link {
+    pointer-events: none;
+    text-decoration: none;
+    font-family: 'Manrope';
+    font-weight: 500;
     font-size: 14px;
+    line-height: 19px;
+    color: #111321;
   }
-  .pagination-buttons {
-     gap: 10px;
+  
+  #pagination li:hover a {
+    color: #fff;
   }
-}
-.settings {
-  padding-top: 3rem;
-  display: flex;
-  align-items: flex-start;
-}
-.settings .form-input {
-  margin-bottom: 1rem;
-}
-.settings .form-input:not(:last-child) {
-  margin-right: 3rem;
-}
-.settings .form-input > label {
-  margin-bottom: 10px;
-}
-.settings .form-input label {
-  font-size: 18px;
-  font-weight: 600;
-  display: block;
-}
-.settings .form-input > input {
-  width: 100%;
-}
-.settings .form-input input {
-  font-size: 18px;
-  outline: none;
-  padding: 10px 17px;
-  border-radius: 5px;
-  border: 1px solid #b6b6b6;
-}
-.settings .wrapper-form-check {
-  display: flex;
-}
-.settings .wrapper-form-check .form-check {
-  display: flex;
-  line-height: 1;
-  align-items: center;
-}
-.settings .wrapper-form-check .form-check:not(:last-child) {
-  margin-right: 10px;
-}
-.settings .wrapper-form-check label {
-  margin-left: 10px;
-}
+  
+  .settings {
+    padding-top: 3rem;
+    display: flex;
+    align-items: flex-start;
+  }
+  .settings .form-input {
+    margin-bottom: 1rem;
+  }
+  .settings .form-input:not(:last-child) {
+    margin-right: 3rem;
+  }
+  .settings .form-input > label {
+    margin-bottom: 10px;
+  }
+  .settings .form-input label {
+    font-size: 18px;
+    font-weight: 600;
+    display: block;
+  }
+  .settings .form-input > input {
+    width: 100%;
+  }
+  .settings .form-input input {
+    font-size: 18px;
+    outline: none;
+    padding: 10px 17px;
+    border-radius: 5px;
+    border: 1px solid #b6b6b6;
+  }
+  .settings .wrapper-form-check {
+    display: flex;
+  }
+  .settings .wrapper-form-check .form-check {
+    display: flex;
+    line-height: 1;
+    align-items: center;
+  }
+  .settings .wrapper-form-check .form-check:not(:last-child) {
+    margin-right: 10px;
+  }
+  .settings .wrapper-form-check label {
+    margin-left: 10px;
+  }
+  @media (max-width: 992px) {
+    .settings {
+      flex-direction: column;
+    }
+  }

@@ -1,113 +1,126 @@
-const READ_KEY = "HAVE_READ"; // ключ для массива прочитанных новостей в Локальном Хранилище
-const READ_URL_KEY = "READ_URL"; // ключ для массива URL прочитанных новостей в Локальном Хранилище
-const FAVORITES_KEY = "FAVORITES";
+import { getNoFound } from './js/markup';
+
+const READ_KEY = 'HAVE_READ'; // ключ для массива прочитанных новостей в Локальном Хранилище
+const READ_URL_KEY = 'READ_URL'; // ключ для массива URL прочитанных новостей в Локальном Хранилище
+const FAVORITES_KEY = 'FAVORITES';
 let favorites = [];
 
-const accordionRef = document.querySelector(".js-haveread"); // получаем ссылку на секцию аккордиона
-const accordionListRef = document.querySelector(".accordion-list"); // получаем ссылку на панель с новостями
+const accordionRef = document.querySelector('.js-haveread'); // получаем ссылку на секцию аккордиона
+const accordionListRef = document.querySelector('.accordion-list'); // получаем ссылку на панель с новостями
 
-accordionListRef.addEventListener("click", onFavoriteClick); // делегируем слушание на секцию аккордиона
+accordionListRef.addEventListener('click', onFavoriteClick); // делегируем слушание на секцию аккордиона
 
 onOpenFavorites(READ_KEY);
 
-
 //====== Функция-обработчик нажатия на кнопку Фавориты ==================
 function onFavoriteClick(event) {
-    if (!event.target.hasAttribute("data-info")) return;// проверка туда ли тырнули
-    
-    const parsedCardData = makeParseJson(event.target.dataset.favorite); // получаем объект данных с карточки которая находится на странице
-    const dataFromLocaleStorage = onGetLocaleStorageData(FAVORITES_KEY); // получаем массив объектов из Локального Хранилища
+  if (!event.target.hasAttribute('data-info')) return; // проверка туда ли тырнули
 
-    if (event.target.classList.contains("js-favorites")) {// проверка условия содержит ли кнопка класс-метку что новость уже добавлена в избранное
+  const parsedCardData = makeParseJson(event.target.dataset.favorite); // получаем объект данных с карточки которая находится на странице
+  const dataFromLocaleStorage = onGetLocaleStorageData(FAVORITES_KEY); // получаем массив объектов из Локального Хранилища
 
-        event.target.textContent = "Add to favorites"; // изменение текстового контента кнопки
+  if (event.target.classList.contains('js-favorites')) {
+    // проверка условия содержит ли кнопка класс-метку что новость уже добавлена в избранное
 
-        event.target.classList.remove("js-favorites"); // убираем класс-метку что карточка добавлена в избранное
+    event.target.textContent = 'Add to favorites'; // изменение текстового контента кнопки
 
-        if (!dataFromLocaleStorage) { // проверка на null из пустого Локального Хранилища 
-            console.log("News isn't in favorites");
-            return;
-        };
+    event.target.classList.remove('js-favorites'); // убираем класс-метку что карточка добавлена в избранное
 
-        const index = dataFromLocaleStorage.find((card, index) => { // получаем индекс нужной карточки
-            if (card.link === parsedCardData.link) {
-                return index;
-            }
-        });
-
-        dataFromLocaleStorage.splice(index, 1) // удаляем карточку по индексу
-
-        if (dataFromLocaleStorage.length === 0) { // проверяем пустой массив или нет
-            localStorage.removeItem('FAVORITES');
-            return;
-        }
-
-        onSetLocaleStorageData(FAVORITES_KEY, dataFromLocaleStorage); // сетаем в локальное хранилище модифицированный массив
-
-        return;        
-    }
-    //В противном случае==========//
-    event.target.textContent = "Remove from favorites"; // изменение текстового контента кнопки
-
-    event.target.classList.add("js-favorites"); // добавляем класс-метку что карточка добавлена в избранное
-
-    if (dataFromLocaleStorage) { // проверка на возврат null из пустого массива
-        const findPresenceResult = dataFromLocaleStorage.some(card => card.link === parsedCardData.link); // получаем булевое значение есть ли новость в избранном
-
-        if (findPresenceResult) { // делаем условие новости на присутствие в Локальном Хранилище в избранном
-            console.log("It's allredy in Favorites");
-            return;
-        }
-
-        favorites = [...dataFromLocaleStorage]; // распыляем в массив "Фавориты" данные из массива полученные из Локального хранилища
+    if (!dataFromLocaleStorage) {
+      // проверка на null из пустого Локального Хранилища
+      console.log("News isn't in favorites");
+      return;
     }
 
-    favorites.push(parsedCardData); // добавляем объект с данными карточки новости в массив "Фавориты"
+    const index = dataFromLocaleStorage.find((card, index) => {
+      // получаем индекс нужной карточки
+      if (card.link === parsedCardData.link) {
+        return index;
+      }
+    });
 
-    onSetLocaleStorageData(FAVORITES_KEY, favorites); // сетаем в локальное хранилище
+    dataFromLocaleStorage.splice(index, 1); // удаляем карточку по индексу
 
-    favorites = []; // очищаем массив "Фавориты"
+    if (dataFromLocaleStorage.length === 0) {
+      // проверяем пустой массив или нет
+      localStorage.removeItem('FAVORITES');
+      return;
+    }
 
+    onSetLocaleStorageData(FAVORITES_KEY, dataFromLocaleStorage); // сетаем в локальное хранилище модифицированный массив
+
+    return;
+  }
+  //В противном случае==========//
+  event.target.textContent = 'Remove from favorites'; // изменение текстового контента кнопки
+
+  event.target.classList.add('js-favorites'); // добавляем класс-метку что карточка добавлена в избранное
+
+  if (dataFromLocaleStorage) {
+    // проверка на возврат null из пустого массива
+    const findPresenceResult = dataFromLocaleStorage.some(
+      card => card.link === parsedCardData.link
+    ); // получаем булевое значение есть ли новость в избранном
+
+    if (findPresenceResult) {
+      // делаем условие новости на присутствие в Локальном Хранилище в избранном
+      console.log("It's allredy in Favorites");
+      return;
+    }
+
+    favorites = [...dataFromLocaleStorage]; // распыляем в массив "Фавориты" данные из массива полученные из Локального хранилища
+  }
+
+  favorites.push(parsedCardData); // добавляем объект с данными карточки новости в массив "Фавориты"
+
+  onSetLocaleStorageData(FAVORITES_KEY, favorites); // сетаем в локальное хранилище
+
+  favorites = []; // очищаем массив "Фавориты"
 }
 
 //=============== Функция при открытии страныцы "Прочитанные" ==================================
 function onOpenFavorites(key) {
-    const dataFromLocaleStorage = onGetLocaleStorageData(key); // получаем данные из избранных в Локальном Хранилище
-    
-    if (!dataFromLocaleStorage || dataFromLocaleStorage.length === 0) { // проверка на null или пустой массив
-        alert("Добавьте страницу заглушку пожалуйста. Файл read.js, 78-строка");
-        return;
-    }
+  const dataFromLocaleStorage = onGetLocaleStorageData(key); // получаем данные из избранных в Локальном Хранилище
 
-    onCreateReadMurkup(dataFromLocaleStorage);
+  if (!dataFromLocaleStorage || dataFromLocaleStorage.length === 0) {
+    // проверка на null или пустой массив
+    alert('Добавьте страницу заглушку пожалуйста. Файл read.js, 78-строка');
+    getNoFound();
+    return;
+  }
+
+  onCreateReadMurkup(dataFromLocaleStorage);
 }
 
 //============== Функция рендера разметки ======================================
 function onCreateReadMurkup(array) {
-    array.forEach(date => { // перебираем массив с объектами со свойством даты и массивом новостей
-        
-        const firstMurkup = createFirstMurkup(date); // создаем разметку секции аккордеона с датой для новостей (разметка первого уровня)
-        accordionListRef.insertAdjacentHTML("beforeend", firstMurkup); // рендерим эту разметку 
+  array.forEach(date => {
+    // перебираем массив с объектами со свойством даты и массивом новостей
 
-        
-        const accordionPanel = document.querySelector(".accordion-list_panel"); // получаем ссылку на новосозданный элемент
-        
+    const firstMurkup = createFirstMurkup(date); // создаем разметку секции аккордеона с датой для новостей (разметка первого уровня)
+    accordionListRef.insertAdjacentHTML('beforeend', firstMurkup); // рендерим эту разметку
 
-        accordionPanel.innerHTML = date.newsArray.map(newsObject => {// рендерим разметку непосредственно новостей (разметка второго внутреннего уровня)
-            const { title, category, date, link, description, imageURL } = newsObject;
-            const favorite = JSON.stringify(newsObject);
+    const accordionPanel = document.querySelector('.accordion-list_panel'); // получаем ссылку на новосозданный элемент
 
-            //Логика проверки наличия новости в Фаворитах ------------------------------------------
-            const fromFavorites = onGetLocaleStorageData(FAVORITES_KEY); // получаем массив из фаворитов из Локального Хранилища
-            let configReadMarkup = checkFavouritesByUrl(fromFavorites, link) //по результату проверки возвращается объект настроек который используется для добавления динамических свойств в разметку
-            if (!configReadMarkup) {// на случай undefined
-                configReadMarkup = {
-                    class: "zaglushka",
-                    addRemove: "Add to favourites"
-                }
-            }
-            //--------------------------------------------------------------------------------------
-            return `<li class="markup-unit markup-unit__read" name="card">
+    accordionPanel.innerHTML = date.newsArray
+      .map(newsObject => {
+        // рендерим разметку непосредственно новостей (разметка второго внутреннего уровня)
+        const { title, category, date, link, description, imageURL } =
+          newsObject;
+        const favorite = JSON.stringify(newsObject);
+
+        //Логика проверки наличия новости в Фаворитах ------------------------------------------
+        const fromFavorites = onGetLocaleStorageData(FAVORITES_KEY); // получаем массив из фаворитов из Локального Хранилища
+        let configReadMarkup = checkFavouritesByUrl(fromFavorites, link); //по результату проверки возвращается объект настроек который используется для добавления динамических свойств в разметку
+        if (!configReadMarkup) {
+          // на случай undefined
+          configReadMarkup = {
+            class: 'zaglushka',
+            addRemove: 'Add to favourites',
+          };
+        }
+        //--------------------------------------------------------------------------------------
+        return `<li class="markup-unit markup-unit__read" name="card">
     <p class="markup-unit__section">${category}</p>
     
     <img 
@@ -157,14 +170,14 @@ function onCreateReadMurkup(array) {
           Read more
       </a>
     </div>
-    </li>`; 
-        }).join(" ");
-
-    });
+    </li>`;
+      })
+      .join(' ');
+  });
 }
 
 function createFirstMurkup(obj) {
-    return `<li class="accordion-list_item">
+  return `<li class="accordion-list_item">
                 <div class="accordion-title_wrapper">
                     <p class="accordion-list_title">
                         ${obj.whenRead}
@@ -180,47 +193,46 @@ function createFirstMurkup(obj) {
 }
 
 function onGetLocaleStorageData(key) {
-    try {
-        return JSON.parse(localStorage.getItem(key)); // получаем массив объектов из Локального Хранилища
-    } catch (error) {
-        console.log(error);
-    }
+  try {
+    return JSON.parse(localStorage.getItem(key)); // получаем массив объектов из Локального Хранилища
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 //========== Функция парсинга данных из JSON файла =================================================
 function makeParseJson(stringData) {
-    try {
-        return JSON.parse(stringData);
-    } catch (error) {
-        console.log(error);
-    }
+  try {
+    return JSON.parse(stringData);
+  } catch (error) {
+    console.log(error);
+  }
 }
-
 
 //========== Функкция Добавления Данных в Locale Storage ========================================
 function onSetLocaleStorageData(key, data) {
-    try {
-        localStorage.setItem(key, JSON.stringify(data));
-    } catch (error) {
-        console.log(error);
-    }
+  try {
+    localStorage.setItem(key, JSON.stringify(data));
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 function checkFavouritesByUrl(array, newsLink) {
-    if (!array || array.length === 0) { // проверка на null или пустой массив
-        return;
-    }
-    const compareResult = array.some(item => item.link === newsLink);
-    if (compareResult) {
-        return {
-            class: "js-favorites",
-            addRemove: "Remove from favorites"
-        };
-    } else {
-        return {
-            class: "zaglushka",
-            addRemove: "Add to favourites"
-        };
-    }
-     
+  if (!array || array.length === 0) {
+    // проверка на null или пустой массив
+    return;
+  }
+  const compareResult = array.some(item => item.link === newsLink);
+  if (compareResult) {
+    return {
+      class: 'js-favorites',
+      addRemove: 'Remove from favorites',
+    };
+  } else {
+    return {
+      class: 'zaglushka',
+      addRemove: 'Add to favourites',
+    };
+  }
 }

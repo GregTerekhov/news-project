@@ -1,3 +1,62 @@
+.toggle-mode {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 98px;
+  height: 21px;
+  @extend %resetGap;
+
+  @include respondTo('pre-medium') {
+    display: none;
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+
+    &.mobile {
+      display: flex;
+      position: absolute;
+      z-index: 6;
+      bottom: 18;
+      opacity: 100%;
+      pointer-events: all;
+      visibility: inherit;
+    }
+  }
+
+  @include respondTo('large') {
+    gap: 12px;
+    width: 148px;
+    height: 24px;
+  }
+}
+
+.toggle-mode__icon {
+  @include respondTo('large') {
+    display: none;
+  }
+}
+
+.sun {
+  fill: transparent;
+  stroke: getColor('accent');
+
+  body.darkmode & {
+    fill: transparent;
+    stroke: #5f6775;;
+  }
+}
+
+.moon {
+  fill: transparent;
+  stroke: #5f6775;
+
+
+  body.darkmode & {
+    fill: transparent;
+    stroke: getColor('accent');
+  }
+}
+
 .toggle-mode__switch {
     position: relative;
     display: inline-block;
@@ -31,4 +90,63 @@
     background-color: getColor('accent');
     -webkit-transition: 0.5s;
     transition: 0.5s;
+  }
+
+  .toggle-mode__slider.round {
+    border-radius: 34px;
+  }
+
+  .toggle-mode__slider.round:before {
+    border-radius: 50%;
+  }
+
+  input:checked + .toggle-mode__slider:before {
+    background-color: getColor('primary-reversed');
+  }
+  
+  input:checked + .toggle-mode__slider {
+    background-color: getColor('accent');
+    border: 1px solid getColor('primary-reversed');
+  }
+  
+  input:focus + .toggle-mode__slider {
+    box-shadow: 0 0 1px getColor('accent');
+  }
+  
+  input:checked + .toggle-mode__slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(20px);
+  }
+
+  .toggle-mode__dark {
+    font-family: $text-secondary;
+    display: none;
+    @extend %resetGap;
+  
+    @include respondTo('large') {
+      display: block;
+      font-size: 18px;
+      color: #5f6775;
+  
+      body.darkmode & {
+        color: getColor('accent');
+      }
+    }
+  }
+  
+  .toggle-mode__light {
+    font-family: $text-secondary;
+    display: none;
+    color: getColor('accent');
+  
+    @include respondTo('large') {
+      display: block;
+      font-size: 18px;
+  
+      body.darkmode & {
+        color: getColor('background-primary');
+        filter: opacity(25%);
+      }
+    }
   }
