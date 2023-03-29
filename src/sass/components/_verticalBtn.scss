@@ -1,10 +1,12 @@
 .lift-buttons {
     position: fixed;
     bottom: 30px;
-    left: 15px;
+    left: 7px;
     display: flex;
     flex-direction: column;
     gap: 10px;
+    align-items: center;
+    z-index: 10;
   }
 
   .up-button,
@@ -16,8 +18,8 @@
       align-items: center;
       justify-content: center;
 
-    width: 40px;
-      height: 40px;
+    width: 60px;
+      height: 60px;
       padding: .25em;
 
     background-color: getColor('accent');
@@ -64,4 +66,38 @@
 
   .middle-button.rot-up {
     transform: rotate(270deg);
+  }
+
+  .middle-button {
+    fill: getColor('primary-reversed');
+    width: 40px;
+    height: 40px;
+    padding: 0.25em;
+    transform: rotate(270deg);
+  
+    .darkmode & {
+      fill: getColor('primary');
+    }
+  }
+  
+  .middle-button.rot-down {
+    transform: rotate(180deg);
+  }
+  
+  .middle-button.rot-up {
+    transform: rotate(0deg);
+  }
+  
+  .button-lock {
+    fill: getColor('accent');
+    color: getColor('accent');
+    border-color: getColor('accent');
+    background-color: getColor('primary');
+  
+    .darkmode & {
+      border: none;
+      fill: getColor('primary-reversed');
+      color: getColor('primary-reversed');
+      background-color: getColor('grey');
+    }
   }
