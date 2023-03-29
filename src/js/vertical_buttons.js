@@ -19,15 +19,19 @@ function onUnScrooll() {
 
   if (silk !== 0 || silk > 100) {
     topButton.removeAttribute('disabled');
+    topButton.classList.remove('button-lock');
   } else {
     topButton.setAttribute('disabled', true);
+    topButton.classList.add('button-lock');
   }
 
   if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
     forest = window.scrollY;
     bottomButton.setAttribute('disabled', true);
+    bottomButton.classList.add('button-lock');
   } else if (forest !== currency) {
     bottomButton.removeAttribute('disabled');
+    bottomButton.classList.remove('button-lock');
   }
 }
 
@@ -40,6 +44,8 @@ function onUnClick(e) {
     return;
   }
 
+  const { top: upButtonEl } =
+    bodyContainerEl.children.articles.getBoundingClientRect();
   const { top: upButtonEl } = bodyArticles.getBoundingClientRect();
 
   if (e.target.classList.contains('up-button')) {
@@ -50,6 +56,7 @@ function onUnClick(e) {
     });
     backButton.removeAttribute('disabled');
     backButton.classList.add(`rot-down`);
+    backButton.classList.remove(`button-lock`);
   } else if (e.target.classList.contains('down-button')) {
     ladyBug = window.scrollY;
     window.scrollBy({
@@ -58,6 +65,7 @@ function onUnClick(e) {
     });
     backButton.removeAttribute('disabled');
     backButton.classList.add(`rot-up`);
+    backButton.classList.remove(`button-lock`);
   } else {
     rotate();
   }
@@ -65,6 +73,7 @@ function onUnClick(e) {
 
 function rotate() {
   backButton.setAttribute('disabled', true);
+  backButton.classList.add(`button-lock`);
 
   if (
     backButton.classList.contains(`rot-down`) ||
