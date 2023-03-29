@@ -158,7 +158,7 @@ function onReadMoreClick(event) {
     const clickDate = receiveDate(); // получаем дату клика в виде 20/02/2023    
     const parsedCardData = makeParseJson(event.target.dataset.favorite); // получаем объект данных с карточки которая находится на странице
     const urlFromLocaleStorage = onGetLocaleStorageData(READ_URL_KEY); // получаем из локального хранилища массив URL прочитанных новстей
-    const dataFromLocaleStorage = onGetLocaleStorageData(READ_KEY); // получаем массив объектов прочитанных новостей из Локального Хранилища
+    const dataFromLocaleStorage = onGetLocaleStorageData(READ_KEY); // получаем массив двухуровневых объектов прочитанных новостей с датой из Локального Хранилища
 
 
 //------ Логика для массива ссылок прочитаных новостей
