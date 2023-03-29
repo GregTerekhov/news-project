@@ -1,0 +1,24 @@
+.accordion-list {
+    @extend %list;
+    padding-top: 20px;
+    padding-bottom: 40px;
+}
+
+.accordion-title_wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+    border-bottom: 1px solid getColor('grey');
+    margin-bottom: 20px;
+}
+
+.accordion-list_panel {
+    flex-wrap: wrap;
+    gap: 30px;
+    display: flex;
+}
+
+.accordion-list {
+    @extend %resetGap;
+}
