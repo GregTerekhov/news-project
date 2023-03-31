@@ -22,7 +22,7 @@
   position: relative;
   border-radius: 10px;
   box-shadow: 8px 10px 20px transparentize(getColor('primary'), 0.5);
-  transition: transform 250ms ease;
+  transition: transform 500ms ease;
 
   @include respondTo('medium') {
     width: calc((100% - (30px * 1)) / 2);

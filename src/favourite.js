@@ -1,4 +1,5 @@
 import { getNoFound } from './js/refs';
+import './js/mobile_menu';
 import {
   onSwitcherClick,
   onStart,
@@ -252,7 +253,7 @@ function addHaveReadNews(newsArr, cardObj, date, key) {
             return { whenRead, newsArray };
           }
         });
-    
+
         onSetLocaleStorageData(key, arrWithNewObject); // сетаем модифицированный массив в локальное хранилище
         return;
       }

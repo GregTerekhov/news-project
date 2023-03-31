@@ -1,5 +1,6 @@
 import { onGetLocaleStorageData } from './js/refs';
 import { getNoFound } from './js/refs';
+import './js/mobile_menu';
 import {
   onSwitcherClick,
   onStart,

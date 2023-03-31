@@ -51,22 +51,9 @@
               </li>
             </ul>
           </nav>
-          <!-- Search-form -->
           <div class="header__search-container">
-            <form class="search-form" id="form-field" role="search">
-              <button class="search-form__btn">
-                <svg class="search-form__icon" width="20" height="20">
-                  <use href="./images/sprite.svg#search"></use>
-                </svg>
-              </button>
-              <input
-                type="text"
-                id="news-search"
-                name="querySearch"
-                autocomplete="off"
-                placeholder="Search |"
-              />
-            </form>
+            <!-- Search-form -->
+            <include src="./partials/search-form.html"></include>
 
             <!-- Button for opening a mobile menu -->
             <button
@@ -85,20 +72,7 @@
             </button>
           </div>
           <!-- Toggle mode -->
-          <div class="toggle-mode">
-            <svg class="toggle-mode__icon sun" width="21" height="21">
-              <use href="./images/sprite.svg#sun"></use>
-            </svg>
-            <p class="toggle-mode__light">Light</p>
-            <label class="toggle-mode__switch">
-              <input type="checkbox" class="toggle-mode__checkbox" />
-              <span class="toggle-mode__slider round"></span>
-            </label>
-            <p class="toggle-mode__dark">Dark</p>
-            <svg class="toggle-mode__icon moon" width="21" height="21">
-              <use href="./images/sprite.svg#moon"></use>
-            </svg>
-          </div>
+          <include src="./partials/toggle-mode.html"></include>
         </div>
       </div>
     </header>
@@ -179,92 +153,11 @@
           <ul class="articles articles-background" name="articles"></ul>
           <div class="pagination" name="pagination"></div>
         </div>
-        <div class="lift-buttons" name="lift-buttons">
-          <button class="up-button" type="button" name="go_up">Go UP</button>
-          <button class="middle-button" type="button" name="get_back">
-            <svg class="" width="18" height="18" viewBox="0 0 32 32">
-              <path d="M0 24h32v4h-32zM16 4l16 16h-32z"></path>
-            </svg>
-          </button>
-          <button class="down-button" type="button" name="go_down">
-            Go Down
-          </button>
-        </div>
+        <include src="./partials/lift-buttons.html"></include>
       </section>
     </main>
     <!-- footer -->
-    <footer class="footer">
-      <div class="container">
-        <div class="footer-top-thumb">
-          <p class="footer-title">News</p>
-          <!-- Toggle mode -->
-          <div class="toggle-mode footer-toggle">
-            <svg class="toggle-mode__icon sun" width="21" height="21">
-              <use href="./images/sprite.svg#sun"></use>
-            </svg>
-            <p class="toggle-mode__light">Light</p>
-            <label class="toggle-mode__switch">
-              <input type="checkbox" class="toggle-mode__checkbox" />
-              <span class="toggle-mode__slider round"></span>
-            </label>
-            <p class="toggle-mode__dark opacity">Dark</p>
-            <svg class="toggle-mode__icon moon" width="21" height="21">
-              <use href="./images/sprite.svg#moon"></use>
-            </svg>
-          </div>
-        </div>
-        <div class="footer-row-thumb">
-          <div class="menu-thumb">
-            <p class="footer-row-name">MENU</p>
-            <ul class="footer-list">
-              <li class="footer-item">
-                <a class="footer-link" href="./index.html">Home</a>
-              </li>
-              <li class="footer-item">
-                <a class="footer-link" href="./favourite.html">Favorite</a>
-              </li>
-              <li class="footer-item">
-                <a class="footer-link" href="./read.html">Read</a>
-              </li>
-            </ul>
-          </div>
-          <div class="about-thumb">
-            <p class="footer-row-name">ABOUT</p>
-            <ul class="footer-list">
-              <li class="footer-item">
-                <a class="footer-link" href="#">About Us</a>
-              </li>
-              <li class="footer-item">
-                <a class="footer-link" href="#">Contact Us</a>
-              </li>
-              <li class="footer-item">
-                <a class="footer-link" href="#">Advertising</a>
-              </li>
-            </ul>
-          </div>
-          <div class="policies-thumb">
-            <p class="footer-row-name">POLICIES</p>
-            <ul class="footer-list">
-              <li class="footer-item">
-                <a class="footer-link" href="#">Privacy Policy</a>
-              </li>
-              <li class="footer-item">
-                <a class="footer-link" href="#">Terms & Conditions</a>
-              </li>
-            </ul>
-          </div>
-          <div class="support-thumb">
-            <p class="support-text">SUPPORT UKRAINE</p>
-            <img class="support-img" src="./images/qr-code.jpg" alt="" />
-          </div>
-        </div>
-        <p class="footer-credits">
-          All materials, including photographs, contained on this site are
-          protected by copyright law and may not be reproduced without the prior
-          written permission.
-        </p>
-      </div>
-    </footer>
+    <include src="./partials/footer.html"></include>
 
     <script type="module" src="./index.js"></script>
   </body>
