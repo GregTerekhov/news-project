@@ -39,17 +39,17 @@ const months = [
   'December',
 ];
 
-// зміна розмітки при закритті
-// const closeModalAndResetCalendar = () => {
-//   calendarForm.classList.add('hidden'); // querySelector('[data-modal]').
-//   calendarForm.querySelector('.calendar-input').classList.remove('isActive');
-//   calendarForm
-//     .querySelector('.calendar__button-down')
-//     .classList.remove('switched');
-//   calendarForm
-//     .querySelector('.form-container__icon-calendar')
-//     .classList.remove('switchedColor');
-// };
+//зміна розмітки при закритті
+const closeModalAndResetCalendar = () => {
+  calendarForm.classList.add('hidden'); // querySelector('[data-modal]').
+  calendarForm.querySelector('.calendar-input').classList.remove('isActive');
+  calendarForm
+    .querySelector('.calendar__button-down')
+    .classList.remove('switched');
+  calendarForm
+    .querySelector('.form-container__icon-calendar')
+    .classList.remove('switchedColor');
+};
 
 function calendarEl(e) {
   const { modal, inputField, toggleBtn, calendarBtn } = calendar;
@@ -168,7 +168,7 @@ const handleSelectedBeginDate = async () => {
       throw new Error(err);
     } else {
       setDateApi(`${selectedDateStr}`);
-      // closeModalAndResetCalendar();
+      closeModalAndResetCalendar();
       errorDisplayed = false;
     }
   } catch (error) {

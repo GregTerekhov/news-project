@@ -41,11 +41,11 @@ function onAddRemoveLocaleStorageData(event) {
     // проверка условия содержит ли кнопка класс-метку что новость уже добавлена в избранное
 
     event.target.firstElementChild.textContent = 'Add to favorites'; // изменение текстового контента кнопки
-    event.target.firstElementChild.setAttribute(
-      'style',
-      'pointer-events: none'
-    );
-    event.target.lastElementChild.setAttribute('style', 'pointer-events: none');
+    // event.target.firstElementChild.setAttribute(
+    //   'style',
+    //   'pointer-events: none'
+    // );
+    // event.target.lastElementChild.setAttribute('style', 'pointer-events: none');
     event.target.lastElementChild.classList.add('heart-fav');
     event.target.classList.add('btn-favourites');
 
@@ -76,10 +76,12 @@ function onAddRemoveLocaleStorageData(event) {
 
     return;
   }
+
+  console.log(event.target.firstElementChild);
   //В противном случае==========//
   event.target.textContent = 'Remove from favorites';
-  event.target.firstElementChild.setAttribute('style', 'pointer-events: none');
-  event.target.lastElementChild.setAttribute('style', 'pointer-events: none'); // изменение текстового контента кнопки
+  // event.target.firstElementChild.setAttribute('style', 'pointer-events: none');
+  // event.target.lastElementChild.setAttribute('style', 'pointer-events: none'); // изменение текстового контента кнопки
   event.target.lastElementChild.classList.remove('heart-fav');
 
   event.target.classList.add('js-favorites'); // добавляем класс-метку что карточка добавлена в избранное
