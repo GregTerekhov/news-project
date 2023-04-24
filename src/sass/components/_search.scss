@@ -1,83 +1,90 @@
 .search-form {
   display: flex;
-  background-color: transparent;
+  transition: outline-color 1000ms ease;
 
   @include respondTo('pre-medium') {
     &:hover {
-      margin-top: 1px;
-      border: 1px solid getColor('primary');
-      outline: none;
+      outline: 1px solid getColor('primary');
       border-radius: 20px;
-      
-      input {
-        width: 125px;
-        padding: 8px 0;
-      }
-
-      .search-form__btn {
-        border: none;
-      }
     }
+  }
+
+  body.darkmode & {
+    outline-color: getColor('background-primary');
   }
 
   @include respondTo('medium') {
-    border: 1px solid;
+    outline: 1px solid getColor('primary');
     border-radius: 20px;
-    width: 213px;
+    width: 173px;
   }
 
   @include respondTo('large') {
-    margin: 0 auto;
     width: 288px;
-  }
-
-  & input {
-    font-family: $text-secondary;
-    font-size: 12px;
-    line-height: calc(21 / 12);
-    letter-spacing: 0.02em;
-    color: getColor('primary');
-    border: none;
-    outline: none;
-    background: none;
-    transition: 0.4s;
-
-    @include respondTo('pre-medium') {
-      padding: 0;
-      transition: 0.4s;
-      width: 0;
-    }
-
-    @include respondTo('medium') {
-      padding: 5px 0;
-      font-size: 14px;
-      line-height: calc(24 / 14);
-    }
-
-    body.darkmode & {
-      color: getColor('background-primary')
-    }
   }
 }
 
 .search-form__btn {
   @extend %resetGap;
   border: none;
-  background-color: inherit;
-  padding: 6px 16px 6px 12px;
+  background-color: transparent;
   transition: color 1000ms ease;
-
-  @include respondTo('pre-medium') {
-    color: getColor('primary');
-  }
+  padding: 6px 16px 6px 12px;
+  cursor: pointer;
 
   body.darkmode & {
     color: getColor('background-primary');
-    transition: color 1000ms ease;
+  }
+
+  @include respondTo('pre-medium') {
+    transition: padding 400ms ease;
+    .search-form:hover & {
+      padding: 6px 16px 6px 12px;
+    }
   }
 }
 
 .search-form__icon {
   @extend %icon;
+  transition: fill 1000ms ease;
+  body.darkmode & {
+    fill: getColor('background-primary');
+  }
+}
+
+.search-form__input {
   @extend %resetGap;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  font-family: $text-secondary;
+  font-size: 12px;
+  line-height: calc(21 / 12);
+  letter-spacing: 0.02em;
+  transition: color 1000ms ease;
+
+  @include respondTo('pre-medium') {
+    width: 0;
+    transition: width 400ms ease;
+  }
+
+  @include respondTo('large') {
+    font-size: 14px;
+    line-height: calc(24 / 14);
+  }
+
+  .search-form:hover & {
+    width: 125px;
+  }
+
+  body.darkmode & {
+    color: getColor('background-primary');
+  }
+
+  &::placeholder {
+    transition: color 1000ms ease;
+    body.darkmode & {
+      color: transparentize(getColor('background-primary'), 0.6);
+    }
+  }
 }

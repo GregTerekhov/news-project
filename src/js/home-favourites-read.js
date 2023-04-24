@@ -46,8 +46,8 @@ function onAddRemoveLocaleStorageData(event) {
     //   'pointer-events: none'
     // );
     // event.target.lastElementChild.setAttribute('style', 'pointer-events: none');
-    event.target.lastElementChild.classList.add('heart-fav');
-    event.target.classList.add('btn-favourites');
+    event.target.lastElementChild.classList.toggle('heart-fav');
+    event.target.classList.toggle('btn-favourites');
 
     event.target.classList.remove('js-favorites'); // убираем класс-метку что карточка добавлена в избранное
 
@@ -77,12 +77,11 @@ function onAddRemoveLocaleStorageData(event) {
     return;
   }
 
-  console.log(event.target.firstElementChild);
   //В противном случае==========//
   event.target.textContent = 'Remove from favorites';
   // event.target.firstElementChild.setAttribute('style', 'pointer-events: none');
   // event.target.lastElementChild.setAttribute('style', 'pointer-events: none'); // изменение текстового контента кнопки
-  event.target.lastElementChild.classList.remove('heart-fav');
+  // event.target.lastElementChild.classList.remove('heart-fav');
 
   event.target.classList.add('js-favorites'); // добавляем класс-метку что карточка добавлена в избранное
 

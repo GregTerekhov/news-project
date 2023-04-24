@@ -1,0 +1,103 @@
+.authentication-button {
+  @include respondTo('pre-medium') {
+    position: relative;
+    display: block;
+    border-radius: 20px;
+  }
+
+  main & {
+    @include respondTo('pre-medium') {
+      position: fixed;
+      top: 150px;
+      right: 30px;
+      z-index: 7;
+      box-shadow: 0 0 11px getColor('background-primary');
+    }
+
+    @include respondTo('medium') {
+      display: none;
+    }
+  }
+}
+
+.authentication-button__link {
+  @extend %link;
+  font-size: 16px;
+  padding: 6px 8px;
+  border: 1px solid;
+  border-radius: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: color 400ms ease, background-color 400ms ease, outline 400ms ease,
+    width 400ms ease;
+
+  main & {
+    @include respondTo('pre-medium') {
+      box-shadow: (
+        0 3px 9px transparentize(getColor('background-primary'), 0.5)
+      );
+      // (-3px -3px -6px transparentize(getColor('background-primary'), 0.5));
+    }
+  }
+
+  @include respondTo('pre-medium') {
+    border: 0;
+    background-color: getColor('accent');
+    width: 40px;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    body.darkmode & {
+      outline: 1px solid getColor('background-primary');
+    }
+
+    &:hover,
+    &:focus,
+    &:active {
+      width: 160px;
+    }
+  }
+
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: getColor('accent');
+    color: getColor('primary-reversed');
+    border-color: getColor('background-primary');
+  }
+}
+
+.authentication-button__link span {
+  @extend %resetGap;
+  @include respondTo('pre-medium') {
+    position: absolute;
+    top: 8px;
+    right: auto;
+    display: block;
+    opacity: 0;
+    visibility: hidden;
+    z-index: -1;
+    white-space: nowrap;
+    transition: opacity 400ms ease 100ms;
+  }
+}
+
+.authentication-button__link:hover .authentication-button__icon + span,
+.authentication-button__link:focus .authentication-button__icon + span {
+  right: 8px;
+  opacity: 1;
+  visibility: visible;
+  z-index: 1;
+}
+
+.authentication-button__icon {
+  @extend %icon;
+  fill: getColor('background-primary');
+  width: 24px;
+  height: 24px;
+  @include respondTo('medium') {
+    display: none;
+  }
+}

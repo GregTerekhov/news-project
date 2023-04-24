@@ -1,184 +1,161 @@
 .footer {
-    padding: 38px 0;
-    @include darkmode;
+  padding: 38px 0;
+  @include darkmode;
 
-    @include respondTo('medium') {
-        padding: 42px 0;
-    }
+  @include respondTo('medium') {
+    padding: 42px 0;
+  }
 }
 
 .footer.darkmode-footer {
-    @include lightmode;
-  }
-
-.footer-title {
-    @extend %resetGap;
-    display: none;
-
-    @include respondTo('medium') {
-        font-size: 32px;
-        display: block;
-        text-align: center;
-        font-weight: 700;
-    }
-
-    @include respondTo('large') {
-        font-size: 42px;
-    }
+  @include lightmode;
 }
 
-.footer-row-name, 
-.support-text {
-    @extend %resetGap;
-    font-weight: 500;
-    font-size: 22px;
+.footer-title {
+  @extend %resetGap;
+  display: none;
+
+  @include respondTo('medium') {
+    font-size: 32px;
+    display: block;
     text-align: center;
+    font-weight: 700;
+  }
 
-    margin-bottom: 10px;
+  @include respondTo('large') {
+    font-size: 42px;
+  }
+}
 
-    @include respondTo('medium') {
-        font-weight: 700;
-    }
+.footer-row-name,
+.support-text {
+  @extend %resetGap;
+  font-weight: 500;
+  font-size: 22px;
+  text-align: center;
+
+  margin-bottom: 10px;
+
+  @include respondTo('medium') {
+    font-weight: 700;
+  }
 }
 
 .footer-list {
-    @extend %list;
-    text-align: center;
-    font-weight: 400;
+  @extend %list;
+  text-align: center;
+  font-weight: 400;
 }
 
 .footer-item:not(:last-child) {
-    margin-bottom: 5px;
+  margin-bottom: 5px;
 
-    @include respondTo('medium') {
-        margin-bottom: 12px;
-    }
-}
-
-.toggle-mode.footer-toggle {
-    opacity: 100;
-    scale: 1.2;
-    pointer-events: all;
-    visibility: visible;
-    display: flex;
-    position: absolute;
-    top: -15px;
-    right: 92px;
-
-    @include respondTo('medium') {
-        top: 20px;
-        right: 48px;
-        align-items: center;
-        display: flex;
-        scale: 1;
-    }
-
-    @include respondTo('large') {
-        right: 23px;
-    }
+  @include respondTo('medium') {
+    margin-bottom: 12px;
+  }
 }
 
 .footer-top-thumb {
-    padding-top: 13px;
-    position: relative;
+  padding-top: 13px;
+  position: relative;
 
-    @include respondTo('medium') {
-        margin-bottom: 50px;
-        padding-top: 0;
-        margin-bottom: 30px;
-    }
+  @include respondTo('medium') {
+    margin-bottom: 50px;
+    padding-top: 0;
+    margin-bottom: 30px;
+  }
 }
 
 .footer-row-thumb {
-    font-weight: 700;
-    font-size: 20px;
-    margin-bottom: 30px;
-    display: grid;
-    grid-template-columns: 46px auto 46px;
-    grid-template-rows: auto;
-    grid-column-gap: 0px;
-    grid-row-gap: 30px;
+  font-weight: 700;
+  font-size: 20px;
+  margin-bottom: 30px;
+  display: grid;
+  grid-template-columns: 46px auto 46px;
+  grid-template-rows: auto;
+  grid-column-gap: 0px;
+  grid-row-gap: 30px;
 
-    @include respondTo('medium') {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        margin-bottom: 35px;
-    }
+  @include respondTo('medium') {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 35px;
+  }
 
-    @include respondTo('large') {
-        font-size: 18px;
-        line-height: 1.388;
-    }
+  @include respondTo('large') {
+    font-size: 18px;
+    line-height: 1.388;
+  }
 }
 
 .menu-thumb {
-    grid-area: 1 / 2 / 2 / 3;
-    display: none;
-    @include respondTo('medium') {
-        display: block;
-    }
+  grid-area: 1 / 2 / 2 / 3;
+  display: none;
+  @include respondTo('medium') {
+    display: block;
+  }
 }
-.about-thumb{
-    grid-area: 2 / 2 / 3 / 3;
+.about-thumb {
+  grid-area: 2 / 2 / 3 / 3;
 }
-.policies-thumb{
-    grid-area: 3 / 2 / 4 / 3;
+.policies-thumb {
+  grid-area: 3 / 2 / 4 / 3;
 }
 .support-thumb {
-    grid-area: 4 / 2 / 5 / 3;
+  grid-area: 4 / 2 / 5 / 3;
 }
 
 .support-img {
-    width: 196px;
+  width: 196px;
 }
 
 .footer-link {
-    @extend %link;
-    transition: color .3s cubic-bezier(0.11, 0.7, 0, 1);
-    display: inline-block;
-    position: relative;
-    padding: 7px 7px;
-    opacity: 0.7;
+  @extend %link;
+  transition: color 0.3s cubic-bezier(0.11, 0.7, 0, 1);
+  display: inline-block;
+  position: relative;
+  padding: 7px 7px;
+  opacity: 0.7;
 
-    @include respondTo('medium') {
-        padding: 0;
-    }
+  @include respondTo('medium') {
+    padding: 0;
+  }
 
-    &::after {
-        content: '';
-        position: absolute;
-        margin: 0;
-        bottom: 0;
-        left: 0;
-        top: 100%;
-        display: block;
-        width: 100%;
-        height: 2px;
-        background-color: getColor('accent');
+  &::after {
+    content: '';
+    position: absolute;
+    margin: 0;
+    bottom: 0;
+    left: 0;
+    top: 100%;
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: getColor('accent');
 
-        transform: scaleX(0);
-        transition: transform .3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
+    transform: scaleX(0);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
 
-    &:hover::after {
-        transition: transform .3s cubic-bezier(0.4, 0, 0.2, 1);
-        transform: scaleX(1.1);
-    }
+  &:hover::after {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: scaleX(1.1);
+  }
 
-    &:hover {
-        color: getColor('accent');
-        opacity: 1;
-    }
+  &:hover {
+    color: getColor('accent');
+    opacity: 1;
+  }
 }
 
 .footer-credits {
-    @extend %resetGap;
-    text-align: center;
-    font-size: 14px;
-    font-weight: 400;
+  @extend %resetGap;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 400;
 
-    @include respondTo('medium') {
-        font-size: 16px;
-    }
+  @include respondTo('medium') {
+    font-size: 16px;
+  }
 }
