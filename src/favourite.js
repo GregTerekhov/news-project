@@ -1,8 +1,8 @@
 import { refs, getNoFound, onGetLocaleStorageData } from './js/refs';
 import './js/mobile_menu';
-import { onInputSubmit } from './js/themeSwitcher';
-export const formEl = document.querySelector('.toggle-mode');
-formEl.addEventListener('submit', onInputSubmit);
+// import { onInputSubmit } from './js/themeSwitcher';
+// export const formEl = document.querySelector('.toggle-mode');
+// formEl.addEventListener('submit', onInputSubmit);
 
 const urlFromLocaleStorage = onGetLocaleStorageData(refs.READ_URL_KEY);
 
