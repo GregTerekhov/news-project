@@ -1,5 +1,4 @@
 .articles {
-  position: relative;
   @extend %link;
   @extend %list;
   display: flex;
@@ -46,6 +45,7 @@
 .markup-unit__global-link {
   @extend %link;
   cursor: pointer;
+  padding-top: 20px;
 }
 
 // .markup-unit::before {
@@ -85,13 +85,10 @@
   display: flex;
   align-items: center;
   top: 14px;
-  left: 167px;
+  right: 14px;
   @include respondTo('medium') {
     top: 20px;
-    left: 225px;
-  }
-  @include respondTo('large') {
-    left: 270px;
+    right: 20px;
   }
 }
 
@@ -108,12 +105,13 @@
 
 .markup-unit__image-wrapper {
   min-height: 395px;
+  position: relative;
 }
 
 .markup-unit__add-favorite {
   position: absolute;
-  top: 355px;
-  left: 154px;
+  bottom: 12px;
+  right: 8px;
   z-index: 4;
   display: flex;
   align-items: center;
@@ -124,20 +122,17 @@
   cursor: pointer;
 
   @include respondTo('medium') {
-    left: 215px;
-  }
-  @include respondTo('large') {
-    left: 257px;
+    right: 12px;
   }
 }
 
 .markup-unit__favorite-icon {
   fill: none;
-}
 
-// .markup-unit__favorite-icon.markup-unit__favorite-icon--active {
-//   fill: #4440f7;
-// }
+  &--active {
+    fill: #4440f7;
+  }
+}
 
 .markup-unit__favorite-text {
   @extend %resetGap;
@@ -163,17 +158,13 @@
 }
 
 .markup-unit__details {
-  margin-top: 20px;
   padding: 0 6px 6px 6px;
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
 }
 
 .markup-unit__subdetails {
   display: grid;
-  grid-auto-flow: 1fr;
+  grid-template-rows: 131px 20px 66px 20px 22px;
 }
 
 .markup-unit__card-header {
@@ -183,6 +174,7 @@
   letter-spacing: -0.01em;
   overflow: hidden;
   pointer-events: none;
+  grid-row: 1 / span 1;
 
   @include respondTo('medium') {
     font-size: 32px;
@@ -192,9 +184,9 @@
 .markup-unit__card-text {
   @extend %resetGap;
   font-size: 14px;
-  margin-top: 20px;
   overflow: hidden;
   pointer-events: none;
+  grid-row: 3 / span 1;
 
   @include respondTo('medium') {
     font-size: 16px;
@@ -205,7 +197,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 20px;
+  grid-row: 5 / span 1;
 }
 
 .markup-unit__card-date {
@@ -244,52 +236,6 @@
   width: 394.66px;
   height: 675px;
   background-color: getColor('primary');
-}
-
-.no-found {
-  margin-top: 40px;
-  margin-left: auto;
-  margin-right: auto;
-  @include respondTo('medium') {
-    margin-top: 88px;
-  }
-  @include respondTo('large') {
-    margin-top: 60px;
-  }
-}
-
-.no-found__text {
-  margin: 0 auto;
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 2.75;
-  text-align: center;
-  letter-spacing: -0.01em;
-  color: getColor('primary');
-  @include respondTo('medium') {
-    font-size: 40px;
-    width: 550px;
-  }
-}
-
-.no-found__image {
-  margin: 40px auto 60px;
-  background-repeat: no-repeat;
-  width: 250px;
-  height: 200px;
-  background-image: url(/src/images/m_background_image.png);
-  @include respondTo('medium') {
-    width: 560px;
-    height: 445px;
-    background-image: url(/src/images/tbl_background_image.png);
-    margin-bottom: 100px;
-  }
-  @include respondTo('large') {
-    width: 605px;
-    height: 480px;
-    background-image: url(/src/images/background_image.png);
-    margin-bottom: 226px;
-  }
 }
 
 .heart-fav {

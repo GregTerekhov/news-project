@@ -1,18 +1,19 @@
 .logo {
-    @extend %link;
-    font-weight: 700;
-    font-size: 24px;
-    display: block;
-    padding: 24px 0;
-  
-    @include respondTo('medium') {
-      padding-top: 32px;
-      padding-bottom: 30px;
-      font-size: 32px;
-    }
-  
-    @include respondTo('large') {
-      padding: 28px 0;
-      font-size: 42px;
-    }
+  @extend %link;
+  font-weight: 700;
+  font-size: 24px;
+  display: block;
+  padding: 24px 0;
+  z-index: 5;
+
+  @include respondTo('medium') {
+    padding-top: 32px;
+    padding-bottom: 30px;
+    font-size: 32px;
   }
+
+  @include respondTo('large') {
+    padding: 28px 0;
+    font-size: 42px;
+  }
+}

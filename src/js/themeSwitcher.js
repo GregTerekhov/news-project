@@ -2,15 +2,6 @@ import { refs } from './refs';
 
 let darkMode = localStorage.getItem('darkMode');
 
-// export const refs = {
-//   switcher: document.querySelector('.toggle-mode__checkbox'),
-//   switchSlider: document.querySelector('.toggle-mode__slider'),
-//   body: document.querySelector('body'),
-//   footer: document.querySelector('.footer'),
-//   darkText: document.querySelector('.toggle-mode__dark'),
-//   lightText: document.querySelector('.toggle-mode__light'),
-// };
-
 onStart();
 
 export function onStart() {
@@ -40,6 +31,8 @@ function makeDarkMode() {
 
 export function enableAnimation() {
   refs.body.style.transition = '1s';
+  refs.footer.style.transition = '1s';
+  refs.modalContent.style.transition = '1s';
 }
 
 function makeLightMode() {
@@ -61,10 +54,18 @@ export function onSwitcherClick() {
   }
   makeLightMode();
 }
-export function onInputSubmit(e) {
-  try {
-    e.preventDefault();
-  } catch (error) {
-    console.log(error);
-  }
+
+if (window.innerWidth < 768) {
+  const elementToMove = document.getElementById('interactive');
+  const newParent = document.getElementById('location-for-interactive');
+  const clonedElement = elementToMove.cloneNode(true);
+  elementToMove.parentNode.removeChild(elementToMove);
+  newParent.appendChild(clonedElement);
 }
+// export function onInputSubmit(e) {
+//   try {
+//     e.preventDefault();
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }

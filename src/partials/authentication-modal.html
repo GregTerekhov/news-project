@@ -1,0 +1,155 @@
+<div
+  class="authentication-modal"
+  role="dialog"
+  aria-hidden="false"
+  id="signup-signin"
+>
+  <div class="authentication-modal__backdrop"></div>
+  <div class="authentication__dialog">
+    <div class="authentication-modal__content">
+      <!-- Modal head & tabs -->
+      <div class="authentication-modal__head">
+        <ul class="authentication-modal__tabs">
+          <li class="active js-tabs" data-for-toggle="login-form">
+            <a
+              href="#login-form"
+              class="authentication-modal__tabslink"
+              aria-expanded="true"
+            >
+              Login
+              <svg class="authentication-modal__icon" width="24" height="24">
+                <use href="./images/icons.svg#icon-user"></use>
+              </svg>
+            </a>
+          </li>
+          <li class="js-tabs" data-for-toggle="registration-form">
+            <a
+              href="#registration-form"
+              class="authentication-modal__tabslink"
+              aria-expanded="false"
+            >
+              Register
+              <svg class="authentication-modal__icon" width="24" height="24">
+                <use href="./images/icons.svg#icon-pen"></use>
+              </svg>
+            </a>
+          </li>
+        </ul>
+        <!-- Toggle mode -->
+        <include src="./partials/toggle-mode.html"></include>
+        <!-- Button for closing modal -->
+        <button
+          type="button"
+          class="authentication-modal__close"
+          data-dismiss="authentication-modal"
+        >
+          <svg class="authentication-modal__close-icon" width="24" height="24">
+            <use href="./images/icons.svg#icon-close-modal"></use>
+          </svg>
+        </button>
+      </div>
+      <!-- Modal content -->
+      <div class="authentication-modal__body">
+        <div class="authentication-modal__tab-content">
+          <!-- Sign in form -->
+          <div
+            class="authentication-modal__tab-pane active"
+            id="login-form"
+            data-toggle="login-form"
+          >
+            <form action="#" class="form" id="login-form">
+              <div class="form__group">
+                <label for="email">Email:</label>
+                <input
+                  type="email"
+                  id="email"
+                  data-validation
+                  class="form__control"
+                  placeholder="Enter your email..."
+                  name="email"
+                  required
+                  title="example@mail.com"
+                  pattern="^\S+@\S+\.\S+$"
+                />
+              </div>
+              <div class="form__group">
+                <label for="pwd">Password:</label>
+                <input
+                  type="password"
+                  id="pwd"
+                  data-validation
+                  class="form__control"
+                  placeholder="Enter your password..."
+                  title="Enter correct password"
+                  name="pwd"
+                  required
+                />
+              </div>
+              <div class="form__checkbox">
+                <label class="form__custom-checkbox">
+                  <input type="checkbox" name="remember" /><span
+                    >Remember me</span
+                  >
+                </label>
+              </div>
+              <button type="submit" class="form__button js-login">Login</button>
+            </form>
+          </div>
+        </div>
+        <!-- Sign up form -->
+        <div
+          class="authentication-modal__tab-pane"
+          id="registration-form"
+          data-toggle="registration-form"
+        >
+          <form action="#" class="form" id="registration-form">
+            <div class="form__group">
+              <label for="name">Your name:</label>
+              <input
+                type="text"
+                id="name"
+                class="form__control"
+                placeholder="Enter your name..."
+                title="Enter your name"
+                name="name"
+                required
+              />
+            </div>
+            <div class="form__group">
+              <label for="newemail">Email:</label>
+              <input
+                type="email"
+                id="newemail"
+                data-validation
+                class="form__control"
+                placeholder="Enter new email..."
+                name="newemail"
+                autocomplete="on"
+                required
+                title="example@mail.com"
+              />
+            </div>
+            <div class="form__group">
+              <label for="newpwd">Password:</label>
+              <input
+                type="password"
+                id="newpwd"
+                data-validation
+                class="form__control"
+                minlength="6"
+                maxlength="20"
+                placeholder="New password..."
+                title="Enter correct password"
+                name="newpwd"
+                required
+              />
+            </div>
+            <button type="submit" class="form__button js-register">
+              Register
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

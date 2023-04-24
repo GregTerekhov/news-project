@@ -8,6 +8,12 @@
   height: 469px;
   border-radius: 10px;
   box-shadow: 5px 6px 8px transparentize(getColor('primary'), 0.5);
+  transition: transform 400ms ease;
+
+  &:hover,
+  &:focus {
+    transform: scale(1.03);
+  }
 
   @include respondTo('medium') {
     width: 353px;
@@ -62,7 +68,7 @@
   line-height: 1.166;
 
   @include respondTo('medium') {
-    margin-right: 8px;
+    margin-right: 16px;
   }
 
   @include respondTo('large') {
@@ -102,7 +108,7 @@
 .main {
   font-family: 'Roboto';
   font-size: 24px;
-  line-height: 1,166;
+  line-height: 1, 166;
   color: getColor('primary-reversed');
   display: flex;
   justify-content: flex-start;
@@ -131,7 +137,7 @@
   @include respondTo('medium') {
     height: 34px;
     width: 135px;
-}
+  }
 }
 
 .svg {

@@ -37,7 +37,7 @@ const valuePage = {
 
 const mediaQuantity = {
   mobile: 4,
-  tablet: 8,
+  tablet: 7,
 };
 
 let quantity =
@@ -51,16 +51,14 @@ window.addEventListener('resize', () => {
   ); //Рендер карточки//////////////////////////////////////////
 });
 export function onPagination() {
-  const paginationRef = document.querySelector('.pagination');
-
   function createPagination() {
-    paginationRef.innerHTML = ` <ul class="page-container">
+    refs.paginationRef.innerHTML = ` <div class="page-container">
   <button class="prev-page" disabled> <  Prev
   </button>
   <div class= "pagination-buttons" id="pagination"></div>
   <button class="next-page"> Next  >    
   </button>
-</ul>`;
+</div>`;
   }
   refs.bodyContainerEl && createPagination();
 

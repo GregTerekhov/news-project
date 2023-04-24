@@ -1,11 +1,22 @@
 body {
   font-family: $text-primary;
+  margin-top: 81px;
+  height: 100vh;
   color: getColor('primary');
   background-color: getColor('background-primary');
   transition: background-color var(--switch-transition),
-    color var(--switch-transition), fill var(--switch-transition) stroke var(--switch-transition);;
+    color var(--switch-transition),
+    fill var(--switch-transition) stroke var(--switch-transition);
   line-height: 1.366;
   @include lightmode;
+
+  @include respondTo('medium') {
+    margin-top: 106px;
+  }
+
+  @include respondTo('large') {
+    margin-top: 113px;
+  }
 
   &.darkmode {
     @include darkmode;

@@ -1,30 +1,25 @@
-(() => {
-  const mobileMenuRef = document.querySelector('.js-menu-container');
-  const openMenuBtn = document.querySelector('.js-open-menu');
-  const closeMenuBtn = document.querySelector('.js-close-menu');
-  const themeContainerRef = document.querySelector('.toggle-mode');
+import './themeSwitcher';
+import { refs } from './refs';
+import { openModal } from './authentication/modal';
 
-  const toggleMenu = () => {
-    const isMenuOpen =
-      openMenuBtn.getAttribute('aria-expanded') === 'true' || false;
-    openMenuBtn.setAttribute('aria-expanded', !isMenuOpen);
-    mobileMenuRef.classList.toggle('is-open');
-    document.body.classList.toggle('_lock');
-    if (themeContainerRef.classList.contains('mobile')) {
-      themeContainerRef.classList.remove('mobile');
-    } else if (!themeContainerRef.classList.contains('mobile')) {
-      themeContainerRef.classList.add('mobile');
-    }
-  };
+export function toggleMenu() {
+  document.body.classList.toggle('_lock');
+  refs.iconMenuBurgerEl.classList.toggle('_active');
+  refs.menuMobileEl.classList.toggle('_active');
+  refs.authenticationMobileBtn.classList.toggle('js-modal-mobile-menu');
 
-  openMenuBtn.addEventListener('click', toggleMenu);
-  closeMenuBtn.addEventListener('click', toggleMenu);
+  window.matchMedia('(max-width: 767px)').addEventListener('change', e => {
+    if (
+      e.matches &&
+      !refs.iconMenuBurgerEl.classList.contains('_active') &&
+      !refs.menuMobileEl.classList.contains('_active')
+    )
+      return;
 
-  // Close the mobile menu on wider screens if the device orientation changes
-  window.matchMedia('(min-width: 768px)').addEventListener('change', e => {
-    if (!e.matches) return;
     document.body.classList.remove('_lock');
-    mobileMenuRef.classList.remove('is-open');
-    openMenuBtn.setAttribute('aria-expanded', false);
+    refs.iconMenuBurgerEl.classList.remove('_active');
+    refs.menuMobileEl.classList.remove('_active');
+    refs.authenticationMobileBtn.classList.remove('js-modal-mobile-menu');
   });
-})();
+}
+refs.iconMenuBurgerEl.addEventListener('click', toggleMenu);

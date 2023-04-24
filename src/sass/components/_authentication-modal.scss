@@ -1,0 +1,270 @@
+.authentication-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 12;
+  display: none;
+  overflow: hidden;
+  outline: none;
+  transition: opacity 800ms ease-in-out, visibility 0s linear 800ms;
+}
+
+.authentication-modal.in {
+  display: block;
+  opacity: 1;
+  visibility: visible;
+  overflow: auto;
+}
+
+.authentication-modal__backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: transparentize(getColor('background-reversed'), 0.2);
+
+  &.in {
+    opacity: 1;
+  }
+}
+
+.authentication__dialog {
+  position: relative;
+  margin: 0 auto;
+  width: calc(100% - 32px);
+
+  @include respondTo('medium') {
+    width: 600px;
+    margin: 0 auto;
+  }
+}
+
+.authentication-modal__content {
+  position: relative;
+  background-color: getColor('background-primary');
+  background-clip: padding-box;
+  border: 1px solid getColor('accent');
+  border-radius: 10px;
+  outline: 0;
+  box-shadow: 0 3px 9px transparentize(getColor('grey'), 0.5);
+  transition: transform 800ms ease-in-out;
+  transform: translate(50%, 35%);
+  left: -50%;
+  @include respondTo('medium') {
+    box-shadow: 0 5px 15px transparentize(getColor('grey'), 0.5);
+  }
+
+  body.darkmode & {
+    background-color: getColor('background-reversed');
+  }
+}
+
+.authentication-modal__head {
+  min-height: 24px;
+  border-bottom: 1px solid getColor('grey');
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.authentication-modal__close {
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  padding-right: 16px;
+}
+
+.authentication-modal__close-icon {
+  transition: fill 400ms ease, transform 400ms ease;
+  transform: rotate(0);
+  .authentication-modal__close:hover &,
+  .authentication-modal__close:focus & {
+    fill: getColor('accent');
+    transform: rotate(90deg);
+  }
+  body.darkmode & {
+    fill: getColor('primary-reversed');
+  }
+}
+
+.authentication-modal__tabs {
+  @extend %list;
+  display: flex;
+
+  & > li.active a {
+    background-color: transparent;
+    color: getColor('accent');
+    // transition: background-color 400ms ease, color 400ms ese;
+
+    // &:hover,
+    // &:focus {
+    //   background-color: getColor('accent');
+    //   color: getColor('background-primary');
+    // }
+  }
+
+  & > li.active .authentication-modal__icon {
+    fill: getColor('accent');
+  }
+}
+
+.authentication-modal__tabslink {
+  @extend %link;
+  color: getColor('primary');
+  font-size: 20px;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  body.darkmode & {
+    color: getColor('grey');
+  }
+}
+
+.authentication-modal__icon {
+  body.darkmode & {
+    fill: getColor('grey');
+  }
+}
+
+.authentication-modal__body {
+  position: relative;
+  padding: 32px;
+}
+
+.authentication-modal__tab-pane.active {
+  display: block;
+  visibility: visible;
+}
+
+.authentication-modal__tab-pane {
+  display: none;
+  visibility: hidden;
+}
+
+.form__group {
+  margin-bottom: 24px;
+
+  & label {
+    display: block;
+    max-width: 100%;
+    margin-bottom: 8px;
+    font-weight: 700;
+    font-size: 24px;
+    color: getColor('primary');
+
+    body.darkmode & {
+      color: getColor('accent');
+    }
+  }
+}
+
+.form__control {
+  display: block;
+  width: 100%;
+  height: 48px;
+  padding: 8px 16px;
+  font-size: 16px;
+  background-color: inherit;
+  color: getColor('primary');
+  border: 1px solid getColor('grey');
+  border-radius: 20px;
+  outline: none;
+  transition: border-color 400ms ease, box-shadow 400ms ease;
+
+  &:focus,
+  &:active {
+    border-color: getColor('accent');
+    box-shadow: inset 0 1px 1px transparentize(getColor('primary'), 0.25);
+  }
+
+  body.darkmode & {
+    color: getColor('primary-reversed');
+  }
+}
+
+.form__checkbox {
+  position: relative;
+  display: block;
+  margin-bottom: 32px;
+}
+
+.form__custom-checkbox > input {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}
+
+.form__custom-checkbox > span {
+  display: inline-flex;
+  align-items: center;
+  user-select: none;
+
+  &::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    flex-grow: 0;
+    border-radius: 4px;
+    margin-right: 16px;
+    border: 1px solid getColor('grey');
+    background-repeat: no-repeat;
+    background-size: 50% 50%;
+    background-position: center center;
+  }
+}
+// ховер на чекбокс
+.form__custom-checkbox
+  > input:not(:disabled):not(:checked)
+  + span:hover::before {
+  border-color: getColor('accent');
+}
+// активний чекбокс
+.form__custom-checkbox > input:not(:disabled):active + span::before {
+  background-color: getColor('accent');
+  border-color: getColor('primary');
+}
+// фокус на чекбокс
+.form__custom-checkbox > input:focus + span::before {
+  box-shadow: 0 3px 9px transparentize(getColor('accent'), 0.5);
+}
+// фокус на чекбокс не в состоянии checked
+.form__custom-checkbox > input:focus:not(:checked) + span::before {
+  border-color: transparentize(getColor('accent'), 0.25);
+}
+// checked
+.form__custom-checkbox > input:checked + span::before {
+  border-color: getColor('accent');
+  background-color: getColor('accent');
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");
+}
+
+.form__button {
+  background-color: transparentize(getColor('accent'), 0.25);
+  color: getColor('background-primary');
+  padding: 8px 24px;
+  font-size: 20px;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  border: 1px solid getColor('background-primary');
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 400ms ease;
+
+  &:disabled {
+    pointer-events: none;
+    background-color: getColor('grey');
+  }
+
+  &:focus,
+  &:hover {
+    background-color: getColor('accent');
+  }
+}

@@ -24,7 +24,9 @@
     border: 1px solid getColor('accent');
     border-radius: 20px;
     cursor: pointer;
-    transition: background-color 0.3s cubic-bezier(0.11, 0.7, 0, 1), color 0.3s cubic-bezier(0.11, 0.7, 0, 1), border-color 0.3s cubic-bezier(0.11, 0.7, 0, 1);
+    background-color: transparent;
+    transition: background-color 400ms ease, color 400ms ease,
+      border-color 400ms ease;
     &:hover {
       background-color: getColor('accent');
       border-color: #4b48db;
@@ -37,6 +39,17 @@
       background-color: getColor('grey');
       color: getColor('primary-reversed');
     }
+
+    body.darkmode & {
+      background-color: getColor('primary-reversed');
+
+      &:hover,
+      &:focus {
+        background-color: getColor('accent');
+        border-color: #4b48db;
+        color: getColor('primary-reversed');
+      }
+    }
   }
 }
 
@@ -47,12 +60,9 @@
 
 .dropdown {
   width: auto;
-  height: 31px;
+  // height: 31px;
   white-space: nowrap;
 
-  @include respondTo('medium') {
-    min-width: 112px;
-  }
   &__switch:checked + &__options-filter &__select {
     transform: scaleY(1);
   }
@@ -86,16 +96,17 @@
     gap: 10px;
     justify-content: center;
     align-items: center;
-    padding: 0 14px;
+    padding: 8px 13px;
     color: getColor('accent');
+    background-color: transparent;
     border: 1px solid getColor('accent');
     border-radius: 20px;
     font-size: 12px;
     height: 100%;
     letter-spacing: 0.01em;
-    transition: all 0.3s cubic-bezier(0.11, 0.7, 0, 1);
+    transition: all 400ms cubic-bezier(0.11, 0.7, 0, 1);
     @include respondTo('medium') {
-      padding: 0 24px;
+      padding: 0 21px;
     }
     &:focus,
     &:hover {
@@ -115,7 +126,15 @@
     }
 
     body.darkmode & {
+      color: getColor('accent');
       background-color: getColor('primary-reversed');
+      transition: color 400ms ease, background-color 400ms ease;
+
+      &:hover,
+      &:focus {
+        color: getColor('primary-reversed');
+        background-color: getColor('accent');
+      }
     }
   }
 

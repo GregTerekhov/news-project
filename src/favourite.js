@@ -1,25 +1,14 @@
-import { getNoFound } from './js/refs';
+import { refs, getNoFound, onGetLocaleStorageData } from './js/refs';
 import './js/mobile_menu';
-import {
-  onSwitcherClick,
-  onStart,
-  enableAnimation,
-  refs,
-  onInputSubmit,
-} from './js/themeSwitcher';
-import { onGetLocaleStorageData } from './js/refs';
+import { onInputSubmit } from './js/themeSwitcher';
 export const formEl = document.querySelector('.toggle-mode');
 formEl.addEventListener('submit', onInputSubmit);
-const READ_KEY = 'HAVE_READ'; // ключ для массива прочитанных новостей в Локальном Хранилище
-const READ_URL_KEY = 'READ_URL'; // ключ для массива URL прочитанных новостей в Локальном Хранилище
-const FAVORITES_KEY = 'FAVORITES'; // ключ для массива новостей Фавориты в Локальном Хранилище
-const urlFromLocaleStorage = onGetLocaleStorageData(READ_URL_KEY);
 
-const favouriteGallery = document.querySelector('.js-articles-favourites');
+const urlFromLocaleStorage = onGetLocaleStorageData(refs.READ_URL_KEY);
 
-favouriteGallery.addEventListener('click', onRemoveFromFavorites); // вешаем слушатель событий на галерею новостей
+refs.favouriteGallery.addEventListener('click', onRemoveFromFavorites); // вешаем слушатель событий на галерею новостей
 
-onOpenFavorites(FAVORITES_KEY); // запуск функции для рендера страницы
+onOpenFavorites(refs.FAVORITES_KEY); // запуск функции для рендера страницы
 
 //=============== Функция при открытии страныцы "Фавориты" ==================================
 function onOpenFavorites(key) {
@@ -30,7 +19,7 @@ function onOpenFavorites(key) {
     // alert(
     //   'Добавьте страницу заглушку пожалуйста. Файл favourite.js, 19-строка'
     // );
-    getNoFound(favouriteGallery);
+    getNoFound(refs.favouriteGallery);
     return;
   }
 
@@ -45,7 +34,7 @@ function onRemoveFromFavorites(event) {
 
   const cardIDLink = event.target.dataset.id; // получаем ID карточки в виде линка на первоисточник
 
-  const dataFromLocaleStorage = onGetLocaleStorageData(FAVORITES_KEY); // получаем массив из Локального хранилища
+  const dataFromLocaleStorage = onGetLocaleStorageData(refs.FAVORITES_KEY); // получаем массив из Локального хранилища
 
   if (!dataFromLocaleStorage) {
     // проверка на null из пустого Локального Хранилища
@@ -69,7 +58,7 @@ function onRemoveFromFavorites(event) {
     return;
   }
 
-  onSetLocaleStorageData(FAVORITES_KEY, dataFromLocaleStorage); // сетаем в локальное хранилище модифицированный массив
+  onSetLocaleStorageData(refs.FAVORITES_KEY, dataFromLocaleStorage); // сетаем в локальное хранилище модифицированный массив
 
   onRemoveElement(card);
 }
@@ -84,7 +73,7 @@ function onCreateMurkup(arrayOfObjects) {
 
       //Логика отображения прочитанных на странице Фавориты--------------------------------------
       let check = 'display: none;'; // стиль по умолчанию для плашки "Already read"
-      const urlFromLocaleStorage = onGetLocaleStorageData(READ_URL_KEY); // получаем массив URL прочитанных новостей
+      const urlFromLocaleStorage = onGetLocaleStorageData(refs.READ_URL_KEY); // получаем массив URL прочитанных новостей
       check = checkIfReadByUrl(urlFromLocaleStorage, link); //возвращает строку с разным свойством display
       if (!check) {
         // проверка на undefined
@@ -103,6 +92,7 @@ function onCreateMurkup(arrayOfObjects) {
       </p>`
           : ''
       }
+    <div class="markup-unit__image-wrapper">
     <img 
         class="markup-unit__card-image" 
         src="${imageURL}" 
@@ -120,7 +110,11 @@ function onCreateMurkup(arrayOfObjects) {
         data-favorite='${favorite}'
         style="pointer-events: none;"
       >
-          Remove from favourites
+      ${
+        urlFromLocaleStorage?.find(favouriteNews => favouriteNews === link)
+          ? 'Remove from Favourites'
+          : 'Add to Favourite'
+      }
       </p>
       <svg 
           data-favorite='${favorite}'  
@@ -133,6 +127,7 @@ function onCreateMurkup(arrayOfObjects) {
         <path style="stroke: var(--color1, #4440f7)" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.2857" d="M10.666 2.286c-4.207 0-7.619 3.377-7.619 7.543 0 3.363 1.333 11.345 14.458 19.413 0.235 0.143 0.505 0.219 0.78 0.219s0.545-0.076 0.78-0.219c13.125-8.069 14.458-16.050 14.458-19.413 0-4.166-3.412-7.543-7.619-7.543s-7.619 4.571-7.619 4.571-3.412-4.571-7.619-4.571z"></path>
       </svg>
     </button>
+    </div>
     <a class="markup-unit__global-link"
       href="${link}" 
       name="read_more"
@@ -162,7 +157,7 @@ function onCreateMurkup(arrayOfObjects) {
     })
     .join(' ');
 
-  return (favouriteGallery.innerHTML = favoritesMurkup);
+  return (refs.favouriteGallery.innerHTML = favoritesMurkup);
 }
 
 //============= Функция удаления элементов из ДОМ ======================================
@@ -172,7 +167,7 @@ function onRemoveElement(element) {
 
 // Логика работы с "Прочитанными" на странице Фавориты --------------------------------------------------------------------
 
-favouriteGallery.addEventListener('click', onReadMoreClick); // вешаем слушатель событий на контейнер с новостями
+refs.favouriteGallery.addEventListener('click', onReadMoreClick); // вешаем слушатель событий на контейнер с новостями
 
 //============== Функция обработчик по клику на ссылку ReadMore ==============================================
 function onReadMoreClick(event) {
@@ -182,13 +177,18 @@ function onReadMoreClick(event) {
   const clickDate = receiveDate(); // получаем дату клика в виде 20/02/2023
   const parsedCardData = makeParseJson(event.target.dataset.favorite); // получаем объект данных с карточки которая находится на странице
   // получаем из локального хранилища массив URL прочитанных новстей
-  const dataFromLocaleStorage = onGetLocaleStorageData(READ_KEY); // получаем массив объектов прочитанных новостей из Локального Хранилища
+  const dataFromLocaleStorage = onGetLocaleStorageData(refs.READ_KEY); // получаем массив объектов прочитанных новостей из Локального Хранилища
 
   //------ Логика для массива ссылок прочитаных новостей
-  addHaveReadLink(urlFromLocaleStorage, parsedCardData.link, READ_URL_KEY);
+  addHaveReadLink(urlFromLocaleStorage, parsedCardData.link, refs.READ_URL_KEY);
 
   //------ Логика для массива объектов с датой и новостями
-  addHaveReadNews(dataFromLocaleStorage, parsedCardData, clickDate, READ_KEY);
+  addHaveReadNews(
+    dataFromLocaleStorage,
+    parsedCardData,
+    clickDate,
+    refs.READ_KEY
+  );
 }
 
 //========== Функция получения даты в формате 20/02/2021
