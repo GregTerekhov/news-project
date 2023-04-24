@@ -1,9 +1,9 @@
 import { refs, getNoFound, onGetLocaleStorageData } from './js/refs';
 import './js/mobile_menu';
-import { onInputSubmit } from './js/themeSwitcher';
+// import { onInputSubmit } from './js/themeSwitcher';
 
-export const formEl = document.querySelector('.toggle-mode');
-formEl.addEventListener('submit', onInputSubmit);
+// export const formEl = document.querySelector('.toggle-mode');
+// formEl.addEventListener('submit', onInputSubmit);
 
 let favorites = [];
 
