@@ -38,7 +38,9 @@ export function articlesMarkup(articles) {
             ${abstract}
           </p>
           <div class="articles__row">
-            <p class="articles__date">${date.split(' ')[0]}</p>
+            <p class="articles__date">${
+              date.toLocalTimeString('en-GB').split(' ')[0]
+            }</p>
   
             <a href="${url}" target="_blank" class="markup-unit__read-more">Read more</a>
           </div>

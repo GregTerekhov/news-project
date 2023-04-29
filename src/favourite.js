@@ -112,8 +112,8 @@ function onCreateMurkup(arrayOfObjects) {
       >
       ${
         urlFromLocaleStorage?.find(favouriteNews => favouriteNews === link)
-          ? 'Remove from Favourites'
-          : 'Add to Favourite'
+          ? 'Add to Favourite'
+          : 'Remove from Favourites'
       }
       </p>
       <svg 

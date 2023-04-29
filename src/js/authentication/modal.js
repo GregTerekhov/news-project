@@ -21,7 +21,7 @@ export function openModal() {
   refs.body.classList.add('_lock');
 }
 // закриття модального вікна
-function closeModal() {
+export function closeModal() {
   refs.modal.classList.remove('in');
   refs.body.classList.remove('_lock');
 }

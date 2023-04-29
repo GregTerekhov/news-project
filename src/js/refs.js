@@ -10,7 +10,7 @@ export const refs = {
   darkText: document.querySelectorAll('.toggle-mode__dark'), // текст темного режиму відображення
   lightText: document.querySelectorAll('.toggle-mode__light'), // текст світлого режиму відображення
   favouriteGallery: document.querySelector('.js-articles-favourites'),
-  articles: document.querySelector('.articles'),
+  newsGallery: document.querySelector('.articles'),
   categories: document.querySelector('.categories'),
   date: document.querySelector('#input-picker'),
   iconMenuBurgerEl: document.querySelector('.header__burger'), // кнопка відкриття/закриття мобільного меню
