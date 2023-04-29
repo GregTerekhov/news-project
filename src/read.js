@@ -1,9 +1,5 @@
 import { refs, getNoFound, onGetLocaleStorageData } from './js/refs';
 import './js/mobile_menu';
-// import { onInputSubmit } from './js/themeSwitcher';
-
-// export const formEl = document.querySelector('.toggle-mode');
-// formEl.addEventListener('submit', onInputSubmit);
 
 let favorites = [];
 
@@ -51,7 +47,7 @@ function onFavoriteClick(event) {
     return;
   }
   //В противном случае==========//
-  event.target.textContent = 'Remove from favorites'; // изменение текстового контента кнопки
+  event.target.textContent = 'Add to favorites'; // изменение текстового контента кнопки
 
   event.target.classList.add('js-favorites'); // добавляем класс-метку что карточка добавлена в избранное
 
@@ -199,14 +195,6 @@ function createFirstMurkup(obj) {
                 <div class="accordion-list_panel"></div>
             </li>`;
 }
-
-// function onGetLocaleStorageData(key) {
-//   try {
-//     return JSON.parse(localStorage.getItem(key)); // получаем массив объектов из Локального Хранилища
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
 
 //========== Функция парсинга данных из JSON файла =================================================
 function makeParseJson(stringData) {

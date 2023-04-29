@@ -1,41 +1,39 @@
-import { onGetLocaleStorageData } from './refs';
-//================================ Логика страницы Index, действие с Прочитанными =====================================================
-const newsGallery = document.querySelector('.articles');
-const READ_KEY = 'HAVE_READ'; // ключ для массива прочитанных новостей в Локальном Хранилище
-const READ_URL_KEY = 'READ_URL'; // ключ для массива URL прочитанных новостей в Локальном Хранилище
+import { onGetLocaleStorageData, refs } from './refs';
 
-newsGallery.addEventListener('click', onReadMoreClick);
-
+refs.newsGallery.addEventListener('click', onReadMoreClick);
 //============== Функция обработчик по клику на ссылку ReadMore ==============================================
 function onReadMoreClick(event) {
-  //   event.preventDefault();
   if (!event.target.classList.contains('markup-unit__global-link')) return; // проверяем туда ли тырнули
 
   const clickDate = receiveDate(); // получаем дату клика в виде 20/02/2023
   const parsedCardData = makeParseJson(event.target.dataset.favorite); // получаем объект данных с карточки которая находится на странице
-  const urlFromLocaleStorage = onGetLocaleStorageData(READ_URL_KEY); // получаем из локального хранилища массив URL прочитанных новстей
-  const dataFromLocaleStorage = onGetLocaleStorageData(READ_KEY); // получаем массив объектов прочитанных новостей из Локального Хранилища
+  const urlFromLocaleStorage = onGetLocaleStorageData(refs.READ_URL_KEY); // получаем из локального хранилища массив URL прочитанных новстей
+  const dataFromLocaleStorage = onGetLocaleStorageData(refs.READ_KEY); // получаем массив объектов прочитанных новостей из Локального Хранилища
 
   //------ Логика для массива ссылок прочитаных новостей
-  addHaveReadLink(urlFromLocaleStorage, parsedCardData.link, READ_URL_KEY);
+  addHaveReadLink(urlFromLocaleStorage, parsedCardData.link, refs.READ_URL_KEY);
 
   //------ Логика для массива объектов с датой и новостями
-  addHaveReadNews(dataFromLocaleStorage, parsedCardData, clickDate, READ_KEY);
+  addHaveReadNews(
+    dataFromLocaleStorage,
+    parsedCardData,
+    clickDate,
+    refs.READ_KEY
+  );
 }
 
 //================================= Логика страницы Index, действие с Фавориты ============================================================
 
-const FAVORITES_KEY = 'FAVORITES';
 let favorites = [];
 
-newsGallery.addEventListener('click', onAddRemoveLocaleStorageData); // вешаем слушателя событий на контейнер с новостями
+refs.newsGallery.addEventListener('click', onAddRemoveLocaleStorageData); // вешаем слушателя событий на контейнер с новостями
 
 //=========== Функция-обработчик Клика на кнопку добавить/убрать в/из Фавориты ==============================================
 function onAddRemoveLocaleStorageData(event) {
   if (!event.target.hasAttribute('data-info')) return; // проверка туда ли тырнули
 
   const parsedCardData = makeParseJson(event.target.dataset.favorite); // получаем объект данных с карточки которая находится на странице
-  const dataFromLocaleStorage = onGetLocaleStorageData(FAVORITES_KEY); // получаем массив объектов из Локального Хранилища
+  const dataFromLocaleStorage = onGetLocaleStorageData(refs.FAVORITES_KEY); // получаем массив объектов из Локального Хранилища
 
   if (event.target.classList.contains('js-favorites')) {
     // проверка условия содержит ли кнопка класс-метку что новость уже добавлена в избранное
@@ -72,7 +70,7 @@ function onAddRemoveLocaleStorageData(event) {
       return;
     }
 
-    onSetLocaleStorageData(FAVORITES_KEY, dataFromLocaleStorage); // сетаем в локальное хранилище модифицированный массив
+    onSetLocaleStorageData(refs.FAVORITES_KEY, dataFromLocaleStorage); // сетаем в локальное хранилище модифицированный массив
 
     return;
   }
@@ -102,19 +100,10 @@ function onAddRemoveLocaleStorageData(event) {
 
   favorites.push(parsedCardData); // добавляем объект с данными карточки новости в массив "Фавориты"
 
-  onSetLocaleStorageData(FAVORITES_KEY, favorites); // сетаем в локальное хранилище
+  onSetLocaleStorageData(refs.FAVORITES_KEY, favorites); // сетаем в локальное хранилище
 
   favorites = []; // очищаем массив "Фавориты"
 }
-
-//========== Функция для Получения Данных из Locale Storage =======================================
-// function onGetLocaleStorageData(key) {
-//   try {
-//     return JSON.parse(localStorage.getItem(key)); // получаем массив объектов из Локального Хранилища
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
 
 //========== Функция парсинга данных из JSON файла =================================================
 function makeParseJson(stringData) {
